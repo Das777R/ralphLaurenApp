@@ -1,0 +1,38 @@
+.search-fetch-info {
+  width: 100%;
+  font-family: monospace;
+}
+
+
+
+.search-fetch-info > h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  margin-left: 2rem;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .search-fetch-info {
+    width: 100%;
+  }
+
+  .search-fetch-info > h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+    padding-bottom: 1em;
+  }
+}
+
+@media (max-width: 426px) {
+  .search-fetch-info {
+    width: 100%;
+  }
+
+  .search-fetch-info > h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    padding-left: 1rem;
+    margin: 0 auto;
+  }
+}

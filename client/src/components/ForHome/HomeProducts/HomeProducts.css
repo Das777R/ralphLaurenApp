@@ -1,0 +1,261 @@
+*{
+  box-sizing: border-box;
+}
+
+.home-collection-info-container {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 0em;
+  padding-left: 3%;
+  user-select: none;
+}
+
+.collect-info-link {
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.filter-btn-pop {
+  width: fit-content;
+  border-radius: 5px;
+  margin-left: 3%;
+  font-size: 12px;
+  gap: 4px;
+  padding-inline: 8px;
+  background: rgb(169, 168, 168);
+  background-color: #47474747;
+  color: #041e3a;
+  margin-top: 1rem;
+  font-family: sans-serif;
+}
+
+.close-filter {
+  font-size: 18px;
+}
+
+.boys-shirt-container,
+.boys-jumpers-container,
+.girls-jumpers-container,
+.boys-jackets-container,
+.girls-jackets-container,
+.girls-tshirts-container,
+.boys-tshirts-container {
+  width: 100%;
+  height: 25rem;
+  margin-top: 0;
+  padding: 3rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  user-select: none;
+  cursor: pointer;
+}
+
+.boys-shirt-container {
+  background-image: url('/kids/boysShirts/MOOD_BOYS_DSK_BLANK%20(2).avif');
+}
+.boys-jumpers-container {
+  background-image: url('/kids/boysJumpers/MOOD_BOYS_DSK_BLANK%20(1).avif');
+}
+
+.girls-jumpers-container {
+  background-image: url('/kids/girlsJumpers/MOOD_GIRLS_DSK_BLANK_NEW.avif');
+}
+
+.boys-jackets-container {
+  background-image: url('/kids/boysjackets/0915_sibling_boys_mb_c01_img.jpg');
+}
+.girls-jackets-container {
+  background-image: url('/kids/girlsjackets/0915_sibling_girls_mb_c01_img.jpg');
+}
+
+.boys-tshirts-container {
+  background-image: url('/kids/boysPolo/MOOD_BOYS_DSK_BLANK.avif');
+}
+
+.girls-tshirts-container {
+  background-image: url('/kids/boysPolo/MOOD_BOYS_DSK_BLANK.avif');
+}
+
+.home-collection-info-title {
+  color: #fff;
+  font-family: "Playfair Display", serif;
+  font-size: 2.2rem;
+  font-weight: 100;
+}
+
+.home-collection-info-text {
+  width: 90%;
+  color: #fff;
+  font-family: "Roboto Mono", monospace;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.view-more-btn {
+  cursor: pointer;
+}
+
+.filteBtn-collection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filterBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: white 1px solid;
+  transition: 0.7s ease-in-out;
+}
+
+.home-collection-product-container {
+  gap: 1px;
+  padding-bottom: 10rem;
+}
+
+@media (max-width: 1025px) {
+  .home-collection-info-text {
+    width: 90%;
+  }
+
+  .filterBtn {
+    padding: 0.3rem 1rem;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 769px) {
+  .home-collection-info-container {
+    margin-top: 0;
+    padding-left: 5%;
+  }
+
+  .boys-shirt-container,
+  .boys-jumpers-container,
+  .girls-jumpers-container,
+  .boys-jackets-container,
+  .girls-jackets-container,
+  .girls-tshirts-container,
+  .boys-tshirts-container {
+    height: 20rem;
+  }
+
+  .home-collection-info-title {
+    font-size: 1.3rem;
+  }
+
+  .home-collection-info-text {
+    width: 100%;
+    font-size: 12px;
+  }
+
+  .filteBtn-collection {
+    margin-top: 0.5rem;
+  }
+
+  .filterBtn {
+    padding: 0.7rem 1.5rem;
+    font-size: 8px;
+  }
+
+  .collect-info-link {
+    font-family: monospace;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 426px) {
+  .boys-shirt-container,
+  .boys-jumpers-container,
+  .girls-jumpers-container,
+  .boys-jackets-container,
+  .girls-jackets-container,
+  .girls-tshirts-container,
+  .boys-tshirts-container {
+    height: 35rem;
+    padding-top: 15rem;
+  }
+
+  .boys-shirt-container{
+    background-image: url('/kids/boysShirts/MOOD_BOYS_MOB_BLANK%20(2).avif');
+  }
+
+  .boys-jumpers-container {
+    background-image: url('/kids/boysJumpers/MOOD_BOYS_MOB_BLANK%20(1).avif');
+  }
+
+  .girls-jumpers-container {
+    background-image: url('/kids/girlsJumpers/MOOD_GIRLS_MOB_BLANK_NEW.avif');
+  }
+
+  .boys-jackets-container {
+    background-image: url('/kids/boysjackets/0915_sibling_boys_mb_m_c01_img.jpg');
+  }
+
+  .girls-jackets-container {
+    background-image: url('/kids/girlsjackets/0915_sibling_girls_mb_m_c01_img.jpg');
+  }
+
+  .boys-tshirts-container {
+    background-image: url('/kids/boysPolo/MOOD_BOYS_MOB_BLANK.avif');
+  }
+
+  .girls-tshirts-container {
+     background-image: url('/kids/boysPolo/MOOD_BOYS_MOB_BLANK.avif');
+  }
+
+  .collect-info-link {
+    font-family: monospace;
+    font-size: 9px;
+  }
+
+  .home-collection-info-title {
+    font-size: 1.3rem;
+  }
+
+  .home-collection-info-text {
+    font-size: 10px;
+  }
+
+  .filterBtn {
+    padding: 0.5rem 1rem;
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 376px) {
+  .home-collection-info-title {
+    font-size: 1.1rem;
+  }
+
+  .home-collection-info-text {
+    font-size: 9px;
+  }
+
+  .filteBtn-collection {
+    margin-top: 1rem;
+  }
+
+  .filterBtn {
+    padding: 0.5rem 1rem;
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 321px) {
+  .home-collection-info-title {
+    font-size: 1rem;
+  }
+
+  .home-collection-info-text {
+    font-size: 8px;
+  }
+
+  .filterBtn {
+    padding: 0.5rem 1rem;
+    font-size: 8px;
+  }
+}

@@ -1,0 +1,389 @@
+.men-discover-cont {
+  font-family: "Playfair Display", serif;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+  padding: 3rem;
+  margin-top: 0rem;
+  user-select: none;
+  background-image: url('/disover/men/0915_discover_lp_c02_bg.avif');
+  min-height: 100%;
+  position: relative;
+  cursor: pointer;
+}
+
+.men-discover-shopnow {
+  font-size: 13px;
+  font-family: monospace;
+  text-underline-offset: 0.5em;
+  cursor: pointer;
+}
+
+.men-discover-intro-cont {
+  width: 15rem;
+  height: 34rem;
+  flex-shrink: 0; 
+  text-align: center;
+}
+
+.men-discover-intro > h1 {
+  font-size: 14px;
+}
+
+.men-discover-card-info {
+  opacity: 0;
+  transform: translateY(10%);
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+  pointer-events: none; 
+  z-index: 2;
+  bottom: 2rem;
+  left: 2rem;
+}
+
+.men-discover-card-info.show-p {
+  opacity: 1;
+  transform: translateY(-10%);
+  pointer-events: auto;
+}
+
+.men-discover-card-info p {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out 0.1s; 
+}
+
+.men-discover-card-info.show-p p {
+  opacity: 1;
+}
+
+.men-discover-intro {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.men-discover-intro img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.men-discover-category-text {
+  font-family: "Playfair Display", serif;
+  font-size: 2.8rem;
+  font-weight: 530;
+}
+
+.men-discover-polo-rl-title {
+  font-size: 12px;
+  font-family: "Roboto Mono", monospace;
+}
+
+.men-discover-polo-rl-card-title {
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+}
+
+.men-discover-card-title {
+  font-family: "Playfair Display", serif;
+  font-size: 2em;
+  width: 200px;
+}
+
+.men-discover-intro img[alt="polo bags stories only mobile"] {
+  display: none;
+}
+
+.men-discover-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.men-discover-title {
+  font-size: 3rem;
+}
+
+.men-discover-text {
+  font-size: 11px;
+  width: 24em;
+  max-width: 100%;
+}
+
+.men-discover-track {
+  margin-top: 2em;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  width: 100%;
+  gap: 1rem;
+  display: flex;
+}
+
+.men-discover-card {
+  width: 20rem;
+  background: #000;
+  flex-shrink: 0; 
+}
+
+.men-discover-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.men-discover-intro h1 {
+  font-size: 2em;
+}
+
+.men-discover-intro h1 span {
+  font-size: 2em;
+}
+
+.men-discover-intro p {
+  font-size: 0.8em;
+}
+
+
+
+@media (max-width: 1401px) {
+  .men-discover-card-info {
+    bottom: 2rem;
+    left: 1.6rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .men-discover-cont {
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .men-discover-intro-cont {
+    width: 20rem;
+    height: 25rem;
+  }
+  .men-discover-text {
+    width: 24em;
+  }
+  .men-discover-card {
+    width: 13rem;
+    flex-shrink: 0; 
+    background: #000;
+  }
+  .men-discover-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .men-discover-category-text {
+    font-size: 2.1rem;
+  }
+  .men-discover-polo-rl-title {
+    font-size: 10px;
+  }
+  .men-discover-card-info {
+    bottom: 0.3rem;
+    left: 0.7rem;
+  }
+  .men-discover-polo-rl-card-title {
+    font-size: 10px;
+  }
+  .men-discover-card-title {
+    font-size: 1.5em;
+    width: 200px;
+  }
+}
+
+@media (max-width: 769px) {
+  .men-discover-cont {
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .men-discover-intro-cont {
+    width: 16rem;
+    height: 21.5rem;
+  }
+  .men-discover-text {
+    width: 24em;
+  }
+  .men-discover-card {
+    width: 12rem;
+  }
+  .men-discover-category-text {
+    font-size: 1.7rem;
+  }
+  .men-discover-polo-rl-title {
+    font-size: 8px;
+  }
+  .men-discover-card-info {
+    bottom: 0.3rem;
+    left: 0.7rem;
+  }
+  .men-discover-polo-rl-card-title {
+    font-size: 8px;
+  }
+  .men-discover-card-title {
+    font-size: 1.1em;
+    width: 150px;
+  }
+  .men-discover-intro h1 {
+    font-size: 1.5em;
+  }
+  .men-discover-intro h1 span {
+    font-size: 2em;
+  }
+  .men-discover-intro p {
+    font-size: 0.7em;
+  }
+}
+
+@media (max-width: 426px) {
+  .men-discover-cont .d-sm-block {
+    width: 100%;
+    text-align: center;
+  }
+  .men-discover-cont {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  .men-discover-intro-cont {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    flex-shrink: 1;
+  }
+  .men-discover-intro {
+    width: 100%;
+    height: 100%;
+  }
+  .men-discover-intro img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .men-discover-intro img[alt="polo bags stories"] {
+    display: none;
+  }
+  .men-discover-intro img[alt="polo bags stories only mobile"] {
+    display: block;
+  }
+  .men-discover-wrap {
+    width: 100%;
+  }
+  .men-discover-title {
+    font-size: 2rem;
+  }
+  .men-discover-text {
+    width: 100%;
+    font-size: 12px;
+  }
+  .men-discover-track {
+    margin-top: 1.5em;
+    overflow-x: scroll;
+    width: 100%;
+    gap: 1rem;
+  }
+  .men-discover-card {
+    width: 70%;
+    flex-shrink: 0; 
+  }
+  .men-discover-card-img {
+    width: 100%;
+    height: auto;
+  }
+  .men-discover-intro-cont {
+    width: 27rem;
+    height: 15rem;
+    flex-shrink: 0; 
+  }
+  .men-discover-category-text {
+    font-size: 2.2rem;
+  }
+  .men-discover-polo-rl-title {
+    font-size: 10px;
+  }
+  .men-discover-card-info {
+    bottom: 0.3rem;
+    left: 0.7rem;
+  }
+  .men-discover-polo-rl-card-title {
+    font-size: 7px;
+  }
+  .men-discover-card-title {
+    font-size: 0.9em;
+    width: 100px;
+  }
+  .men-discover-intro h1 {
+    font-size: 2em;
+  }
+  .men-discover-intro h1 span {
+    font-size: 2em;
+  }
+  .men-discover-intro p {
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width: 376px) {
+  .men-discover-title {
+    font-size: 1.8rem;
+  }
+  .men-discover-text {
+    width: 100%;
+  }
+  .men-discover-intro-cont {
+    width: 17rem;
+  }
+  .men-discover-card {
+    width: 75%;
+  }
+  .men-discover-category-text {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+  .men-discover-polo-rl-title {
+    font-size: 10px;
+  }
+  .men-discover-card-info {
+    bottom: 0.5rem;
+    left: 1rem;
+  }
+}
+
+@media (max-width: 321px) {
+  .men-discover-title {
+    font-size: 1.8rem;
+  }
+  .men-discover-text {
+    width: 100%;
+    font-size: 12px;
+  }
+  .men-discover-intro-cont {
+    width: 17rem;
+  }
+  .men-discover-card {
+    width: 80%;
+  }
+  .men-discover-category-text {
+    font-size: 1.7rem;
+  }
+  .men-discover-polo-rl-title {
+    font-size: 8px;
+  }
+  .men-discover-card-info {
+    bottom: 0.5rem;
+    left: 1rem;
+  }
+  .men-discover-intro h1 {
+    font-size: 2em;
+  }
+  .men-discover-intro h1 span {
+    font-size: 2em;
+  }
+  .men-discover-intro p {
+    font-size: 0.8em;
+  }
+}

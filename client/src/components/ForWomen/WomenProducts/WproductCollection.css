@@ -1,0 +1,242 @@
+* {
+  box-sizing: border-box;
+  
+}
+
+.w-collection-info-container {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 6em;
+  padding-left: 3%;
+  user-select: none;
+}
+
+.w-collect-info-link {
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.w-filter-btn-pop {
+  width: fit-content;
+  border-radius: 5px;
+  margin-left: 3%;
+  font-size: 12px;
+  gap: 4px;
+  padding-inline: 8px;
+  background: rgb(169, 168, 168);
+  background-color: #47474747;
+  color: #041e3a;
+  margin-top: 1rem;
+  font-family: sans-serif;
+}
+
+.w-close-filter {
+  font-size: 18px;
+}
+
+.w-shirts-container,
+.w-jumpers-container,
+.w-dresses-container,
+.w-trousers-container,
+.w-bags-container,
+.w-jackets-container {
+  width: 100%;
+  height: 25rem;
+  margin-top: 0;
+  padding: 3rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  user-select: none;
+  cursor: pointer;
+}
+
+
+.w-shirts-container {
+  background-image: url('/women/shirt/MOOD_WOMEN_DSK_BLANK.avif');
+}
+
+.w-jumpers-container {
+  background-image: url('/women/jumpers/MOOD_WOMEN_DSK_BLANK.avif');
+  /* background-image: url('/women/shirt/MOOD_WOMEN_MOB_BLANK.avif'); */
+}
+
+.w-dresses-container {
+  /* background-image: url('/women/dresses/MOOD_WOMEN_DSK_BLANK.avif'); */
+  background-image: url('/women/shirt/MOOD_WOMEN_MOB_BLANK.avif');
+}
+
+.w-trousers-container {
+  /* background-image: url('/women/trousers/MOOD_WOMEN_DSK_BLANK.avif'); */
+  background-image: url('/women/shirt/MOOD_WOMEN_MOB_BLANK.avif');
+}
+
+.w-bags-container {
+  background-image: url('/women/bags/0825_w_shop_all_bags_mb_dsk.avif');
+}
+
+.w-jackets-container {
+  /* background-image: url('/women/jackets/MOOD_WOMEN_DSK_BLANK.avif'); */
+  background-image: url('/women/shirt/MOOD_WOMEN_MOB_BLANK.avif');
+}
+
+.w-collection-info-title {
+  color: #fff;
+  font-family: "Playfair Display", serif;
+  font-size: 2.2rem;
+  font-weight: 100;
+}
+
+.w-collection-info-text {
+  width: 90%;
+  color: #fff;
+  font-family: "Roboto Mono", monospace;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.w-view-more-btn {
+  cursor: pointer;
+}
+
+.w-filter-btn-collection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.w-filter-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: white 1px solid;
+  transition: 0.7s ease-in-out;
+}
+
+.w-collection-product-container {
+  gap: 1px;
+  padding-bottom: 10rem;
+}
+
+@media (max-width: 1025px) {
+  .w-collection-info-text {
+    width: 90%;
+  }
+
+  .w-filter-btn {
+    padding: 0.3rem 1rem;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 769px) {
+  .w-collection-info-container {
+    margin-top: 0;
+    padding-left: 5%;
+  }
+
+  .w-shirts-container,
+  .w-jumpers-container,
+  .w-dresses-container,
+  .w-trousers-container,
+  .w-bags-container,
+  .w-jackets-container {
+    height: 20rem;
+  }
+
+  .w-collection-info-title {
+    font-size: 1.3rem;
+  }
+
+  .w-collection-info-text {
+    width: 100%;
+    font-size: 12px;
+  }
+
+  .w-filter-btn-collection {
+    margin-top: 0.5rem;
+  }
+
+  .w-filter-btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 8px;
+  }
+
+  .w-collect-info-link {
+    font-family: monospace;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 426px) {
+  .w-shirts-container,
+  .w-jumpers-container,
+  .w-dresses-container,
+  .w-trousers-container,
+  .w-bags-container,
+  .w-jackets-container {
+    height: 35rem;
+    background-image: url('/women/shirt/MOOD_WOMEN_MOB_BLANK.avif');
+  }
+  .w-jumpers-container {
+    background-image: url('/women/jumpers/MOOD_WOMEN_MOB_BLANK.avif');
+  }
+
+  .w-bags-container {
+    background-image: url('/women/bags/0825_w_shop_all_bags_mb_mob.avif');
+  }
+
+  .w-collect-info-link {
+    font-family: monospace;
+    font-size: 10px;
+    margin-top: 7rem;
+  }
+
+  .w-collection-info-title {
+    font-size: 1.3rem;
+  }
+
+  .w-collection-info-text {
+    font-size: 10px;
+  }
+
+  .w-filter-btn {
+    padding: 0.5rem 1rem;
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 376px) {
+  .w-collection-info-title {
+    font-size: 1.1rem;
+  }
+
+  .w-collection-info-text {
+    font-size: 9px;
+  }
+
+  .w-filter-btn-collection {
+    margin-top: 1rem;
+  }
+
+  .w-filter-btn {
+    padding: 0.5rem 1rem;
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 321px) {
+  .w-collection-info-title {
+    font-size: 1rem;
+  }
+
+  .w-collection-info-text {
+    font-size: 8px;
+  }
+
+  .w-filter-btn {
+    padding: 0.5rem 1rem;
+    font-size: 8px;
+  }
+}

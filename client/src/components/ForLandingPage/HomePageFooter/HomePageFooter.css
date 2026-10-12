@@ -1,0 +1,260 @@
+.rlc-footer-container {
+  border-top: 1px solid #c7c5c5;
+  user-select: none;
+}
+
+.footer-con {
+  width: 40%;
+  padding: 2rem;
+  font-size: 13px;
+  font-weight: 100;
+}
+
+.about-section-title,
+.account-section-title,
+.customer-service-title,
+.signup-to-rlc-message {
+  color: #02162c;
+  font-family: "Fjalla One";
+  font-size: 1rem;
+}
+
+.about-section-nav,
+.customer-service-nav,
+.account-section-nav,
+.signup-to-rlc-privacy {
+  color: #000;
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  user-select: none;
+  cursor: pointer;
+}
+
+@media (max-width: 2560px) {
+  .rlc-about-section,
+  .rlc-account-section,
+  .rlc-customer-service-section {
+    line-height: 1.9rem;
+    border-right: 1px solid #c7c5c5;
+    height: 100%;
+  }
+}
+
+.signup-to-rlc-privacy {
+  font-size: 12px;
+  line-height: 1.2rem;
+  word-spacing: 5px;
+}
+
+.submit-to-rlcf {
+  color: #fff;
+  background-color: #02162c;
+  border: none;
+  padding: 10px 12px;
+}
+
+.signup-input-rlf {
+  display: flex;
+  flex: 1;
+  outline: none;
+  padding: 6px 10px;
+  font-size: 14px;
+  font-family: "Fjalla One", sans-serif;
+}
+
+.signup-to-rlc-container {
+  background-color: darkgreen;
+  display: flex;
+  width: 17rem;
+}
+
+@media (max-width: 1024px) {
+  .signup-to-rlc-section {
+    display: none;
+  }
+  .rlc-customer-service-section {
+    border: none;
+  }
+
+  .sign-to-rlc-only-1024 {
+    display: block;
+    border-top: 1px solid #c7c5c5;
+    width: 100%;
+  }
+
+  .signup-to-rlc-privacy {
+    font-size: 12px;
+    line-height: 1rem;
+    word-spacing: 2px;
+  }
+}
+
+@media (max-width: 768px) {
+  .signup-to-rlc-section {
+    display: none;
+  }
+  .rlc-customer-service-section {
+    border: none;
+  }
+
+  .sign-to-rlc-only-1024 {
+    display: block;
+    border-top: 1px solid #c7c5c5;
+    width: 100%;
+  }
+
+
+
+  .signup-to-rlc-container {
+    width: 100%;
+  }
+
+  .signup-input-rlf {
+    font-size: 1rem;
+  }
+
+  .signup-to-rlc-privacy {
+    font-size: 12px;
+    line-height: 1rem;
+    word-spacing: 2px;
+  }
+
+  .rlc-about-section,
+  .rlc-account-section,
+  .rlc-customer-service-section {
+    line-height: 1.9rem;
+    border-right: none;
+    height: 100%;
+  }
+
+  .footer-con {
+    line-height: 1.9rem;
+    border-top: 1px solid #c7c5c5;
+    height: 100%;
+    width: 100%;
+  }
+
+  .footer-con-about {
+    border-top: none;
+  }
+
+  .rlc-footer-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.rlc-social-media-container {
+  border-top: 1px solid #c7c5c5;
+  height: 13rem;
+}
+
+.rlc-social-media {
+  height: 40%;
+  border-bottom: 1px solid #c7c5c5;
+  font-size: 18px;
+}
+
+.rlc-socials {
+  background-color: #2f4b69;
+  color: whitesmoke;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.1rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+
+.rlc-socials:hover {
+  background-color: #02162c;
+  color: whitesmoke;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+
+.rlc-copyright {
+  font-size: 0.8rem;
+}
+
+@media (max-width: 426px) {
+  .signup-to-rlc-section {
+    display: none;
+  }
+  .rlc-customer-service-section {
+    border: none;
+  }
+
+  .sign-to-rlc-only-1024 {
+    display: block;
+    border-top: 1px solid #c7c5c5;
+    width: 100%;
+  }
+
+
+
+  .signup-to-rlc-container {
+    width: 100%;
+  }
+
+  .signup-input-rlf {
+    font-size: 0.7rem;
+  }
+
+  .signup-to-rlc-privacy {
+    font-size: 10px;
+    line-height: 1rem;
+    word-spacing: 2px;
+  }
+
+  .rlc-about-section,
+  .rlc-account-section,
+  .rlc-customer-service-section {
+    line-height: 1.9rem;
+    border-right: none;
+    height: 100%;
+  
+  }
+
+  .footer-con {
+    line-height: 1.9rem;
+    border-top: 1px solid #c7c5c5;
+    height: 100%;
+    width: 100%;
+  }
+
+  .footer-con-about {
+    border-top: none;
+  }
+
+  .rlc-footer-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+.submit-to-rlcf {
+  color: #fff;
+  background-color: #02162c;
+  border: none;
+  padding: 10px 12px;
+}
+.signup-to-rlc-container {
+  background-color: darkgreen;
+  display: flex;
+  width: 100%;
+}
+
+.about-section-title,
+.account-section-title,
+.customer-service-title,
+.signup-to-rlc-message {
+  color: #02162c;
+  font-family: "Fjalla One";
+  font-size: 0.7rem;
+}
+}

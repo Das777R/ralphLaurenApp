@@ -1,0 +1,258 @@
+.carousel-slide-item {
+  height: 30rem;
+  position: relative;
+}
+
+.carousel-slide-inner {
+  margin: 0 auto;
+}
+
+.carousel-slide-item .carousel-slide-video {
+  width: 80%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.bg-img-women-slide {
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.6)
+    ),
+    url(./women-slide-video/polo-blue-advert.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding-top: 9rem;
+  padding-bottom: 3rem;
+}
+
+.carousel-women-info {
+  position: absolute;
+  top: 35%;
+  left: 25%;
+  width: 50%;
+  padding: 1em;
+  border-radius: 1em;
+  color: #fff;
+}
+
+.h1-women-info-1 {
+  font-family: "Playfair Display", serif;
+  font-size: 4em;
+}
+
+.h1-women-info-2 {
+  font-family: "Mystery Quest", system-ui;
+  font-size: 4em;
+}
+
+.h1-women-info-3 {
+  font-family: "Playfair Display", serif;
+  font-size: 4em;
+}
+
+.p-women-info-1 {
+  font-family: "Forum", serif;
+  font-size: 1em;
+}
+
+.p-women-info-2 {
+  font-family: "Forum", serif;
+  font-size: 1em;
+}
+
+.p-women-info-3 {
+  font-size: 1em;
+}
+
+.shop-now {
+  font-size: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .carousel-slide-item {
+    height: 25rem;
+  }
+
+  .carousel-slide-item .carousel-slide-video {
+    width: 70%;
+  }
+
+  .bg-img-women-slide {
+    padding-top: 9rem;
+    padding-bottom: 2rem;
+  }
+
+  .h1-women-info-1,
+  .h1-women-info-2,
+  .h1-women-info-3 {
+    font-size: 3.5em;
+  }
+
+ .carousel-women-info {
+  top: 30%;
+  left: 25%;
+  transform: translateX(50%, 50%);
+  }
+}
+
+@media (max-width: 769px) {
+  .carousel-slide-item {
+    height: 20rem;
+  }
+
+  .carousel-slide-item .carousel-slide-video {
+    width: 70%;
+  }
+
+  .bg-img-women-slide {
+    padding-top: 9rem;
+    padding-bottom: 1rem;
+  }
+
+  .h1-women-info-1 {
+    font-size: 2.5em;
+  }
+
+  .h1-women-info-2 {
+    font-size: 2em;
+  }
+
+  .h1-women-info-3 {
+    font-size: 2.5em;
+  }
+
+  .p-women-info-1,
+  .p-women-info-2,
+  .p-women-info-3 {
+    font-size: 0.7em;
+  }
+
+  .shop-now {
+    font-size: 0.7rem;
+  }
+
+  .carousel-women-info {
+  top: 40%;
+  left: 25%;
+  transform: translateX(50%, 50%);
+  }
+}
+
+@media (max-width: 426px) {
+  .carousel-slide-item {
+    height: 15rem;
+  }
+
+  .carousel-slide-item .carousel-slide-video {
+    width: 70%;
+  }
+
+  .bg-img-women-slide {
+    padding-top: 9rem;
+    padding-bottom: 1rem;
+  }
+
+  .carousel-women-info {
+    top: 35%;
+    left: 25%;
+    transform: translateX(50%, 50%);
+  }
+
+  .h1-women-info-1,
+  .h1-women-info-2,
+  .h1-women-info-3 {
+    font-size: 1.5em;
+  }
+
+  .p-women-info-1,
+  .p-women-info-2,
+  .p-women-info-3 {
+    font-size: 0.7em;
+  }
+
+  .shop-now {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 376px) {
+  .carousel-slide-item {
+    height: 12rem;
+  }
+
+  .carousel-slide-item .carousel-slide-video {
+    width: 80%;
+  }
+
+  .bg-img-women-slide {
+    padding-top: 9rem;
+    padding-bottom: 1rem;
+  }
+
+  .carousel-women-info {
+    top: 30%;
+    left: 10%;
+    width: 80%;
+    transform: translateX(50%, 50%);
+  }
+
+  .h1-women-info-1,
+  .h1-women-info-2,
+  .h1-women-info-3 {
+    font-size: 1.5em;
+  }
+
+  .p-women-info-1,
+  .p-women-info-2,
+  .p-women-info-3 {
+    font-size: 0.7em;
+  }
+
+  .shop-now {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 321px) {
+  .carousel-slide-item {
+    height: 10rem;
+  }
+
+  .carousel-slide-item .carousel-slide-video {
+    width: 90%;
+  }
+
+  .bg-img-women-slide {
+    padding-top: 8rem;
+    padding-bottom: 1rem;
+  }
+
+  .carousel-women-info {
+    top: 20%;
+    left: 25%;
+    width: 50%;
+    transform: translateX(50%, 50%);
+  }
+
+  .h1-women-info-1,
+  .h1-women-info-2,
+  .h1-women-info-3 {
+    font-size: 1.4em;
+  }
+
+  .p-women-info-1,
+  .p-women-info-2,
+  .p-women-info-3 {
+    font-size: 0.9em;
+  }
+
+  .shop-now {
+    font-size: 0.5rem;
+  }
+}

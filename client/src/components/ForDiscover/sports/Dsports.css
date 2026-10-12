@@ -1,0 +1,384 @@
+.discover-carousel-cont {
+  font-family: "Playfair Display", serif;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+  padding: 3rem;
+  margin-top: 0rem;
+  user-select: none;
+  background-image: url('/disover/sports/0416_discover_lp_c07_bg.avif');
+  min-height: 100%;
+  position: relative;
+  cursor: pointer;
+}
+
+.discover-carousel-shopnow {
+  font-size: 13px;
+  font-family: monospace;
+  text-underline-offset: 0.5em;
+  cursor: pointer;
+}
+
+.discover-carousel-intro-cont {
+  width: 15rem;
+  height: 34rem;
+  flex-shrink: 0; 
+  text-align: center;
+}
+
+.discover-carousel-intro > h1 {
+  font-size: 14px;
+}
+
+.discover-carousel-card-info {
+  opacity: 0;
+  transform: translateY(10%);
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+  pointer-events: none; 
+}
+
+.discover-carousel-card-info.show-p {
+  opacity: 1;
+  transform: translateY(-10%);
+  pointer-events: auto;
+}
+
+.discover-carousel-card-info p {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out 0.1s; 
+}
+
+.discover-carousel-card-info.show-p p {
+  opacity: 1;
+}
+
+.discover-carousel-intro {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.discover-carousel-intro img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.discover-carousel-card-info {
+  z-index: 2;
+  bottom: 2rem;
+  left: 2rem;
+}
+
+.discover-carousel-category-text {
+  font-family: "Playfair Display", serif;
+  font-size: 2.8rem;
+  font-weight: 530;
+}
+
+.discover-carousel-polo-rl-title {
+  font-size: 12px;
+  font-family: "Roboto Mono", monospace;
+}
+
+.discover-carousel-polo-rl-card-title {
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+}
+
+.discover-carousel-card-title {
+  font-family: "Playfair Display", serif;
+  font-size: 2em;
+  width: 200px;
+}
+
+.discover-carousel-intro img[alt="polo bags stories only mobile"] {
+  display: none;
+}
+
+.discover-carousel-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.discover-carousel-title {
+  font-size: 3rem;
+}
+
+.discover-carousel-text {
+  font-size: 11px;
+  width: 24em;
+  max-width: 100%;
+}
+
+.discover-carousel-track {
+  margin-top: 2em;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  width: 100%;
+  gap: 1rem;
+  display: flex;
+}
+
+.discover-carousel-card {
+  width: 20rem;
+  background: #000;
+  flex-shrink: 0; 
+}
+
+.discover-carousel-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.discover-carousel-intro h1 {
+  font-size: 2em;
+}
+
+.discover-carousel-intro h1 span {
+  font-size: 2em;
+}
+
+.discover-carousel-intro p {
+  font-size: 0.8em;
+}
+
+@media (max-width: 1401px) {
+  .discover-carousel-card-info {
+    bottom: 2rem;
+    left: 1.6rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .discover-carousel-cont {
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .discover-carousel-intro-cont {
+    width: 20rem;
+    height: 25rem;
+  }
+  .discover-carousel-text {
+    width: 24em;
+  }
+  .discover-carousel-card {
+    width: 13rem;
+    flex-shrink: 0; 
+    background: #000;
+  }
+  .discover-carousel-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .discover-carousel-category-text {
+    font-size: 2.1rem;
+  }
+  .discover-carousel-polo-rl-title {
+    font-size: 10px;
+  }
+  .discover-carousel-card-info {
+    bottom: 0.3rem;
+    left: 0.7rem;
+  }
+  .discover-carousel-polo-rl-card-title {
+    font-size: 10px;
+  }
+  .discover-carousel-card-title {
+    font-size: 1.5em;
+    width: 200px;
+  }
+}
+
+@media (max-width: 769px) {
+  .discover-carousel-cont {
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .discover-carousel-intro-cont {
+    width: 16rem;
+    height: 21.5rem;
+  }
+  .discover-carousel-text {
+    width: 24em;
+  }
+  .discover-carousel-card {
+    width: 12rem;
+  }
+  .discover-carousel-category-text {
+    font-size: 1.7rem;
+  }
+  .discover-carousel-polo-rl-title {
+    font-size: 8px;
+  }
+  .discover-carousel-card-info {
+    bottom: 0.3rem;
+    left: 0.7rem;
+  }
+  .discover-carousel-polo-rl-card-title {
+    font-size: 8px;
+  }
+  .discover-carousel-card-title {
+    font-size: 1.1em;
+    width: 150px;
+  }
+  .discover-carousel-intro h1 {
+    font-size: 1.5em;
+  }
+  .discover-carousel-intro h1 span {
+    font-size: 2em;
+  }
+  .discover-carousel-intro p {
+    font-size: 0.7em;
+  }
+}
+
+@media (max-width: 426px) {
+  .discover-carousel-cont .d-sm-block {
+    width: 100%;
+    text-align: center;
+  }
+  .discover-carousel-cont {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  .discover-carousel-intro-cont {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    flex-shrink: 1;
+  }
+  .discover-carousel-intro {
+    width: 100%;
+    height: 100%;
+  }
+  .discover-carousel-intro img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .discover-carousel-wrap {
+    width: 100%;
+  }
+  .discover-carousel-title {
+    font-size: 2rem;
+  }
+  .discover-carousel-text {
+    width: 100%;
+    font-size: 12px;
+  }
+  .discover-carousel-track {
+    margin-top: 1.5em;
+    overflow-x: scroll;
+    width: 100%;
+    gap: 1rem;
+  }
+  .discover-carousel-card {
+    width: 70%;
+    flex-shrink: 0; 
+  }
+  .discover-carousel-card-img {
+    width: 100%;
+    height: auto;
+  }
+  .discover-carousel-intro-cont {
+    width: 27rem;
+    height: 15rem;
+    flex-shrink: 0; 
+  }
+  .discover-carousel-category-text {
+    font-size: 2.2rem;
+  }
+  .discover-carousel-polo-rl-title {
+    font-size: 10px;
+  }
+  .discover-carousel-card-info {
+    bottom: 0.3rem;
+    left: 0.7rem;
+  }
+  .discover-carousel-polo-rl-card-title {
+    font-size: 7px;
+  }
+  .discover-carousel-card-title {
+    font-size: 0.9em;
+    width: 100px;
+  }
+  .discover-carousel-intro h1 {
+    font-size: 2em;
+  }
+  .discover-carousel-intro h1 span {
+    font-size: 2em;
+  }
+  .discover-carousel-intro p {
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width: 376px) {
+  .discover-carousel-title {
+    font-size: 1.8rem;
+  }
+  .discover-carousel-text {
+    width: 100%;
+  }
+  .discover-carousel-intro-cont {
+    width: 17rem;
+  }
+  .discover-carousel-card {
+    width: 75%;
+  }
+  .discover-carousel-category-text {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+  .discover-carousel-polo-rl-title {
+    font-size: 10px;
+  }
+  .discover-carousel-card-info {
+    bottom: 0.5rem;
+    left: 1rem;
+  }
+}
+
+@media (max-width: 321px) {
+  .discover-carousel-title {
+    font-size: 1.8rem;
+  }
+  .discover-carousel-text {
+    width: 100%;
+    font-size: 12px;
+  }
+  .discover-carousel-intro-cont {
+    width: 17rem;
+  }
+  .discover-carousel-card {
+    width: 80%;
+  }
+  .discover-carousel-category-text {
+    font-size: 1.7rem;
+  }
+  .discover-carousel-polo-rl-title {
+    font-size: 8px;
+  }
+  .discover-carousel-card-info {
+    bottom: 0.5rem;
+    left: 1rem;
+  }
+  .discover-carousel-intro h1 {
+    font-size: 2em;
+  }
+  .discover-carousel-intro h1 span {
+    font-size: 2em;
+  }
+  .discover-carousel-intro p {
+    font-size: 0.8em;
+  }
+}

@@ -1,0 +1,117 @@
+.rlc-block {
+  display: flex;
+  width: 100%;
+  color: #fff;
+  margin-top: 0.5rem;
+  gap: 0.5rem;
+}
+
+.pre-fall-block,
+.teen-shop-block {
+  position: relative;
+  overflow: visible; 
+ 
+  height: 53rem;
+  user-select: none;
+}
+
+.pre-fall-vid,
+.teen-shop-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+.block-info-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center; 
+  z-index: 2;
+
+}
+.pre-fall-info,
+.teen-shop-info {
+  padding: 7rem 2rem;
+  width: 100%;
+  max-width: 450px;
+  font-family: "Fjalla One", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  position: sticky;
+  top: 2rem;
+  cursor: pointer;
+
+}
+
+.pre-fall-title,
+.teen-shop-title {
+  font-size: 36px;
+  margin-bottom: 1rem;
+}
+
+.pre-fall-text,
+.teen-shop-text {
+  width: 100%;
+  line-height: 28px;
+  font-size: 18px;
+  margin-bottom: 1.5rem;
+}
+
+.shopnow-pre-fall,
+.shop-teen-shop {
+  font-size: 18px;
+  user-select: none;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .pre-fall-block,
+  .teen-shop-block {
+    height: 50rem;
+  }
+
+  .rlc-block {
+    gap: 0.5rem;
+  }
+
+  .block-info-overlay {
+    padding: 1.5rem;
+  }
+
+  .pre-fall-text,
+  .teen-shop-text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .rlc-block {
+    flex-direction: column;
+    gap: 0rem;
+  }
+
+  .pre-fall-block,
+  .teen-shop-block {
+    height: auto;
+    aspect-ratio: 1.5 / 2;
+  }
+
+  .block-info-overlay {
+    align-items: flex-end; 
+    padding: 1rem;
+  }
+
+  .pre-fall-info,
+  .teen-shop-info {
+    padding: 1.5rem;
+    max-width: 100%;
+  }
+}

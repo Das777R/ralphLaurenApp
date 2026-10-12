@@ -1,0 +1,111 @@
+.kids-trend {
+  position: relative;
+  width: 100%;
+}
+
+.kids-trend-banner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: #0b0b1f; 
+}
+
+.kids-trend-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.kids-trend-overlay {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 500;
+}
+
+.kids-trend-logo {
+  object-fit: contain;
+  width: 27rem;
+}
+
+.kids-trend-caption {
+  margin-top: 1em;
+  font-size: 1rem
+}
+
+.home-trend-title {
+  font-family: "Playfair Display";
+  font-size: 3.5em;
+}
+
+.kids-trend-banner--desktop {
+  background-color: aqua;
+}
+
+.kids-trend-banner--desktop .kids-trend-overlay {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.kids-trend-banner--mobile {
+  background-color: rgb(17, 5, 107);
+}
+
+.kids-trend-banner--mobile .kids-trend-overlay {
+  bottom: 0;
+  left: 0%;
+  width: 100%;
+  padding: 1.5em 1em;
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+.kids-trend-banner--mobile {
+  display: block;
+}
+
+.kids-trend-banner--desktop {
+  display: none;
+}
+
+  .kids-trend-banner--mobile {
+    display: none;
+  }
+
+  .kids-trend-banner--desktop {
+    display: block;
+  }
+
+@media (max-width: 768px) {
+
+
+  .kids-trend-logo {
+  object-fit: contain;
+  width: 24rem;
+}
+}
+
+@media (max-width: 426px){
+  .kids-trend-logo {
+  object-fit: contain;
+  width: 23rem;
+  }
+
+.kids-trend-caption {
+  margin-top: 1em;
+  font-size: 0.8rem
+}
+
+  .kids-trend-banner--mobile {
+  display: block;
+  }
+
+  .kids-trend-banner--desktop {
+  display: none;
+  }
+}

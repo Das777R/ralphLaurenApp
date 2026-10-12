@@ -1,0 +1,87 @@
+
+.sticky-bar-img-wrapper {
+ width: 4.5rem;
+ }
+.sticky-bar-container {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  visibility: hidden;         
+  pointer-events: none;
+  transition:
+    height 0.3s ease-in-out,
+    opacity 0.3s ease-in-out,
+    visibility 0s linear 0.3s;  
+    display: flex;
+
+}
+
+.sticky-bar-container.sticky-bar-visible {
+  height: 5rem;
+  padding-top: 0rem;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    height 0.3s ease-in-out,
+    opacity 0.3s ease-in-out,
+    visibility 0s linear 0s;   
+}
+
+.sticky-bar-title {
+  font-size: 16px;
+  font-family: "Playfair Display", serif;
+  color: #041e3a;
+  margin-top: 0.7rem;
+}
+
+.sticky-bar-price {
+  font-size: 16px;
+  color: #041e3a;
+  font-family: Arial;
+}
+
+.sticky-bar-btn {
+  background: #0a1a3c;
+  font-size: 0.8rem;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: transform 1s ease-in;
+  width: 25rem;
+  padding: 1.9rem 0;
+}
+
+.sticky-bar-btn:hover {
+  background-color: #132449;
+}
+
+
+@media (max-width: 769px){
+ .sticky-bar-container.sticky-bar-visible {
+  height: 4rem;
+  }
+
+  .sticky-bar-price {
+  font-size: 13px;
+  }
+
+ .sticky-bar-title {
+  font-size: 15px;
+  }
+
+.sticky-bar-img-wrapper {
+ width: 3.3rem;
+ }
+
+ .sticky-bar-btn {
+  font-size: 0.6rem;
+ }
+}
+
+@media (max-width: 427px){
+  .sticky-bar-container,
+  .sticky-bar-container .sticky-bar-visible 
+  {
+    display: none;
+  }
+}

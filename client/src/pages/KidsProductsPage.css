@@ -1,0 +1,54 @@
+
+.products-page-con {
+  overflow-x: hidden;
+}
+
+
+
+
+
+
+
+@media (max-width: 1024px){
+.products-collection-info-container {
+  
+}
+}
+
+
+@media (max-width: 768px){
+.products-collection-info-container {
+
+}
+.products-collection-info-text {
+ width: 100%;
+}
+}
+
+@media (max-width: 426px){
+.products-collection-info-container {
+  
+}
+.products-collection-info-text {
+ width: 100%;
+}
+}
+
+@media (max-width: 376px){
+.products-collection-info-container {
+ 
+}
+.products-collection-info-text {
+ width: 100%;
+}
+}
+
+
+@media (max-width: 320px){
+.products-collection-info-container {
+  
+}
+.products-collection-info-text {
+ width: 100%;
+}
+}

@@ -1,0 +1,112 @@
+.sticky-filter-bar {
+  background-color: white;
+  color: #041e3a;
+  height: 4rem;
+}
+
+.sticky-filter-link-men {
+  color: #041e3a;
+}
+
+.sticky-filter-link-category {
+  color: #041e3a;
+}
+
+  .sticky-filter-breadcrumb {
+    font-family: monospace;
+    font-size: 12px;
+
+  }
+
+.sticky-filter-breadcrumb {
+  font-size: 12px;
+  margin-left: 1rem;
+}
+
+.sticky-filter-chip-wrap {
+  margin-left: 1rem;
+  background-color: #47474747;
+  font-family: sans-serif;
+}
+
+.sticky-filter-action {
+  font-size: 1em;
+  font-weight: bold;
+  margin-right: 1rem;
+  align-items: center;
+}
+
+.sticky-filter-bar {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  visibility: hidden;         
+  pointer-events: none;
+  transition:
+    height 0.3s ease-in-out,
+    opacity 0.3s ease-in-out,
+    visibility 0s linear 0.3s;  
+}
+
+
+.sticky-filter-bar.show-filter-bar {
+  height: 5rem;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    height 0.3s ease-in-out,
+    opacity 0.3s ease-in-out,
+    visibility 0s linear 0s;    
+}
+
+.sticky-filter-text {
+  margin-bottom: 0;
+}
+
+.filter-head-btn-pop {
+  width: fit-content;
+  border-radius: 5px;
+  font-size: 12px;
+  gap: 4px;
+  padding: 4px 6px 4px 10px;
+  background: rgb(169, 168, 168);
+  color: #041e3a;
+  white-space: nowrap;
+}
+
+.close-head-filter {
+  font-size: 16px;
+}
+
+
+@media (max-width: 769px){
+    .sticky-filter-breadcrumb {
+    font-family: monospace;
+    font-size: 10px;
+
+  }
+
+.sticky-filter-bar.show-filter-bar {
+  height: 4rem;
+  }
+
+  .sticky-filter-action {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 426px){
+  .sticky-filter-breadcrumb {
+    font-family: monospace;
+    font-size: 9px;
+
+  }
+  .sticky-filter-bar.show-filter-bar {
+  height: 3rem;
+  }
+
+    .sticky-filter-action {
+    font-size: 0.7rem;
+  }
+}

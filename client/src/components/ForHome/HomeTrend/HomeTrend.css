@@ -1,0 +1,104 @@
+
+
+.home-trend {
+  position: relative;
+  width: 100%;
+}
+
+.home-trend-title {
+  font-family: "Playfair Display", serif;
+  font-size: 3.5em;
+}
+
+.home-trend-caption {
+  margin-top: 1em;
+}
+
+.home-trend-cta {
+  font-size: 15px;
+  font-family: monospace;
+  text-underline-offset: 0.5em;
+}
+
+
+.home-trend-banner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: #0b0b1f;
+}
+
+.home-trend-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-trend-overlay {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 500;
+}
+
+
+.home-trend-banner--desktop {
+  display: block;
+
+}
+
+.home-trend-banner--desktop .home-trend-overlay {
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.home-trend-banner--mobile {
+  display: none;
+  background-color: rgb(17, 5, 107);
+}
+
+.home-trend-banner--mobile .home-trend-overlay {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5em 1em;
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+
+
+@media (max-width: 768px) {
+
+  .home-trend-title {
+    font-size: 3em;
+  }
+
+  .home-trend-cta {
+    font-size: 13px;
+  }
+}
+
+
+@media (max-width: 426px) {
+  .home-trend-title {
+    font-size: 1.8em;
+  }
+
+  .home-trend-cta {
+    font-size: 10px;
+  }
+
+  .home-trend-banner--mobile {
+    display: block;
+  }
+
+  .home-trend-banner--desktop {
+    display: none;
+  }
+}

@@ -1,0 +1,221 @@
+
+.bag-submit-auth-con {
+  margin-top: 10rem;
+}
+
+.sign-in-title-bag-submit {
+  font-size: 1.6rem;
+  font-weight: 350;
+  color: #474747;
+}
+
+.user-checkout-con {
+  margin-top: 3rem;
+}
+
+.required-signin-bag-submit {
+  color: #a7a4a4;
+  font-size: 15px;
+}
+
+
+.checkbox-instruction-submit-bag-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: #041e3a;
+  line-break: 200px;
+}
+
+.guest-input-instruction {
+  font-size: 13px;
+  font-weight: 370;
+  color: #041e3a;
+
+}
+
+.read-rlf-lauren-checkbox-text {
+  cursor: pointer;
+}
+
+.guest-checkout-title {
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: #474747;
+}
+
+.guest-email-input {
+  outline: none;
+  border: 1px solid #2d2d2d;
+  font-size: 13px;
+  color: #373737;
+  padding: 10px 15px;
+}
+
+.ckeckoutGuest-btn {
+  background-color: #041e3a;
+  color: #fff;
+  padding: 15px 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  user-select: none;
+  cursor: pointer;
+  width: 20rem;
+}
+
+.create-account-text-instruction-on-guest-checkout {
+    font-size: 11px;
+  font-weight: 500;
+  color: #041e3a;
+  line-break: 200px;
+}
+
+.order-logo-title {
+  font-weight: 500;
+  font-size: 1.9rem;
+  font-family: "Playfair Display", serif;
+  cursor: pointer;
+  user-select: none;
+   color: #041e3a;
+   word-spacing: 10px;
+   letter-spacing: 3px;
+  
+}
+
+
+
+.order-summary-title {
+  font-size: 1.9rem;
+  font-weight: 200;
+  font-family: "Playfair Display", serif;
+  cursor: pointer;
+  user-select: none;
+}
+
+.billing-order-title,
+.payment-order-title {
+  font-size: 1.9rem;
+  font-weight: 200;
+  font-family: "Playfair Display", serif;
+  cursor: pointer;
+  user-select: none;
+  color: #041e3a;
+  border-bottom: #373737 1px solid;
+}
+
+.qty-title-text,
+.price-title-text,
+.total-title-text {
+  font-family: monospace;
+  font-weight: 100;
+  font-size: 1rem;
+}
+
+.product-name-ordered {
+ font-size: 1rem;
+  font-weight: 200;
+  color: #041e3a;
+  font-family: "Playfair Display", serif;
+  cursor: pointer;
+  user-select: none;
+}
+
+.product-color-ordered {
+  color: #041e3a;
+}
+
+.product-size-ordered {
+  color: #041e3a;
+}
+
+.delivery-address-title,
+.billing-address-title {
+  font-size: 2rem;
+  font-weight: 200;
+  color: #041e3a;
+  font-family: "Playfair Display", serif;
+  cursor: pointer;
+  user-select: none;
+  border-bottom: #c3c2c2 solid 1px;
+}
+
+.ba-text {
+  font-size: 15px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-address-input {
+  padding: 10px 20px;
+  border: #38393a 1px solid;
+  font-family: monospace;
+}
+
+.default-ba-text {
+  font-size: 13px;
+  font-weight: 550;
+  font-family: monospace;
+  cursor: pointer;
+  user-select: none;
+}
+
+.order-payment-instruction-text {
+  font-family:  Helvetica, sans-serif;
+  font-size: 11px;
+  color: #8a8a8b;
+}
+
+.paypal-payment-instruction-text {
+  width: 90%;
+  margin: 0 auto;
+  font-size: 14px;
+}
+
+.op-instruction-span:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.paypal-logo-con {
+  width: 4rem;
+}
+
+.item-total-order-billing,
+.shipping-order-billing,
+.total-order-billing {
+  font-family: monospace;
+  font-weight: 100;
+  border-bottom: 1px solid #cdcbcb;
+  padding-bottom: 3rem;
+  margin: 0.5rem;
+}
+
+.total-order-billing {
+  border: none;
+} 
+
+.text-duties-taxes {
+  font-size: 11px;
+  font-weight: 400;
+  color: #8a8a8b;
+}
+
+
+@media (max-width: 426px){
+ .bag-product-img-con {
+  width: 12rem;
+  margin-top: 2rem;
+  background-color: #041e3a;
+ }
+}
+
+@media (max-width: 376px){
+ .bag-product-img-con {
+  width: 13rem;
+  margin-top: 2rem;
+ }
+
+}

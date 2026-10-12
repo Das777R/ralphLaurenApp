@@ -1,0 +1,236 @@
+.women-trend {
+  position: relative;
+  width: 100%;
+}
+
+.women-trend-banner {
+  position: relative;
+  width: 100%;
+  height: 85vh; 
+  background-color: #0b0b1f;
+}
+
+.women-trend-image,
+.women-trend-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.women-trend-overlay-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none; 
+  z-index: 2;
+}
+
+.women-trend-overlay {
+  position: sticky;
+  top: 100px; 
+  align-self: flex-start;
+  margin-left: 1%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  color: #fff;
+  font-family: 'Times New Roman', Times, serif;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  pointer-events: auto;
+}
+
+.women-trend-brand {
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  font-family: Arial, sans-serif;
+}
+
+.women-trend-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.women-trend-caption {
+  font-size:1rem;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.women-trend-cta {
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: Arial, sans-serif;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 2px;
+  cursor: pointer;
+}
+
+.women-trend-banner--mobile {
+  display: none;
+}
+
+.women-trend-banner--desktop {
+  display: block;
+}
+
+
+@media (max-width: 1024px){
+  
+.women-trend-overlay {
+  position: sticky;
+  top: 100px; 
+  align-self: flex-start;
+  margin-left: 1%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  max-width: 500px;
+}
+  .women-trend-brand {
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  font-family: Arial, sans-serif;
+}
+
+.women-trend-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.women-trend-caption {
+  font-size:0.8rem;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.women-trend-cta {
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: Arial, sans-serif;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 2px;
+  cursor: pointer;
+}
+}
+
+@media (max-width: 768px) {
+  .women-trend-title {
+    font-size: 2rem;
+  }
+
+
+
+}
+
+@media (max-width: 426px) {
+  .women-trend-banner--mobile {
+    display: block;
+  }
+
+
+
+  .women-trend-banner--desktop {
+    display: none;
+  }
+
+  .women-trend-banner {
+    height: 100vh;
+  }
+
+  .women-trend-overlay-wrap {
+    justify-content: flex-end; 
+  }
+
+  .women-trend-overlay {
+    top: auto;
+    bottom: 1rem; 
+    align-self: stretch;
+    max-width: none;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 400px;
+  }
+
+  .women-trend-title {
+    font-size: 1.5rem;
+  }
+
+  .women-trend-brand {
+    font-size: 0.rem;
+  }
+
+  .women-trend-caption {
+    font-size: 0.7rem;
+  }
+}
+
+
+@media (max-width: 376px) {
+  .women-trend-banner--mobile {
+    display: block;
+  }
+
+  .women-trend-banner--desktop {
+    display: none;
+  }
+
+  .women-trend-banner {
+    height: 100vh;
+  }
+
+  .women-trend-overlay-wrap {
+    justify-content: flex-end; 
+  }
+
+  .women-trend-overlay {
+    bottom: 1px; 
+    max-width: 450px;
+  }
+
+  .women-trend-title {
+    font-size: 1.4rem;
+  }
+
+  .women-trend-caption {
+    font-size: 0.5rem;
+  }
+
+  .women-trend-overlay {
+  position: sticky;
+  top: 100px; 
+  align-self: flex-start;
+  margin-left: 1%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  max-width: 300px;
+}
+}

@@ -1,0 +1,24 @@
+.header-banner-container-ralph {
+  background-color: transparent;
+  color: #fff;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  top: 2.5rem;
+  z-index: 1001;
+}
+
+.header-banner-container-ralph:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.header-banner-container-ralph.ralphBigHeader-scrolled {
+  background-color: #fff;
+  color: #041e3a;
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+}
+
+.ralphBigHeader-scrolled {
+  color: #041e3a;
+}

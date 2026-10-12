@@ -1,0 +1,110 @@
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    body {
+      background-color: #f9f9f9;
+    }
+
+    
+    .cont {
+      min-height: 100vh;
+      display: flex;
+      padding: 2rem;
+      overflow: auto;
+    }
+
+    .grid-container {
+      margin: auto;
+      display: grid;
+      gap: 1em;
+    }
+
+  
+    .grid-container {
+      grid-template-columns: repeat(4, 230px);
+      grid-template-rows: repeat(2, 250px);
+      grid-template-areas:
+        "box-1 box-3 box-4 box-5"
+        "box-2 box-3 box-4 box-6";
+    }
+
+    .box {
+      background-color: rgb(6, 81, 179);
+      overflow: hidden;
+      position: relative; 
+    }
+
+    .box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+   
+    .box-1 { grid-area: box-1; }
+    .box-2 { grid-area: box-2; }
+    .box-3 { grid-area: box-3; }
+    .box-4 { grid-area: box-4; }
+    .box-5 { grid-area: box-5; }
+    .box-6 { grid-area: box-6; }
+
+    
+    .box .text-label {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-weight: 500;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+      z-index: 10; 
+    }
+
+
+    @media (max-width: 1024px) {
+      .grid-container {
+        grid-template-columns: repeat(4, 180px);
+        grid-template-rows: repeat(2, 180px);
+        gap: 1em;
+        grid-template-areas:
+          "box-1 box-3 box-4 box-5"
+          "box-2 box-3 box-4 box-6";
+      }
+    }
+
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: repeat(4, 120px);
+        grid-template-rows: repeat(2, 130px);
+        gap: 0.8em;
+        grid-template-areas:
+          "box-1 box-3 box-4 box-5"
+          "box-2 box-3 box-4 box-6";
+      }
+    }
+
+    @media (max-width: 425px) {
+      .grid-container {
+        grid-template-columns: repeat(4, 80px);
+        grid-template-rows: repeat(2, 90px);
+        gap: 0.5em;
+        grid-template-areas:
+          "box-1 box-3 box-4 box-5"
+          "box-2 box-3 box-4 box-6";
+      }
+    }
+  

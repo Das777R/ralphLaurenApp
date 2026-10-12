@@ -1,0 +1,77 @@
+
+
+.ralph-logo {
+  font-family: "Playfair Display", serif;
+  
+}
+
+.baglength {
+  bottom: -0.1rem;
+  font-size: 0.8rem;
+  font-weight: 100;
+}
+
+
+
+.original-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+
+.header-banner-container-ralph-products {
+  background-color: #fff;
+  color: #041e3a;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  top: 2.5rem;
+  z-index: 1001;
+}
+
+.header-banner-container-ralph-products:hover {
+  background-color: #fff;
+  color: #000;
+  
+}
+
+.header-banner-container-ralph-products.ralphBigHeader-scrolled {
+  background-color: #fff;
+  color: #041e3a;
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+}
+
+
+
+@media (max-width: 768px){
+  .ralph-categories {
+    display: none;
+  }
+}
+
+.header-icons {
+  cursor: pointer;
+  user-select: none;
+}
+
+.search-icon,
+.profile-icon,
+.fav-icon,
+.bag-icon,
+.bag-icon,
+.bar-icon {
+  cursor: pointer;
+  user-select: none;
+}
+
+.category-nav {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  transition: text-decoration 0.2s ease-in-out;
+}
+
+.category-nav:hover {
+  text-decoration: underline;
+}

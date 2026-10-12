@@ -1,0 +1,103 @@
+.men-trend {
+  position: relative;
+  width: 100%;
+}
+
+.men-trend-banner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: #0b0b1f; 
+}
+
+.men-trend-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.men-trend-overlay {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 500;
+}
+
+.men-trend-logo {
+  object-fit: contain;
+  width: 25rem;
+}
+
+.men-trend-caption {
+  margin-top: 1em;
+ font-size: 1rem;
+}
+
+.home-trend-title {
+  font-family: "Playfair Display";
+  font-size: 3.5em;
+}
+
+.men-trend-banner--desktop {
+  background-color: aqua;
+}
+
+.men-trend-banner--desktop .men-trend-overlay {
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.men-trend-banner--mobile {
+  background-color: rgb(17, 5, 107);
+}
+
+.men-trend-banner--mobile .men-trend-overlay {
+  bottom: 0;
+  left: 0%;
+  width: 100%;
+  padding: 1.5em 1em;
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+.men-trend-banner--mobile {
+  display: none;
+}
+
+.men-trend-banner--desktop {
+  display: block;
+}
+
+
+@media (max-width: 768px) {
+  .men-trend-logo {
+    object-fit: contain;
+    width: 23rem;
+  }
+}
+
+
+@media (max-width: 426px) {
+  .men-trend-banner--mobile {
+  display: block;
+  }
+
+  .men-trend-banner--desktop {
+  display: none;
+  }
+
+  .men-trend-logo {
+  object-fit: contain;
+  width: 23rem;
+  }
+
+  .men-trend-caption {
+  margin-top: 1em;
+  font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,96 @@
+.rlc-hero-video {
+  height: 40rem;
+
+
+}
+
+.rlf-img {
+  position: relative;
+  z-index: 998;
+  overflow: hidden;
+}
+
+video[alt="Ralph Lauren summer campaign desktop"],
+video[alt="Ralph Lauren summer campaign"] {
+  width: 100%;
+  height: 40rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.Polo-ralph-Lauren-text {
+  position: absolute;
+  width: 25rem;
+  top: 25rem;
+  left: 28rem;
+  z-index: 999;
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+}
+
+.poloByralph-shopnow-p {
+  font-size: 14px;
+  color: #f8f8f9;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  z-index: 999;
+  font-family: monospace;
+}
+
+@media (max-width: 1024px) {
+.Polo-ralph-Lauren-text {
+    top: 62%;
+    left: 30%;
+    
+  }
+
+  video[alt="Ralph Lauren summer campaign desktop"],
+  video[alt="Ralph Lauren summer campaign"] {
+    width: 100%;
+    height: 35rem;
+  }
+}
+
+@media (max-width: 768px) {
+.Polo-ralph-Lauren-text {
+    top: 58%;
+    width: 14rem;
+    left: 35%;
+  }
+  .poloByralph-shopnow-p {
+    top: 62%;
+    font-size: 12px;
+  }
+
+  video[alt="Ralph Lauren summer campaign desktop"],
+  video[alt="Ralph Lauren summer campaign"] {
+    width: 100%;
+    height: 30rem;
+  }
+}
+
+@media (max-width: 426px) {
+.Polo-ralph-Lauren-text {
+  top: 45%;
+  width: 15rem;
+  margin-top: 20rem;
+  margin-left: -3rem;
+
+}
+
+}
+
+@media (max-width: 320px) {
+.Polo-ralph-Lauren-text {
+    top: 55%;
+    margin-top: 20rem;
+    margin-left: -4rem;
+    font-size: 10px;
+
+  }
+  .poloByralph-shopnow-p {
+    top: 60%;
+  }
+}

@@ -1,0 +1,378 @@
+.home-explore-cont {
+  font-family: "Playfair Display", serif;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+  padding: 3rem;
+  user-select: none;
+}
+
+.shopnow-women{
+  font-size: 13px;
+  font-family: monospace;
+  text-underline-offset: 0.5em;
+  cursor: pointer;
+}
+
+.home-explore-img-cont {
+  width: 15rem;
+  height: 34rem;
+  flex-shrink: 0; 
+  text-align: center;
+  
+}
+
+.home-explore-img > h1 {
+  font-size: 14px;
+}
+
+
+
+.home-explore-img {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.home-explore-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.home-explore-img-info {
+  z-index: 2;
+  bottom: 2rem;
+  left: 2rem;
+}
+
+.home-explore-category-text {
+  font-family: "Playfair Display", serif;
+  font-size: 2.8rem;
+  font-weight: 530;
+}
+
+.home-explore-polo-rl-title {
+  font-size: 12px;
+  font-family: "Roboto Mono", monospace;
+}
+
+.home-explore-polo-rl-carousel-title {
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+}
+
+.home-explore-category-carousel-text {
+  font-family: "Playfair Display", serif;
+  font-size: 2em;
+  width: 200px;
+}
+
+.home-explore-img img[alt="polo bags stories only mobile"] {
+  display: none;
+}
+
+.home-explore-carousel-cont {
+  flex: 1;
+  min-width: 0;
+}
+
+.home-explore-carousel-title {
+  font-size: 3rem;
+}
+
+.home-explore-carousel-text {
+  font-size: 11px;
+  width: 24em;
+  max-width: 100%;
+}
+
+.home-explore-img-carosuel-cont {
+  margin-top: 2em;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  width: 100%;
+  gap: 1rem;
+  display: flex;
+}
+
+.home-explore-img-carousel {
+  width: 20rem;
+  background: #000;
+  flex-shrink: 0; 
+}
+
+.home-explore-img-carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.home-explore-img h1{
+   font-size: 2em;
+}
+.home-explore-img h1 span {
+   font-size: 2em;
+}
+.home-explore-img p {
+  font-size: 0.8em;
+
+}
+
+@media (max-width: 1401px) {
+  .home-explore-img-info {
+    bottom: 2rem;
+    left: 1.6rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .home-explore-cont {
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .home-explore-img-cont {
+    width: 20rem;
+    height: 25rem;
+  }
+  .home-explore-carousel-text {
+    width: 24em;
+  }
+
+  .home-explore-img-carousel {
+  width: 13rem;
+  flex-shrink: 0; 
+  background: #000;
+}
+
+.home-explore-img-carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+  .home-explore-category-text {
+    font-size: 2.1rem;
+  }
+  .home-explore-polo-rl-title {
+    font-size: 10px;
+  }
+  .home-explore-img-info {
+    bottom: 0.3rem;
+    left: 0.7rem;
+  }
+  .home-explore-polo-rl-carousel-title {
+    font-size: 10px;
+  }
+  .home-explore-category-carousel-text {
+    font-size: 1.5em;
+    width: 200px;
+  }
+}
+
+@media (max-width: 769px) {
+  .home-explore-cont {
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .home-explore-img-cont {
+    width: 16rem;
+    height: 21.5rem;
+  }
+  .home-explore-carousel-text {
+    width: 24em;
+  }
+  .home-explore-img-carousel {
+    width: 12rem;
+  }
+  .home-explore-category-text {
+    font-size: 1.7rem;
+  }
+  .home-explore-polo-rl-title {
+    font-size: 8px;
+  }
+  .home-explore-img-info {
+    bottom: 0.3rem;
+    left: 0.7rem;
+  }
+  .home-explore-polo-rl-carousel-title {
+    font-size: 8px;
+  }
+  .home-explore-category-carousel-text {
+    font-size: 1.1em;
+    width: 150px;
+  }
+
+.home-explore-img h1{
+   font-size: 1.5em;
+}
+.home-explore-img h1 span {
+   font-size: 2em;
+}
+.home-explore-img p {
+  font-size: 0.7em;
+
+}
+}
+
+@media (max-width: 426px) {
+  .home-explore-cont .d-sm-block {
+    width: 100%;
+    text-align: center;
+  }
+  .home-explore-cont {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  .home-explore-img-cont {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    flex-shrink: 1;
+  }
+  .home-explore-img {
+    width: 100%;
+    height: 100%;
+  }
+  .home-explore-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .home-explore-img img[alt="polo bags stories"] {
+    display: none;
+  }
+  .home-explore-img img[alt="polo bags stories only mobile"] {
+    display: block;
+  }
+  .home-explore-carousel-cont {
+    width: 100%;
+  }
+  .home-explore-carousel-title {
+    font-size: 2rem;
+  }
+  .home-explore-carousel-text {
+    width: 100%;
+    font-size: 12px;
+  }
+  .home-explore-img-carosuel-cont {
+    margin-top: 1.5em;
+    overflow-x: scroll;
+    width: 100%;
+    gap: 1rem;
+  }
+  .home-explore-img-carousel {
+    width: 70%;
+    flex-shrink: 0; 
+  }
+  .home-explore-img-carousel-img {
+    width: 100%;
+    height: auto;
+  }
+
+  .home-explore-img-cont {
+  width: 27rem;
+  height: 15rem;
+  flex-shrink: 0; 
+}
+  .home-explore-category-text {
+    font-size: 2.2rem;
+  }
+  .home-explore-polo-rl-title {
+    font-size: 10px;
+  }
+  .home-explore-img-info {
+    bottom: 0.3rem;
+    left: 0.7rem;
+  }
+  .home-explore-polo-rl-carousel-title {
+    font-size: 7px;
+  }
+  .home-explore-category-carousel-text {
+    font-size: 0.9em;
+    width: 100px;
+  }
+
+.home-explore-img h1{
+   font-size: 2em;
+}
+.home-explore-img h1 span {
+   font-size: 2em;
+}
+.home-explore-img p {
+  font-size: 0.8em;
+
+}
+}
+
+@media (max-width: 376px) {
+  .home-explore-carousel-title {
+    font-size: 1.8rem;
+  }
+  .home-explore-carousel-text {
+    width: 100%;
+  }
+  .home-explore-img-cont {
+  width: 17rem;
+ 
+  }
+
+  .home-explore-img-carousel {
+    width: 75%;
+  }
+  .home-explore-category-text {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+  .home-explore-polo-rl-title {
+    font-size: 10px;
+  }
+  .home-explore-img-info {
+    bottom: 0.5rem;
+    left: 1rem;
+  }
+}
+
+@media (max-width: 321px) {
+  .home-explore-carousel-title {
+    font-size: 1.8rem;
+  }
+  .home-explore-carousel-text {
+    width: 100%;
+    font-size: 12px;
+  }
+  .home-explore-img-cont {
+  width: 17rem;
+ 
+}
+
+  .home-explore-img-carousel {
+    width: 80%;
+  }
+  .home-explore-category-text {
+    font-size: 1.7rem;
+  }
+  .home-explore-polo-rl-title {
+    font-size: 8px;
+  }
+  .home-explore-img-info {
+    bottom: 0.5rem;
+    left: 1rem;
+  }
+
+.home-explore-img h1{
+   font-size: 2em;
+}
+.home-explore-img h1 span {
+   font-size: 2em;
+}
+.home-explore-img p {
+  font-size: 0.8em;
+
+}
+}

@@ -1,0 +1,29 @@
+.products-list-page {
+  left: 18%;
+  top: 4rem;
+  width: 83%;
+  
+}
+
+
+@media (max-width: 1025px){
+  .products-list-page {
+  left:25%;
+  right: 0;
+  top: 4rem;
+  width: 84%;
+ 
+}
+}
+
+
+
+@media (max-width: 427px){
+  .products-list-page {
+  left: 0;
+  right: 0;
+  top: 4rem;
+  width: 100%;
+ 
+}
+}

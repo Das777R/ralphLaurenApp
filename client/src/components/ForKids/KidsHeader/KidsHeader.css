@@ -1,0 +1,74 @@
+.ralph-categories-kids {
+  font-size: 10px;
+  font-family: serif;
+  word-spacing: 1px;
+  letter-spacing: 2px;
+  font-weight: 100;
+  font-style: normal;
+  left: 25%;
+  z-index: 999;
+  display: block;
+
+  
+}
+
+.original-link-kids {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+
+.header-banner-container-ralph-products-kids {
+  position: absolute;
+  color: #fff;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  top: 2.5rem;
+  left: 0;
+  width: 100%;
+  z-index: 1001;
+}
+
+.header-banner-container-ralph-products-kids:hover {
+  color: #000;
+}
+
+.header-banner-container-ralph-products-kids.ralphBigHeader-scrolled {
+  color: #041e3a;
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+}
+
+
+
+@media (max-width: 768px){
+  .ralph-categories-kids {
+    display: none;
+  }
+}
+
+.header-icons-kids {
+  cursor: pointer;
+  user-select: none;
+}
+
+.search-icon-kids,
+.profile-icon-kids,
+.fav-icon-kids,
+.bag-icon-kids,
+.bar-icon-kids {
+  cursor: pointer;
+  user-select: none;
+}
+
+.category-nav-kids {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  transition: text-decoration 0.2s ease-in-out;
+}
+
+.category-nav-kids:hover {
+  text-decoration: underline;
+}

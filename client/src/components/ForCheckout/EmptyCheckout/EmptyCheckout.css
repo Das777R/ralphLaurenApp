@@ -1,0 +1,24 @@
+
+
+.fb-con,
+.google-con,
+.apple-con {
+ width: 10rem;
+}
+
+.signin-btn,.ckeckoutGuest-btn,.ckeckoutGuest-btn {
+  width: 20rem;
+}
+
+
+@media (max-width: 768px){
+.fb-con,
+.google-con,
+.apple-con {
+ width: 100%;
+}
+
+.signin-btn,.ckeckoutGuest-btn,.ckeckoutGuest-btn {
+  width: 100%;
+}
+}

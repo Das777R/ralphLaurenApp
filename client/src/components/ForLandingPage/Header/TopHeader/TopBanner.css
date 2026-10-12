@@ -1,0 +1,96 @@
+.ralph-logo-user{
+  font-size: 1.7rem;
+  font-weight: 500;
+  letter-spacing: 5px;
+  word-spacing: 1px;
+  font-family: "Playfair Display", serif;
+  padding: 15px 20px;
+  
+  
+}
+
+
+.category-nav {
+  font-family: monospace;
+}
+
+
+
+.banner-icon {
+  font-size: 1.2rem;
+}
+
+
+.original-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (max-width: 768px){
+  .ralph-categories {
+    display: none;
+  }
+  .banner-icon {
+  font-size: 1.1rem;
+}
+}
+
+
+@media (max-width: 426px){
+  .header-icons {
+
+  }
+
+  .ralph-logo {
+    font-size: 1.2rem;
+  }
+
+.banner-icon {
+  font-size: 1rem;
+}
+}
+
+@media (max-width: 321px){
+  .ralph-logo{
+    padding: 20px 10px;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  
+
+  .header-icons {
+    
+  }
+
+}
+
+.header-icons {
+  cursor: pointer;
+  user-select: none;
+}
+
+.search-icon,
+.profile-icon,
+.fav-icon,
+.bag-icon,
+.bag-icon,
+.bar-icon {
+  cursor: pointer;
+  user-select: none;
+  font-size: 15px;
+}
+
+
+
+
+.category-nav {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  transition: text-decoration 0.2s ease-in-out;
+}
+
+.category-nav:hover {
+  text-decoration: underline;
+}

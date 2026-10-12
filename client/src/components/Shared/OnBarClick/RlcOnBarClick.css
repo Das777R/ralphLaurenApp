@@ -1,0 +1,45 @@
+.rlc-on-bar {
+  max-height: calc(100vh - 2.5rem);
+  z-index: 1001;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.signup-or-login-container {
+  border-bottom: 1px solid #a3a2a2;
+  height: 3rem;
+  font-size: 1rem;
+  font-family: "Playfair Display", serif;
+  cursor: pointer;
+  user-select: none;
+}
+
+.rlc-on-bar-categories-container {
+  border-bottom: 1px solid #8b8b8d;
+  font-family: "Playfair Display", serif;
+  font-weight: 540;
+}
+
+.on-bar-category {
+  cursor: pointer;
+  user-select: none;
+}
+
+
+
+.on-bar-wishlist,
+.on-bar-stores,
+.on-bar-language {
+  display: flex;
+  gap: 0.6rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.on-bar-english-text,
+.on-bar-stores-text,
+.on-bar-whishlist-text {
+  font-size: 0.9rem;
+  font-weight: 100;
+  font-family: "Fjalla One", sans-serif;
+}

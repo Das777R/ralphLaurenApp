@@ -1,0 +1,155 @@
+
+
+.search-bar-for-rlc-products{
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1.5rem;
+  font-family: "Playfair Display", serif;
+  min-width: 0;
+
+}
+
+.search-for-search-container {
+  width: 100%;
+  gap: 0.5rem;
+  border: 1px solid rgb(209, 207, 207);
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: "Playfair Display";
+}
+
+.search-for-search-container > input {
+  font-size: 1.2rem;
+  font-family: "Playfair Display";
+}
+
+.search-icon-for-search {
+  font-size: 1.3em;
+  color: #c9c8c8;
+  flex-shrink: 0; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.delete-query-container {
+  width: 3rem;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0; 
+  cursor: pointer;
+}
+
+.delete-search-query-container {
+  font-size: 13px;
+}
+
+.delete-query-search-search {
+  font-size: 15px;
+  color: #c9c8c8;
+  user-select: none;
+}
+
+.search-fetch-info > h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  margin-left: 2rem;
+  width: 100%;
+
+
+}
+
+.search-fetch-info {
+  width: 100%;
+}
+
+.products-collection-product-container {
+  position: relative;
+  z-index: 999;
+  overflow: hidden;
+  gap: 1px;
+  margin-bottom: 5rem;
+  margin: 0 auto;
+}
+
+.product-container {
+  margin-bottom: 26rem;
+  margin-top: 1rem;
+}
+
+
+@media (max-width: 1024px) {
+  .search-fetch-info > h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  padding-bottom: 1em;
+  
+}
+
+.product-container {
+  margin-bottom: 5rem;
+  margin-top: 1rem;
+}
+
+.search-fetch-info {
+  width: 100%;
+}
+}
+
+@media (max-width: 768px){
+  .product-container {
+  margin-bottom: 3rem;
+  margin-top: 1rem;
+}
+
+.search-icon-for-search {
+  font-size: 1em;
+}
+}
+
+@media (max-width: 426px) {
+  .search-fetch-info > h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  padding-left: 1rem;
+  margin: 0 auto;
+}
+
+.search-bar-for-rlc-products {
+ font-size: 1rem;
+}
+
+.product-container {
+  margin-bottom: 5rem;
+  margin-top: 1rem;
+}
+
+.search-fetch-info {
+  width: 100%;
+}
+}
+
+@media (max-width: 376px){
+  .product-container {
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+}
+
+@media (max-width: 321px){
+.product-container {
+  margin-bottom: 6rem;
+  margin-top: 1rem;
+}
+}
+
+
+
+

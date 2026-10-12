@@ -1,0 +1,224 @@
+.continue-shopping-link:hover {
+  text-decoration: underline;
+}
+
+.continue-shopping-link {
+  font-size: 13px;
+  margin-top: 10px;
+  font-weight: 600;
+  color: #474747;
+  transition: all 2.02s ease-in-out;
+  cursor: pointer;
+}
+.shop-cart-title {
+  color: #474747;
+  font-size: 1.7rem;
+   font-family: "Raleway", sans-serif;
+  font-weight: 520;
+  font-style: normal;
+}
+
+
+.bag-outer {
+  margin-top: 7rem;
+}
+
+.bag-product-img-con {
+  width: 7rem;
+  height: 9rem;
+}
+
+
+.bag-product-img-con-mobile {
+  width: 46rem;
+}
+
+.bag-product-img-con-mobile img {
+  object-fit: contain;
+}
+
+
+.head-bag-title {
+  
+  font-size: 1.5rem;
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: .15rem;
+  
+}
+
+.hb-title {
+  color: #535252;
+   font-weight: 500;
+}
+
+.bag-product-img-con > img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.bag-features {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: #666565;
+
+ user-select: none;
+}
+
+.bg-product-title {
+  color: #3b3a3a;
+  font-size: 0.8rem;
+  font-family: "Roboto Mono", monospace;
+}
+
+.bg-product-title:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.remove-product-from-bag {
+  cursor: pointer;
+}
+
+.checkout-btn {
+  background-color: #041e3a;
+  padding: 15px 20px;
+  font-size: 12px;
+  width: 13rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  font-family: sans-serif;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+
+.select-qty {
+  width: 5rem;
+  user-select: none;
+  cursor: pointer;
+
+}
+
+.select-qty > option {
+  user-select: none;
+  cursor: pointer;
+}
+
+.sub-total-outer > h4 {
+  font-size: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  color: #474747;
+  border-bottom: 1px solid #7a7a7a;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+.price-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 4rem;
+}
+
+.price-num {
+  display: inline-block;
+}
+
+.proceed-btn {
+  background-color: #041e3a;
+  padding: 25px 80px;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+
+.bag-policy-outer {
+  margin-top: 1rem;
+}
+
+
+.continue-shop-text {
+  font-size: 14px;
+  color: #858383;
+  cursor: pointer;
+}
+
+.bag-policy-outer > h4 {
+  font-size: 13px;
+   color: #969494;
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+.bag-email-us-text {
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+    cursor: pointer;
+}
+.bag-email-us-text,
+.bag-security-text {
+  color: #023265;
+  font-weight: 100;
+}
+
+.bag-security-text {
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  user-select: none;
+  cursor: pointer;
+}
+
+.bag-email-us-text:hover,
+.bag-security-text:hover {
+  text-decoration: underline;
+}
+
+
+@media (max-width: 426px){
+  .bag-product-img-con-mobile {
+  width: 25rem;
+ 
+}
+
+.bag-product-img-con-mobile img {
+  object-fit: contain;
+}
+
+.proceed-btn {
+  background-color: #041e3a;
+  padding: 25px 80px;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.sub-total-outer > h4 {
+  font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  color: #474747;
+  border-bottom: 1px solid #7a7a7a;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+.proceed-btn {
+  background-color: #041e3a;
+  padding: 25px 80px;
+  font-size: 0.8em;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+}
+
+
+@media (max-width: 376px){
+  .bag-product-img-con-mobile {
+  width: 21.5rem;
+}
+}
+
+@media (max-width: 320px){
+  .bag-product-img-con-mobile {
+  width: 18rem;
+}
+}
