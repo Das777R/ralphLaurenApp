@@ -37,8 +37,8 @@
 
 
 @media (max-width: 426px){
-  .header-icons {
-
+  .ralph-logo-user {
+    font-size: 1.5em;
   }
 
   .ralph-logo {
@@ -46,7 +46,7 @@
   }
 
 .banner-icon {
-  font-size: 1rem;
+  font-size: 0.5rem;
 }
 }
 
@@ -54,17 +54,18 @@
   .ralph-logo{
     padding: 20px 10px;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
   }
 
-  
-
-  .header-icons {
-    
+    .ralph-logo-user {
+    font-size: 1em;
   }
 
+  .banner-icon {
+  font-size: 1rem;
 }
 
+ 
 .header-icons {
   cursor: pointer;
   user-select: none;
@@ -81,9 +82,6 @@
   font-size: 15px;
 }
 
-
-
-
 .category-nav {
   position: relative;
   cursor: pointer;
@@ -93,4 +91,6 @@
 
 .category-nav:hover {
   text-decoration: underline;
+}
+ 
 }

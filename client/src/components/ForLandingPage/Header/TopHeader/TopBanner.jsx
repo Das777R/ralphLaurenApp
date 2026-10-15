@@ -46,8 +46,8 @@ function TopBanner() {
 
     useEffect(() => {
       const lsbag = JSON.parse(localStorage.getItem('bag')) || [];
-      const lengbag = lsbag.length;
-      setBagLength(lengbag)
+       const lengbag = lsbag.reduce((i,c) => i + c.qty,0);
+       setBagLength(lengbag)
     },[]);
 
     
@@ -121,8 +121,6 @@ function TopBanner() {
           <IoIosHeartEmpty className="banner-icon"/>
            )}
           </Link>
-         
-          
         </div>
       <div className="bag-icon">
         <Link to={bagPath} style={{ color: "inherit" }} className="position-relative d-inline-block">

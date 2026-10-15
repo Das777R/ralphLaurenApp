@@ -44,6 +44,9 @@ setItemForUserBag();
 }, [userId, setBagProducts]);
 
 
+
+
+
 const removeProductFromBag = async (productId, size) => {
 if (!userId) {
 const lsBag = JSON.parse(localStorage.getItem('bag')) || [];
@@ -62,6 +65,8 @@ console.log(err);
 }
 }
 };
+
+
 
 
 const handleQtyChange = async (pId, size, newQty) => {
@@ -83,10 +88,12 @@ item.productId === pId && item.size === size
   : item
 );
 localStorage.setItem("bag", JSON.stringify(updatedLsBag));
+
+const bag = JSON.parse(localStorage.getItem('bag'));
+
 } else {
 try {
 await api.put(`/auth/${userId}/${pId}`, { updatedQty: numericQty, size });
-
 } catch (err) {
 console.log("Failed to update quantity on server", err);
 }

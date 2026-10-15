@@ -46,7 +46,6 @@ function Dmen() {
         <div className="men-discover-track d-flex">
           {DmenData?.map((item, index) => {
             const isHovered = activeCardId === item?._id;
-            
             return (
               <div 
                 className="men-discover-card position-relative" 

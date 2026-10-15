@@ -1,0 +1,38 @@
+:root {
+  --sidebar-width: 260px;
+  --header-height: 64px;
+}
+
+.admin-layout {
+  min-height: 100vh;
+  background: var(--bs-tertiary-bg);
+}
+
+.admin-main {
+  padding: calc(var(--header-height) + 1.25rem) 1rem 1.5rem;
+  min-width: 0; /* lets charts/tables shrink instead of overflowing */
+}
+
+.admin-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+}
+
+@media (min-width: 768px) {
+  .admin-main {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* Laptop/desktop: sidebar is permanent, content sits beside it */
+@media (min-width: 992px) {
+  .admin-main {
+    margin-left: var(--sidebar-width);
+  }
+  .admin-backdrop {
+    display: none;
+  }
+}

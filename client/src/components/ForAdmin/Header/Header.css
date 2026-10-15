@@ -1,0 +1,39 @@
+.top-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height, 64px);
+  z-index: 1030;
+  background: var(--bs-body-bg);
+  border-bottom: 1px solid var(--bs-border-color);
+}
+
+.top-navbar,
+.top-navbar > .container-fluid {
+  flex-wrap: nowrap;
+}
+
+/* Laptop/desktop: start the header after the permanent sidebar */
+@media (min-width: 992px) {
+  .top-navbar {
+    left: var(--sidebar-width, 260px);
+  }
+}
+
+.header-left {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.search-input-group {
+  max-width: 420px;
+}
+
+.notification-badge {
+  font-size: 0.6rem;
+}
+
+.no-caret::after {
+  display: none;
+}

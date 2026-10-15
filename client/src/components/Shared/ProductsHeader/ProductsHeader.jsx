@@ -19,7 +19,6 @@ function ProductsHeader() {
     const {handleSearchToggle, handleBarToggle, bagLength, setBagLength} = useContext(UIContext);
     const [userProfileIsHovered, setUserProfileIsHovered] = useState(false);
     const [userFavIsHovered, setUserFavIsHovered] = useState(false);
-
     const {userId} = useParams();
  
     
@@ -35,7 +34,7 @@ function ProductsHeader() {
 
     useEffect(() => {
       const lsbag = JSON.parse(localStorage.getItem('bag')) || [];
-      const lengbag = lsbag.length;
+      const lengbag = lsbag.reduce((i,c) => i + c.qty,0);
       setBagLength(lengbag)
     },[])
   

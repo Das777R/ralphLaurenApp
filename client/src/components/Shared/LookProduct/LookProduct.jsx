@@ -1,16 +1,31 @@
-import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import api from "../../../api/api.js";
 import { CiHeart } from "react-icons/ci";
 import { IoCloseOutline } from "react-icons/io5";
 import { BsHandbag } from "react-icons/bs";
 import { useLookProduct } from "../../../context/Look/LookProductContext.js";
-import LookProductProvider from "../../../context/Look/LookProductProvider.jsx";
+import LookProductProvider from '../../../context/Look/LookProductProvider.jsx'
 import StickyBar from "../../../context/Look/StickyBar.jsx";
-import { isVideo } from "../../../context/Look/LookHelpers.js"
+import { isVideo } from "../../../context/Look/LookHelpers.js";
 import { FiAlertCircle } from "react-icons/fi";
+import { FiChevronDown } from "react-icons/fi";
+import { Offcanvas } from "bootstrap";
+import { useContext } from "react";
 import "./LookProduct.css";
+import CompleteLook from "./CompleteLook.jsx";
+import { UIContext } from "../../../context/UIContext.jsx";
 
+function getSectionSlug(category) {
+  const c = (category || "").toLowerCase().trim();
+  if (c.startsWith("women")) return "women-section";
+  if (c.startsWith("men")) return "men-section";
+  if (c.startsWith("kid") || c.startsWith("boy") || c.startsWith("girl")) {
+    return "kids-section";
+  }
+  if (c.startsWith("home")) return "home-section";
+  return null;
+}
 
 function LookProductContent() {
   const {
@@ -38,11 +53,22 @@ function LookProductContent() {
     setIsLoading,
     bag,
     bagLength,
-    sizeNotSelectForLook
+    sizeNotSelectForLook,
+    
+    
   } = useLookProduct();
 
+  const {setCompleteLookOpen,completeLookOpen} = useContext(UIContext);
 
+  const { userId } = useParams();
   const scrollContainerRef = useRef(null);
+   
+  const scrolledLeftBtnRef = useRef(); 
+  const scrolledRightBtnRef = useRef();
+
+
+     
+
 
   const scrollRight = () => {
     if (scrollContainerRef.current) {
@@ -50,6 +76,16 @@ function LookProductContent() {
         left: scrollContainerRef.current.scrollWidth,
         behavior: "smooth",
       });
+    }
+
+    if(scrolledRightBtnRef.current){
+       if(!scrollContainerRef.current.classList.contains('active')){
+      scrolledRightBtnRef.current.classList.add('active');
+      scrolledLeftBtnRef.current.classList.remove('active');
+       }else{
+         scrolledRightBtnRef.current.classList.remove('active');
+         scrolledLeftBtnRef.current.classList.add('active');
+       }
     }
   };
 
@@ -60,7 +96,43 @@ function LookProductContent() {
         behavior: "smooth",
       });
     }
+
+    if(scrolledLeftBtnRef.current){
+      scrolledLeftBtnRef.current.classList.add('active');
+       scrolledRightBtnRef.current.classList.remove('active');
+    }else{
+      scrolledLeftBtnRef.current.classList.remove('active');
+      scrolledRightBtnRef.current.classList.add('active');
+    }
   };
+
+  const bagOffcanvasRef = useRef(null);
+  const recommendOffcanvasRef = useRef(null);
+
+  const handleOpenBagOffcanvas = () => {
+    const el = bagOffcanvasRef.current;
+    if (el) {
+      const bsOffcanvas = Offcanvas.getInstance(el) || new Offcanvas(el);
+      bsOffcanvas.show();
+    }
+  };
+
+  const handleOpenRecommendOffcanvas = () => {
+    const el = recommendOffcanvasRef.current;
+    if (el) {
+      const bsOffcanvas = Offcanvas.getInstance(el) || new Offcanvas(el);
+      bsOffcanvas.show();
+    }
+  };
+
+  const handleCloseRecommendOffcanvas = () => {
+    const el = recommendOffcanvasRef.current;
+    if (el) {
+      Offcanvas.getInstance(el)?.hide();
+    }
+  };
+
+  const [handleEnterCat, setHandleEnterCat] = useState(null);
 
   useEffect(() => {
     const getProductsById = async () => {
@@ -80,12 +152,37 @@ function LookProductContent() {
     if (productId) {
       getProductsById();
     }
+    
   }, [productId]);
+
+  const userSuffix = userId ? `/${userId}` : "";
+
+  const getUrlForCat = () => {
+    const slug = getSectionSlug(productLook?.category);
+    return slug ? `/${slug}${userSuffix}` : null;
+  };
+
+  const getUrlForKind = () => {
+    const slug = getSectionSlug(productLook?.category);
+    const kind = (productLook?.kind || "").trim();
+    return slug && kind
+      ? `/${slug}/category/${encodeURIComponent(kind)}${userSuffix}`
+      : null;
+  };
+
+  const catUrl = getUrlForCat();
+  const kindUrl = getUrlForKind();
+
+  const fullDetailsPath = offCanavasRecommendData?._id
+    ? `/lookup/${offCanavasRecommendData._id}${userSuffix}`
+    : "#";
+
+
 
   if (isLoading) {
     return (
       <div
-        className="d-flex w-100 d-flex justify-content-center align-items-center"
+        className="d-flex w-100 justify-content-center align-items-center"
         style={{ height: "20rem" }}
       >
         <div
@@ -99,14 +196,23 @@ function LookProductContent() {
 
   return (
     <>
-      <StickyBar/>
-      <div className="product-look-container  d-flex">
+    
+      <StickyBar />
+      <CompleteLook/>
+      <div className={`product-look-container d-flex ${completeLookOpen ? 'd-none': ''}`}>
         <div className="product-image-look-container">
           <img
             src={formatImgSrc(productLook?.lookImage)}
             alt=""
-            className="product-lookImage"
+            className="product-lookImage position-relative"
           />
+        <button
+        type="button"
+        className="complete-look-btn position-absolute"
+        onClick={() => setCompleteLookOpen(true)}
+        >
+        COMPLETE THE LOOK <FiChevronDown />
+        </button>
           {productLook?.slideImage?.map((slideUrl, index) => (
             <div key={index} className="product-slideImage">
               {isVideo(slideUrl) ? (
@@ -119,7 +225,7 @@ function LookProductContent() {
                   className="w-100"
                 />
               ) : (
-                <img src={formatImgSrc(slideUrl)} alt="Polo Advert" />
+                <img src={formatImgSrc(slideUrl)} alt="Product" />
               )}
             </div>
           ))}
@@ -146,7 +252,7 @@ function LookProductContent() {
                 ) : (
                   <img
                     src={formatImgSrc(slideUrl)}
-                    alt="Polo Advert"
+                    alt="Product"
                     className="slide-img-look"
                   />
                 )}
@@ -158,8 +264,40 @@ function LookProductContent() {
         <div className="product-look-info-container d-flex flex-column">
           <div className="product-look-info mb">
             <div className="product-look-path text-uppercase mb-3 d-flex gap-2">
-              <p className="text-dark">{productLook?.category}</p>/
-              <p className="text-dark">{productLook?.kind}</p>
+              {catUrl ? (
+                <Link to={catUrl} style={{ textDecoration: "inherit" }}>
+                  <p
+                    className={`text-dark ${
+                      handleEnterCat === productLook?.category
+                        ? "text-decoration-underline"
+                        : ""}`}
+                    onMouseEnter={() => setHandleEnterCat(productLook?.category)}
+                    onMouseLeave={() => setHandleEnterCat("")}
+                  >
+                    {productLook?.category}
+                  </p>
+                </Link>
+              ) : (
+                <p className="text-dark">{productLook?.category}</p>
+              )}
+              /
+              {kindUrl ? (
+                <Link to={kindUrl} style={{ textDecoration: "inherit" }}>
+                  <p
+                    className={`text-dark ${
+                      handleEnterCat === productLook?.kind
+                        ? "text-decoration-underline"
+                        : ""
+                    }`}
+                    onMouseEnter={() => setHandleEnterCat(productLook?.kind)}
+                    onMouseLeave={() => setHandleEnterCat("")}
+                  >
+                    {productLook?.kind}
+                  </p>
+                </Link>
+              ) : (
+                <p className="text-dark">{productLook?.kind}</p>
+              )}
             </div>
             <h3 className="product-name-look-text text-capitalize">
               {productLook?.productName}
@@ -192,13 +330,12 @@ function LookProductContent() {
               </div>
             </div>
 
-          
             <div className="product-look-size-container mt-3 d-flex flex-column gap-2">
               <div className="product-look-size-text text-capitalize">
                 SIZE: <span className="size-chart-text">Size Chart</span>
               </div>
               <div className="product-look-size-box-container d-flex gap-2 flex-wrap">
-                {availableSizes.map((size) => (
+                {(availableSizes || []).map((size) => (
                   <div
                     key={size}
                     className={`product-look-size-box text-uppercase ${
@@ -211,19 +348,27 @@ function LookProductContent() {
                 ))}
               </div>
             </div>
-            {sizeNotSelectForLook &&
-            <div className="d-flex gap-2 font-monospace mt-3 fw-bold">
-              <FiAlertCircle className="text-white bg-danger rounded-circle"/>
-              <p className="text-danger text-capitalize" style={{fontSize:"12px"}}>please select a size</p>
-            </div> }
+            {sizeNotSelectForLook && (
+              <div className="d-flex gap-2 font-monospace mt-3 fw-bold">
+                <FiAlertCircle className="text-white bg-danger rounded-circle" />
+                <p
+                  className="text-danger text-capitalize"
+                  style={{ fontSize: "12px" }}
+                >
+                  please select a size
+                </p>
+              </div>
+            )}
             <div
               className="add-to-bag-div text-uppercase mt-3"
-              data-bs-toggle={lookSize ? "offcanvas" : undefined}
-              href={lookSize ? "#offcanvasExample" : undefined}
+              onClick={() => {
+                handleAddToBag(productLook?._id, lookSize);
+                if (lookSize) {
+                  handleOpenBagOffcanvas();
+                }
+              }}
               role="button"
               id="liveToastBtn"
-              aria-controls="offcanvasExample"
-              onClick={() => handleAddToBag(productLook._id, lookSize)}
             >
               {addedToBag ? "Item added" : "add to bag"}
             </div>
@@ -237,11 +382,9 @@ function LookProductContent() {
             </div>
           </div>
 
-    
-
           <div className="product-look-delivery-info-contatiner mt-0">
             <div className="products-instruction-text">
-              {productLook.description}
+              {productLook?.description}
             </div>
             <div className="product-look-instruction-div d-flex flex-column gap-2 text-uppercase mt-5">
               <div className="product-look-instruction product-details">
@@ -256,7 +399,6 @@ function LookProductContent() {
             </div>
           </div>
 
-        
           <div className="container py-1 position-sticky" style={{ top: "0px" }}>
             <div className="d-flex justify-content-between align-items-center mb-4">
               <h3 className="text-uppercase complete-the-look-title">
@@ -270,10 +412,10 @@ function LookProductContent() {
                   <div
                     className="d-flex align-items-center justify-content-center"
                     style={{ width: "174px", height: "220px", cursor: "pointer" }}
-                    onClick={() => getProductByName(item.productName)}
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#recommendOffcanvas"
-                    aria-controls="recommendOffcanvas"
+                    onClick={() => {
+                      getProductByName(item.productName);
+                      handleOpenRecommendOffcanvas();
+                    }}
                   >
                     <img
                       src={formatImgSrc(item.lookImage)}
@@ -284,7 +426,11 @@ function LookProductContent() {
 
                   <div
                     className="d-flex flex-column py-3"
-                    style={{ width: "174px", height: "220px" }}
+                    style={{ width: "174px", height: "220px", cursor: "pointer" }}
+                    onClick={() => {
+                      getProductByName(item.productName);
+                      handleOpenRecommendOffcanvas();
+                    }}
                   >
                     <h6
                       className="mb-1 recom-offcanvas-title"
@@ -305,9 +451,8 @@ function LookProductContent() {
           </div>
         </div>
 
-      
-    
         <div
+          ref={bagOffcanvasRef}
           className="offcanvas offcanvas-end bag-offcanvas"
           tabIndex="-1"
           id="offcanvasExample"
@@ -330,7 +475,7 @@ function LookProductContent() {
               <div className="bag-offcanvas-item-image">
                 <Link style={{ textDecoration: "inherit" }} to="#">
                   <img
-                    src={formatImgSrc(canvasData.lookImage)}
+                    src={formatImgSrc(canvasData?.lookImage)}
                     alt=""
                     className="w-100 h-100"
                   />
@@ -383,28 +528,23 @@ function LookProductContent() {
           </div>
         </div>
       </div>
-
-
-      <div className="container mt-5">
+      <div className={`container mt-5 ${completeLookOpen ? 'd-none': ''}`}>
         <div className="d-flex gap-3 align-items-center mb-4">
           <h2 className="fw-normal user-select-none you-may-also-title">
             You may also like
           </h2>
           <div className="btn-group" role="group" aria-label="Carousel Navigation">
-            <button
-              type="button"
-              className="btn move-right-btn btn-outline-secondary btn-sm rounded-0 px-3"
-              onClick={scrollLeft}
-            >
-              &lsaquo;
-            </button>
-            <button
-              type="button"
-              className="btn move-left-btn btn-outline-secondary btn-sm rounded-0 px-3"
+              <div 
+              className="fs-3 move-right-btn  btn-md rounded-start-1 px-3"
+               onClick={scrollLeft}
+               ref={scrolledLeftBtnRef}
+              >&lsaquo;</div>
+              <div 
+              className=" fs-3 move-left-btn btn-md rounded-end-1 px-3"
               onClick={scrollRight}
-            >
-              &rsaquo;
-            </button>
+               ref={scrolledRightBtnRef}
+              >&rsaquo;</div>
+            {/* </button> */}
           </div>
         </div>
         <div
@@ -416,15 +556,15 @@ function LookProductContent() {
               <div className="card product-card">
                 <div
                   className="product-img-wrapper"
-                  onClick={() => getProductByName(item.productName)}
-                  data-bs-toggle="offcanvas"
-                  data-bs-target="#recommendOffcanvas"
-                  aria-controls="recommendOffcanvas"
+                  onClick={() => {
+                    getProductByName(item.productName);
+                    handleOpenRecommendOffcanvas();
+                  }}
                   style={{ cursor: "pointer" }}
                 >
                   <img
                     src={formatImgSrc(item.lookImage)}
-                    alt="Polo Shirt"
+                    alt={item.productName}
                     className="w-100 h-100"
                   />
                 </div>
@@ -439,147 +579,155 @@ function LookProductContent() {
         </div>
       </div>
 
-   
-      {offCanavasRecommendData && (
-        <div
-          className="offcanvas offcanvas-end w-75 d-flex flex-row recommend-offcanvas-body"
-          tabIndex="-1"
-          id="recommendOffcanvas"
-          aria-labelledby="recommendOffcanvasLabel"
-        >
-          <div className="d-flex flex-column w-75 recommend-offcanvas-image-con p-0">
-            <img
-              src={formatImgSrc(offCanavasRecommendData.lookImage)}
-              className="w-100"
-              alt=""
-            />
-            {offCanavasRecommendData?.slideImage?.map((item, index) => (
+      <div
+        ref={recommendOffcanvasRef}
+        className={`offcanvas offcanvas-end w-75 d-flex flex-row recommend-offcanvas-body ${completeLookOpen ? 'd-none': ''}`}
+        tabIndex="-1"
+        id="recommendOffcanvas"
+        aria-labelledby="recommendOffcanvasLabel"
+        data-bs-backdrop="false"
+      >
+        {offCanavasRecommendData && (
+          <div className="d-flex overflow-auto recommend-offcanvas-con h-100 w-100">
+            <div className="d-flex flex-column w-75 recommend-offcanvas-image-con p-0">
               <img
-                key={index}
-                src={formatImgSrc(item)}
+                src={formatImgSrc(offCanavasRecommendData.lookImage)}
                 className="w-100"
                 alt=""
               />
-            ))}
-          </div>
-          <div className="offcanvas-body w-50 d-flex flex-column p-4">
-            <div className="w-100 d-flex justify-content-end">
-              <IoCloseOutline
-                className="fs-3 text-dark"
-                style={{ cursor: "pointer" }}
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              />
+              {offCanavasRecommendData?.slideImage?.map((item, index) => (
+                <img
+                  key={index}
+                  src={formatImgSrc(item)}
+                  className="w-100"
+                  alt=""
+                />
+              ))}
             </div>
+            <div className="offcanvas-body w-50 d-flex flex-column p-4 position-sticky top-0 offcanvas-product-detail">
+              <div className="w-100 d-flex justify-content-end">
+                <IoCloseOutline
+                  className="fs-3 text-dark"
+                  style={{ cursor: "pointer" }}
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                />
+              </div>
 
-            <div className="w-100">
-              <h1 className="recom-offcanvas-title">
-                {offCanavasRecommendData.productName}
-              </h1>
-              <p className="recom-offcanvas-brand">
-                {offCanavasRecommendData.brand}
-              </p>
-
-              <div>
-                <p className="recom-offcanvas-price">
-                  ₹{offCanavasRecommendData.price}
+              <div className="w-100">
+                <h1 className="recom-offcanvas-title" id="recommendOffcanvasLabel">
+                  {offCanavasRecommendData.productName}
+                </h1>
+                <p className="recom-offcanvas-brand">
+                  {offCanavasRecommendData.brand}
                 </p>
-                <p className="recom-offcanvas-taxes">MRP, incl. of all taxes</p>
-              </div>
 
-              <div className="product-look-color-container">
-                COLOR:{" "}
-                <span className="product-look-color-text text-capitalize">
-                  {offCanavasRecommendData.color}
-                </span>
-                <div className="d-flex gap-2 mt-2 look-product-color-img-con">
-                  {offCanavasRecommendData?.availableColors?.map((clr, index) => (
-                    <img
-                      key={index}
-                      src={formatImgSrc(clr)}
-                      alt="color option"
-                      className={`look-product-color-img ${
-                        clr === offCanavasRecommendData.colorImage
-                          ? "currentColor"
-                          : ""
-                      }`}
-                      onClick={() => getProductByColor(clr)}
-                    />
-                  ))}
+                <div>
+                  <p className="recom-offcanvas-price">
+                    ₹{offCanavasRecommendData.price}
+                  </p>
+                  <p className="recom-offcanvas-taxes">MRP, incl. of all taxes</p>
                 </div>
-              </div>
 
-              
-              <div className="product-look-size-container mt-3 d-flex flex-column gap-2">
-                <div className="product-look-size-text text-capitalize">
-                  SIZE: <span className="size-chart-text">Size Chart</span>
+                <div className="product-look-color-container">
+                  COLOR:{" "}
+                  <span className="product-look-color-text text-capitalize">
+                    {offCanavasRecommendData.color}
+                  </span>
+                  <div className="d-flex gap-2 mt-2 look-product-color-img-con">
+                    {offCanavasRecommendData?.availableColors?.map((clr, index) => (
+                      <img
+                        key={index}
+                        src={formatImgSrc(clr)}
+                        alt="color option"
+                         className={`look-product-color-img ${
+                          clr === offCanavasRecommendData.colorImage
+                            ? "currentColor" : ""}`}
+                        onClick={() => getProductByColor(clr)}
+                      />
+                    ))}
+                  </div>
                 </div>
-                <div className="product-look-size-box-container d-flex gap-2 flex-wrap">
-                  {recommendAvailableSizes.map((size) => (
-                    <div
-                      key={size}
-                      className={`product-look-size-box text-uppercase ${
-                        recommendSize === size ? "size-selected" : ""
-                      }`}
-                      onClick={() => selectSizeForCanvas(size)}
-                    >
-                      {size}
+
+                <div className="product-look-size-container mt-3 d-flex flex-column gap-2">
+                  <div className="product-look-size-text text-capitalize">
+                    SIZE: <span className="size-chart-text">Size Chart</span>
+                  </div>
+                  <div className="product-look-size-box-container d-flex gap-2 flex-wrap">
+                    {(recommendAvailableSizes || []).map((size) => (
+                      <div
+                        key={size}
+                        className={`product-look-size-box text-uppercase ${
+                          recommendSize === size ? "size-selected" : ""
+                        }`}
+                        onClick={() => selectSizeForCanvas(size)}
+                      >
+                        {size}
+                      </div>
+                    ))}
+                  </div>
+                  {sizeNotSelectForLook && (
+                    <div className="d-flex gap-2 font-monospace mt-3 fw-bold">
+                      <FiAlertCircle className="text-white bg-danger rounded-circle" />
+                      <p
+                        className="text-danger text-capitalize"
+                        style={{ fontSize: "12px" }}
+                      >
+                        please select a size
+                      </p>
                     </div>
-                  ))}
-                </div>
-             {sizeNotSelectForLook &&
-            <div className="d-flex gap-2 font-monospace mt-3 fw-bold">
-              <FiAlertCircle className="text-white bg-danger rounded-circle"/>
-              <p className="text-danger text-capitalize" style={{fontSize:"12px"}}>please select a size</p>
-            </div> }
-              </div>
-
-              <div className="d-flex flex-column gap-3 mt-5">
-                <div className="d-flex" style={{ gap: "1px" }}>
-                  <div
-                    className="flex-grow-1 text-white d-flex align-items-center justify-content-center py-3 text-uppercase add-to-bag-recommend"
-                    data-bs-toggle={recommendSize ? "offcanvas" : undefined}
-                    href={recommendSize ? "#offcanvasExample" : undefined}
-                    role="button"
-                    aria-controls="offcanvasExample"
-                    onClick={() =>
-                      handleAddToBag(offCanavasRecommendData._id, recommendSize)
-                    }
-                  >
-                    {addedToBag ? "Item added" : "add to bag"}
-                  </div>
-                  <div className="border border-dark d-flex align-items-center justify-content-center px-3 add-to-fav-recommend">
-                    <CiHeart className="text-white" />
-                  </div>
+                  )}
                 </div>
 
-                <div className="text-center py-2">
-                  <Link
-                    to={`/lookup/${offCanavasRecommendData._id}`}
-                    style={{ textDecoration: "inherit" }}
-                  >
-                    <p
-                      className="text-dark d-inline text-decoration-none text-uppercase border-bottom border-dark pb-1"
-                      style={{ letterSpacing: "1.5px", fontSize: "0.7rem" }}
+                <div className="d-flex flex-column gap-3 mt-5">
+                  <div className="d-flex" style={{ gap: "1px" }}>
+                    <div
+                      className="flex-grow-1 text-white d-flex align-items-center justify-content-center py-3 text-uppercase add-to-bag-recommend"
+                      onClick={() => {
+                        handleAddToBag(offCanavasRecommendData._id, recommendSize);
+                        if (recommendSize) {
+                          handleCloseRecommendOffcanvas();
+                          handleOpenBagOffcanvas();
+                        }
+                      }}
+                      role="button"
                     >
-                      Full Details
-                    </p>
-                  </Link>
+                      {addedToBag ? "Item added" : "add to bag"}
+                    </div>
+                    <div className="border border-dark d-flex align-items-center justify-content-center px-3 add-to-fav-recommend">
+                      <CiHeart className="text-white" />
+                    </div>
+                  </div>
+
+                  <div className="text-center py-2">
+                    <Link
+                      to={fullDetailsPath}
+                      style={{ textDecoration: "inherit" }}
+                      onClick={handleCloseRecommendOffcanvas}
+                    >
+                      <p
+                        className="text-dark d-inline text-decoration-none text-uppercase border-bottom border-dark pb-1"
+                        style={{ letterSpacing: "1.5px", fontSize: "0.7rem" }}
+                      >
+                        Full Details
+                      </p>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 }
 
 function LookProduct() {
   return (
-    <LookProductProvider>
-      <LookProductContent />
-    </LookProductProvider>
+      <LookProductProvider>
+        <LookProductContent />
+      </LookProductProvider>
   );
 }
 

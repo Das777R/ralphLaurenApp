@@ -1,0 +1,90 @@
+/* Segmented range control */
+.seg {
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border-radius: 0.625rem;
+  background: var(--bs-secondary-bg);
+}
+.seg button {
+  border: 0;
+  background: transparent;
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--bs-secondary-color);
+  transition: all 0.15s ease;
+}
+.seg button:hover {
+  color: var(--bs-body-color);
+}
+.seg button.active {
+  background: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.14);
+}
+
+/* Chart containers */
+.chart-box {
+  position: relative;
+  width: 100%;
+}
+.spark-box {
+  position: relative;
+  height: 44px;
+  margin-top: 0.5rem;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Progress bars */
+.bar-track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--bs-secondary-bg);
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Heatmap */
+.heat-grid {
+  display: grid;
+  grid-template-columns: 2.5rem repeat(6, minmax(0, 1fr));
+  gap: 6px;
+  align-items: center;
+}
+.heat-label {
+  font-size: 0.72rem;
+  color: var(--bs-secondary-color);
+}
+.heat-cell {
+  display: grid;
+  place-items: center;
+  min-height: 30px;
+  aspect-ratio: 1.6 / 1;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  transition: transform 0.15s ease;
+}
+.heat-cell:hover {
+  transform: scale(1.08);
+}
+.heat-scale {
+  display: inline-block;
+  width: 64px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(13, 110, 253, 0.1), rgba(13, 110, 253, 1));
+}

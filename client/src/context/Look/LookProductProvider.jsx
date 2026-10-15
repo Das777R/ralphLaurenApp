@@ -13,6 +13,7 @@ function LookProductProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [sizeNotSelectForLook, setsizeNotSelectForLookForLook] = useState(false);
   
+  
   const [lookSize, setLookSize] = useState(null);
   const [recommendSize, setRecommendSize] = useState(null);
 
@@ -233,8 +234,11 @@ function LookProductProvider({ children }) {
         } else {
           updatedBag = [...existingBag, newItem];
         }
+        const qty = updatedBag.reduce((i,c) => {
+          return i + c.qty
+        },0)
 
-        setBagLength(updatedBag.length);
+        setBagLength(qty);
         localStorage.setItem("bag", JSON.stringify(updatedBag));
         setCanvasData(newItem);
         setAddedToBag(true);

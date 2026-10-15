@@ -3,7 +3,8 @@ import RefreshToken from '../schema/RefreshToken.schema.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { z } from 'zod';
-import { generateAccessToken, generateRefreshToken } from '../utils/token.js';
+import { generateAccessToken,
+         generateRefreshToken } from '../utils/token.js';
 
 const signUpSchema = z.object({
   name: z.string().trim().min(1, { message: "Name is required!!" }),
@@ -145,8 +146,8 @@ export const refreshTokenController = async (req, res) => {
     }
 
     return res.status(200).json({
-      message: "New access token issued",
-      data: { accessToken: generateAccessToken(account), userId: account._id },
+      message: "New access token issued for user",
+      data: { accessToken: generateAccessToken(account), userId: account._id, role: "user"},
       success: true
     });
   } catch (err) {
@@ -154,20 +155,7 @@ export const refreshTokenController = async (req, res) => {
   }
 };
 
-export const logoutController = async (req, res) => {
-  try {
-    const token = req.cookies?.refreshToken;
-    if (token) {
-      await RefreshToken.deleteOne({ token });
-    }
 
-    res.clearCookie("refreshToken", clearCookieOptions);
-
-    return res.status(200).json({ message: "User successfully logged out", success: true });
-  } catch (err) {
-    return serverError(res, err);
-  }
-};
 
 export const getCustomer = async (req, res) => {
   try {

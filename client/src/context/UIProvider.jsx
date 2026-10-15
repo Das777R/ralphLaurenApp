@@ -45,9 +45,9 @@ export function UIProvider({children}){
 
 
   const totalPrice = bagProducts.reduce((acc, item) => acc + Number(item.price) * item.qty, 0);
-  
+   const [completeLookOpen, setCompleteLookOpen] = useState(false);
   return(
-    <UIContext.Provider value={{openSearchBar,setOpenSearchBar, openRlcBar, handleSearchToggle, handleBarToggle,searchedData, setSearchedData, setFreezeST, freezeST,isLoading, setIsLoading, addedToFav, setAddedToFav, guestFavData, setGuestFavData, bagProducts, setBagProducts, totalPrice, checkoutProducts, setCheckoutProducts,bagLength, setBagLength,searchTerm, setSearchTerm,productsData, setProductsData}}>
+    <UIContext.Provider value={{openSearchBar,setOpenSearchBar, openRlcBar, handleSearchToggle, handleBarToggle,searchedData, setSearchedData, setFreezeST, freezeST,isLoading, setIsLoading, addedToFav, setAddedToFav, guestFavData, setGuestFavData, bagProducts, setBagProducts, totalPrice, checkoutProducts, setCheckoutProducts,bagLength, setBagLength,searchTerm, setSearchTerm,productsData, setProductsData,completeLookOpen, setCompleteLookOpen}}>
       {children}
     </UIContext.Provider>
   )

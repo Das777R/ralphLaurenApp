@@ -1,5 +1,5 @@
 import './HomeExplore.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import api from '../../../api/api';
 
 function HomeExplore() {
@@ -21,6 +21,38 @@ function HomeExplore() {
     fetchExploreData();
   }, []);
 
+  const scrollBoxRef = useRef();
+  const scrolledRightBtnRef = useRef();
+  const scrolledLeftBtnRef = useRef();
+
+  const scrollLeft = () => {
+    if (scrollBoxRef.current) {
+      scrollBoxRef.current.scrollTo({
+        left: scrollBoxRef.current.scrollLeft - 300,
+        behavior: "smooth",
+      });
+    }
+
+    if (scrolledLeftBtnRef.current) {
+      scrolledLeftBtnRef.current.classList.add("active");
+      scrolledRightBtnRef.current.classList.remove("active");
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollBoxRef.current) {
+      scrollBoxRef.current.scrollTo({
+        left: scrollBoxRef.current.scrollLeft + 300,
+        behavior: "smooth",
+      });
+    }
+
+    if (scrolledRightBtnRef.current) {
+      scrolledRightBtnRef.current.classList.add("active");
+      scrolledLeftBtnRef.current.classList.remove("active");
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="w-100 d-flex justify-content-center align-items-center" style={{ height: "15rem" }}>
@@ -37,10 +69,28 @@ function HomeExplore() {
           <p>Discover more from Ralph Lauren Home</p>
         </div>
       </div>
+
       <div className="home-explore-carousel-cont">
-        <div className="home-explore-img-carosuel-cont d-flex">
+      
+        <div className="btn-group mb-3 w-100 d-flex justify-content-end pe-3 mt-4 position-relative" role="group">
+          <div 
+            className="fs-3 move-right-btn btn-md rounded-start-1 px-3 position-relative"
+            onClick={scrollLeft}
+            ref={scrolledLeftBtnRef}
+            style={{ cursor: "pointer" }}
+          >&lsaquo;</div>
+          <div 
+            className="fs-3 move-left-btn btn-md rounded-end-1 px-3 position-relative"
+            onClick={scrollRight}
+            ref={scrolledRightBtnRef}
+            style={{ cursor: "pointer" }}
+          >&rsaquo;</div>
+        </div>
+
+        {/* Carousel Container */}
+        <div className="home-explore-img-carosuel-cont d-flex gap-2 overflow-x-auto" ref={scrollBoxRef}>
           {womenStoriesData?.map((item) => (
-            <div className="home-explore-img-carousel position-relative" key={item?._id || item?.title}>
+            <div className="home-explore-img-carousel position-relative flex-shrink-0" key={item?._id || item?.title}>
               <img src={item?.media[0]} alt="" className="home-explore-img-carousel-img"/>
               <div className="home-explore-img-info position-absolute">
                 <h2 className="home-explore-category-carousel-text text-capitalize text-white">{item?.title}</h2>

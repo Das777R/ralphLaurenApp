@@ -8,11 +8,18 @@ import { useMenContext } from "../../../context/men/MenProductContext.js";
 
 function ProductBox() {
 const { 
-  hoveredProductId, setHoveredProductId,
-  setAddedToFav, addedToFav,carouselPrevIconHovered,
-   setCarouselPrevIconHovered 
-  ,carouselNextIconHovered, setCarouselNextIconHovered,
-  productData, setProductData,isLoading, setIsLoading
+  hoveredProductId, 
+  setHoveredProductId,
+  setAddedToFav, 
+  addedToFav,
+  carouselPrevIconHovered,
+  setCarouselPrevIconHovered 
+  ,carouselNextIconHovered, 
+  setCarouselNextIconHovered,
+  productData, 
+  setProductData,
+  isLoading, 
+  setIsLoading
 } = useMenContext();  
 
 const { category, userId } = useParams();

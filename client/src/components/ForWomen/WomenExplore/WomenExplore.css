@@ -7,6 +7,33 @@
   user-select: none;
 }
 
+.move-left-btn,
+.move-right-btn {
+  background-color:#e1e1dc;
+  color: #041e3a;
+  font-weight: 100;
+  cursor: pointer;
+  transition: all ease-in-out 0.5s;
+}
+
+.move-left-btn.active,
+.move-right-btn.active{
+ color: #949393;
+}
+
+
+
+.move-right-btn::before{
+  content: '';
+  background-color: #8c8e91;
+  width: 1px;
+  height: 1.8rem;
+  position: absolute;
+  top: 0.5rem;
+  left: 2.5rem;
+}
+
+
 .shopnow-women{
   font-size: 13px;
   font-family: monospace;

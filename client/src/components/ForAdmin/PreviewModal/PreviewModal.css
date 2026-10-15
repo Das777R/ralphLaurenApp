@@ -1,0 +1,55 @@
+.product-preview-modal .modal-title,
+.product-preview-modal h4,
+.product-preview-modal .product-box-name-text,
+.product-preview-modal .product-box-price,
+.product-preview-modal .product-color-label {
+  color: #212529 !important;
+}
+
+.product-preview-modal .product-colors-div {
+  width: 1.6em;
+  height: 1.6em;
+  border: 1px solid #041e3a;
+  padding: 2px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.preview-meta dt {
+  font-weight: 500;
+}
+
+/* Legacy lightbox helpers (if still used) */
+.media-stage-wrap {
+  position: relative;
+  background: var(--bs-tertiary-bg);
+}
+.media-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+}
+.media-stage img,
+.media-stage video {
+  display: block;
+  max-width: 100%;
+  max-height: 68vh;
+  border-radius: 0.75rem;
+}
+.media-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+}
+.media-nav.start {
+  left: 0.75rem;
+}
+.media-nav.end {
+  right: 0.75rem;
+}

@@ -15,7 +15,7 @@ import { HiOutlineBars2 } from "react-icons/hi2";
 
 
 function AuthHeader() {
-   const {handleSearchToggle, handleBarToggle, bagLength, setBagLength} = useContext(UIContext);
+   const {handleSearchToggle, handleBarToggle, bagLength, setBagLength, bagProducts, setBagProducts } = useContext(UIContext);
    const [userProfileIsHovered, setUserProfileIsHovered] = useState(false);
    const [userFavIsHovered, setUserFavIsHovered] = useState(false);
 
@@ -23,9 +23,9 @@ function AuthHeader() {
 
   useEffect(() => {
   const lsbag = JSON.parse(localStorage.getItem('bag')) || [];
-  const lengbag = lsbag.length;
+  const lengbag = lsbag.reduce((i,c) => i + c.qty,0);
   setBagLength(lengbag)
-},[]);
+  },[bagProducts, setBagProducts ]);
 
 
   
@@ -101,7 +101,7 @@ function AuthHeader() {
     </div>
     <div className="bag-icon">
     <Link to={bagPath} style={{ color: "inherit" }} className="position-relative d-inline-block">
-    <IoBagHandleOutline />
+    <IoBagHandleOutline className="banner-icon" />
     <span 
     style={{bottom: "1rem",left: '1rem' ,fontSize: "0.8rem", fontWeight:"100"}} 
     className={`position-absolute text-dark ${bagLength === 0 ? 'd-none': 'd-block'} `}
@@ -112,7 +112,7 @@ function AuthHeader() {
     </div>
     <div className="bar-icon d-lg-none d-sm-block">
     <Link style={{color: "inherit"}} onClick={() => handleBarToggle()}>
-     <HiOutlineBars2 />
+     <HiOutlineBars2 className="banner-icon" />
     </Link>
     </div>
     </div>

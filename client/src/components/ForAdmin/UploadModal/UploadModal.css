@@ -1,0 +1,110 @@
+.media-drop {
+  padding: 1.75rem 1rem;
+  border: 2px dashed var(--bs-border-color);
+  border-radius: 0.75rem;
+  background: var(--bs-tertiary-bg);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.media-drop:hover,
+.media-drop:focus-visible,
+.media-drop.over {
+  border-color: var(--bs-primary);
+  background: rgba(13, 110, 253, 0.06);
+  outline: none;
+}
+.media-drop.has-file {
+  padding: 0.5rem;
+}
+
+.look-preview {
+  max-height: 120px;
+  width: auto;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+/* Slide previews inside the same drop zone */
+.media-drop.slide-drop.has-files {
+  padding: 0.75rem;
+  min-height: 140px;
+  align-items: stretch;
+  justify-content: flex-start;
+  display: flex;
+}
+.slide-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 0.5rem;
+  width: 100%;
+}
+.slide-preview-item {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid #dee2e6;
+  background: #f8f9fa;
+}
+.slide-preview-item.is-error {
+  border-color: #dc3545;
+}
+.slide-preview-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.slide-preview-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #dc3545;
+}
+.slide-preview-remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.slide-preview-err {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 0.55rem;
+  line-height: 1.2;
+  padding: 2px 4px;
+  background: rgba(220, 53, 69, 0.9);
+  color: #fff;
+}
+.slide-preview-add {
+  aspect-ratio: 3 / 4;
+  border: 1px dashed #adb5bd;
+  border-radius: 0.5rem;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  color: #6c757d;
+  font-size: 0.7rem;
+}
+
+.slide-thumb {
+  width: 64px;
+  height: 80px;
+}

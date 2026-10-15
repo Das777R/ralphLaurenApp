@@ -1,9 +1,10 @@
+import jwt from 'jsonwebtoken';
 import Admin from '../schema/AdminAuth.schema.js';
 import RefreshToken from '../schema/RefreshToken.schema.js';
 import OrderList from '../schema/Order.schema.js';
 import { generateAccessToken, generateRefreshToken } from '../utils/token.js';
 import bcrypt from 'bcrypt';
-import {  z } from 'zod';
+import { z } from 'zod';
 
 const signUpSchema = z.object({
   name: z.string().trim().min(1, { message: "Name is required!!" }),
@@ -31,12 +32,22 @@ const orderSchema = z.object({
   deliveryDate: z.coerce.date()
 });
 
+const COOKIE_NAME = 'refreshTokenForAdmin';
+
 const refreshCookieOptions = {
   httpOnly: true,
-  secure: true,
-  sameSite: "strict",
-  path: "/api/admin/auth",
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: 'lax',
+  path: '/',
   maxAge: 7 * 24 * 60 * 60 * 1000
+};
+
+// clearCookie must use the same attributes the cookie was set with
+const clearCookieOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: 'lax',
+  path: '/'
 };
 
 const safeUser = (u) => ({
@@ -55,8 +66,6 @@ export const signupController = async (req, res) => {
         success: false
       });
     }
-
-
 
     const { name, email, password } = validate.data;
     const existing = await Admin.findOne({ email });
@@ -136,11 +145,14 @@ export const loginController = async (req, res) => {
       expirationDate
     });
 
-    res.cookie("adminRefreshToken", refreshToken, refreshCookieOptions);
+    res.cookie(COOKIE_NAME, refreshToken, refreshCookieOptions);
 
     return res.status(200).json({
-      message: "Admin successfully logged in",
-      data: { user: safeUser(account), accessToken },
+      message: 'Login successful',
+      data: {
+        user: safeUser(account),
+        accessToken
+      },
       success: true
     });
   } catch (err) {
@@ -161,7 +173,7 @@ export const ordersOfUsers = async (req, res) => {
         success: false
       });
     }
-    
+
     const order = await OrderList.create(validate.data);
 
     return res.status(201).json({
@@ -194,45 +206,109 @@ export const getAllOrders = async (req, res) => {
   }
 };
 
-export const getLoggedInAdmin = async (req,res) => {
-  try{
-   const {adminId} = req.params;
+export const getLoggedInAdmin = async (req, res) => {
+  try {
+    const { adminId } = req.params;
 
-   if(!adminId){
-    return res.status(400).json({
-      message:"Not able to process the adminId",
+    if (!adminId) {
+      return res.status(400).json({
+        message: "Not able to process the adminId",
+        success: false
+      });
+    }
+
+    const isAdmin = await Admin.findById(adminId);
+
+    if (!isAdmin) {
+      return res.status(404).json({
+        message: "Admin not found.",
+        success: false
+      });
+    }
+
+    const getInitials = (name) => {
+      if (!name) return "";
+      return name
+        .trim()
+        .split(/\s+/)
+        .map((word) => word[0])
+        .join("")
+        .toUpperCase();
+    };
+
+    return res.status(200).json({
+      message: "Admin info found",
+      data: { name: isAdmin.name, initials: getInitials(isAdmin.name) },
+      success: true
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: err.message,
       success: false
-    })
-   }
-
-   const isAdmin = await Admin.findById(adminId);
-
-   if(!isAdmin){
-   return res.status(404).json({
-    message:"Admin not found.",
-    success: false
-   })
-   }
-
-  const getInitials = (name) => {
-  if (!name) return "";
-  return name
-    .trim()
-    .split(/\s+/)
-    .map((word) => word[0])
-    .join("")
-    .toUpperCase();
-  };
-
-   return res.status(200).json({
-    message:"Admin info found",
-    data: {name: isAdmin.name, initials: getInitials(isAdmin.name)},
-    successs: true
-   })
-  }catch(err){
-    res.status(500).json({
-      message:err.message,
-      success: false 
-    })
+    });
   }
-} 
+};
+
+export const getTokenController = async (req, res) => {
+  try {
+    const token = req.cookies?.[COOKIE_NAME];
+
+    if (!token) {
+      return res.status(200).json({ message: "No session", success: false });
+    }
+
+    let payload;
+    try {
+      payload = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
+    } catch {
+      return res.status(401).json({ message: "Invalid session", success: false });
+    }
+
+    const stored = await RefreshToken.findOne({ userId: payload.id, token });
+    if (!stored) {
+      return res.status(401).json({ message: "Session expired", success: false });
+    }
+
+    const account = await Admin.findById(payload.id);
+    if (!account || account.role !== 'admin') {
+      return res.status(401).json({ message: "Invalid session", success: false });
+    }
+
+    return res.status(200).json({
+      message: "New access token issued for admin",
+      data: {
+        accessToken: generateAccessToken(account),
+        userId: account._id,
+        role: account.role
+      },
+      success: true
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: err.message,
+      success: false
+    });
+  }
+};
+
+export const adminLogoutController = async (req, res) => {
+  try {
+    const token = req.cookies?.[COOKIE_NAME];
+
+    if (token) {
+      await RefreshToken.deleteOne({ token });
+    }
+
+    res.clearCookie(COOKIE_NAME, clearCookieOptions);
+
+    return res.status(200).json({
+      message: "Admin successfully logged out",
+      success: true
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: err.message,
+      success: false
+    });
+  }
+};

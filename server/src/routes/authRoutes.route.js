@@ -2,7 +2,6 @@ import { Router } from "express";
 import {
   signupController,
   loginController,
-  logoutController,
   refreshTokenController,
   getCustomer,
   getUserBag,
@@ -17,7 +16,6 @@ const router = Router();
 
 router.post("/signin", signupController);
 router.post("/login", loginController);
-router.post("/logout", logoutController);
 router.post("/token", refreshTokenController);
 
 router.get("/customer", verifyToken, isAdmin, getCustomer);

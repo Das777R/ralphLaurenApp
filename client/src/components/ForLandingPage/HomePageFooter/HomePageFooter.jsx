@@ -1,6 +1,11 @@
+import { useParams, Link } from 'react-router-dom'
 import './HomePageFooter.css'
 
 function HomePageFooter() {
+  const {userId} = useParams();
+
+    const authPath = userId ? `/auth/${userId}` : '/auth';
+    const bag = userId ? `/bag/${userId}` : "/bag";
   return (
      <footer className="d-flex flex-column bg-body">
           <div className="signup-to-rlc-section sign-to-rlc-only-1024 footer-con d-xxl-none d-xl-none">
@@ -37,8 +42,12 @@ function HomePageFooter() {
       <div className="footer-con">
         <div className="rlc-account-section">
           <div className="account-section-title text-uppercase  fw-medium">account</div>
+          <Link to={authPath} style={{textDecoration:"inherit"}}>
           <div className="account-section-nav text-capitalize">my account</div>
+          </Link>
+          <Link to={bag} style={{textDecoration:"inherit"}}>
           <div className="account-section-nav text-capitalize">check order</div>
+          </Link>
         </div>
 
       </div>

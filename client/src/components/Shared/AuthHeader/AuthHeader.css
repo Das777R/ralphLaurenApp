@@ -11,6 +11,10 @@
   font-weight: 100;
 }
 
+.banner-icon {
+  font-size: 1.2rem;
+}
+
 
 
 .original-link {
@@ -74,4 +78,15 @@
 
 .category-nav:hover {
   text-decoration: underline;
+}
+
+
+@media (max-width: 321px){
+  .banner-icon {
+  font-size: 1rem;
+}
+
+.ralph-logo {
+  font-size: 1.1em;
+}
 }
