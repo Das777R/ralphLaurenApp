@@ -35,7 +35,7 @@ function HeroSection() {
   return (
 <div className="rlph-img w-100 bg-body">
   <section className="rlph-img-container position-relative">
-<video src={heroSectionData[0]?.media[0]} 
+<video src={heroSectionData[1]?.media[0]} 
 alt="Ralph Lauren summer campaign desktop" 
 className="rlc-hero-video d-none d-md-block w-100 object-fit-cover" autoPlay loop muted playsInline></video>
     <div className="poloByralph-p user-select-none">
@@ -46,7 +46,7 @@ className="rlc-hero-video d-none d-md-block w-100 object-fit-cover" autoPlay loo
         </div>
     </div>
   </section>
- <video src={heroSectionData[1]?.media[0]} 
+ <video src={heroSectionData[0]?.media[0]} 
   alt="Ralph Lauren summer campaign"
   className="rlc-hero-video d-block d-md-none w-100 object-fit-cover" autoPlay loop muted playsInline/> 
 </div>

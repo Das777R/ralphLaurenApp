@@ -1,4 +1,12 @@
-import { MB, IMAGE_TYPES, VIDEO_TYPES, MAX_IMAGE, MAX_VIDEO } from "./constants";
+import {
+  MB,
+  IMAGE_TYPES,
+  VIDEO_TYPES,
+  MAX_IMAGE,
+  MAX_VIDEO,
+  DEFAULT_COLOR_FALLBACK,
+  DEFAULT_LOOK_FALLBACK,
+} from "./constants";
 
 export const formatBytes = (b) =>
   b >= 1024 * MB
@@ -44,3 +52,34 @@ export const revokeItemUrls = (item) => {
     if (u?.startsWith("blob:")) URL.revokeObjectURL(u);
   });
 };
+
+/* ---------- API mapping ---------- */
+
+/* Backend stores "products/<category>/<kind>/<product>/<folder>/<file>", served statically by Express */
+export const toAbsoluteUrl = (path) => {
+  if (!path) return null;
+  if (/^(https?:|blob:|data:)/i.test(path)) return path; // Cloudinary / already absolute
+  return `/${path.replace(/^\/+/, "")}`;
+};
+
+/* Mongo document -> the item shape the cards expect */
+export const normalizeProduct = (p) => ({
+  id: p._id,
+  productName: p.productName,
+  brand: p.brand,
+  price: p.price || 0,
+  description: p.description || "",
+  isTrending: !!p.trending,
+  kind: p.kind,
+  category: p.category,
+  colorName: p.colorName || "",
+  colorImage: toAbsoluteUrl(p.colorImage),
+  colorFallback: DEFAULT_COLOR_FALLBACK,
+  sizes: p.sizesAvailable || [],
+  stock: p.stock,
+  lookImage: toAbsoluteUrl(p.lookImage),
+  slideImage: (p.slideImage || []).map(toAbsoluteUrl),
+  lookFallback: DEFAULT_LOOK_FALLBACK,
+  uploaded: new Date(p.createdAt || Date.now()),
+  bytes: 0, // the API doesn't return file sizes
+});

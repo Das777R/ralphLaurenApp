@@ -1,74 +1,75 @@
-import path from "path";
-import MediaForHomePage from '../schema/mediaForHomePage.schema.js'
+import MediaForHomePage from "../schema/mediaForHomePage.schema.js";
+import { uploadFilesToCloudinary } from "../utils/uploadMediaToCloud.js"; // adjust path if needed
 
 const section_field_map = {
-  "rlc-hero":'rlc_hero',
-  "rlc-block":'rlc_block',
-  "rlc-wrapper":'rlc_wrapper',
-  "rlc-trend":'rlc_trend',
-  "rlc-ads" : 'rlc_ads'
-}
+  "rlc-hero": "rlc_hero",
+  "rlc-block": "rlc_block",
+  "rlc-wrapper": "rlc_wrapper",
+  "rlc-trend": "rlc_trend",
+  "rlc-ads": "rlc_ads",
+};
 
-export const uploadForHomePageMedia = async (req,res) => {
- try{
-  const {section} = req.params;
-  const dbField = section_field_map[section];
+export const uploadForHomePageMedia = async (req, res) => {
+  try {
+    const { section } = req.params;
+    const dbField = section_field_map[section];
 
-  if(!dbField){
-    return res.status(400).json({
-      message: "Unknown section",
-      success: false
-    })
-  }
+    if (!dbField) {
+      return res.status(400).json({
+        message: "Unknown section",
+        success: false,
+      });
+    }
 
-  const {title,brand,description, forMobile} = req.body;
+    const { title, brand, description, forMobile } = req.body;
 
-  if(!Array.isArray(req.files) || req.files.length === 0){
-    return res.status(400).json({
-      message: "The files are not uploaded",
-      success: false,
-    })
-  }
+    if (!Array.isArray(req.files) || req.files.length === 0) {
+      return res.status(400).json({
+        message: "The files are not uploaded",
+        success: false,
+      });
+    }
 
-  const HomeMediaPath = path.join(process.cwd(), "MediaForHome");
+    // Upload every file to Cloudinary
+    // Folder structure example: home/rlc_hero
+    const folder = `home/${dbField}`;
 
-  const target_path = req.files.map((file) => {
-    const relativePath = path.relative(HomeMediaPath, file.path);
-    return `/mediaforhome/${relativePath.split(path.sep).join('/')}`
-  })
+    const mediaUrls = await Promise.all(
+      req.files.map((file) => uploadFilesToCloudinary(file.path, folder))
+    );
 
-  const mediaInfo = {
-    title: title,
-    brand: brand,
-    description: description,
-    media: target_path,
-    forMobile: forMobile === true || forMobile === "true"
-  }
+    const mediaInfo = {
+      title,
+      brand,
+      description,
+      media: mediaUrls,               // now contains Cloudinary secure_urls
+      forMobile: forMobile === true || forMobile === "true",
+    };
 
-  let mediaForHome = await MediaForHomePage.findOne({});
+    let mediaForHome = await MediaForHomePage.findOne({});
 
-  if(!mediaForHome){
-    mediaForHome = await MediaForHomePage.create({
-      [dbField]:[mediaInfo]
+    if (!mediaForHome) {
+      mediaForHome = await MediaForHomePage.create({
+        [dbField]: [mediaInfo],
+      });
+    } else {
+      mediaForHome[dbField].push(mediaInfo);
+      await mediaForHome.save();
+    }
+
+    return res.status(201).json({
+      message: "Media for Home is Successfully uploaded!!",
+      success: true,
+      data: mediaForHome,
     });
-  }else{
-    mediaForHome[dbField].push(mediaInfo);
-    await mediaForHome.save();
-  }
-
-  return res.status(201).json({
-    message: "Media for Home is Successfully uploaded!!",
-    success: true,
-    data: mediaForHome,
-  });
-
-  }catch(err){
+  } catch (err) {
+    console.error("Home media upload error:", err);
     return res.status(500).json({
       message: err.message,
-      success: false
-    })
+      success: false,
+    });
   }
-}
+};
 
 export const getForHomePageMedia = async (req,res) => {
   try{

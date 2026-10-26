@@ -39,7 +39,7 @@ function Dnew() {
         <div className="discover-carousel-intro position-relative overflow-hidden d-flex flex-column justify-content-center text-white">
           <p className="d-block text-uppercase text-center">Discover</p>
           <h1 className="text-capitalize">
-             Men’s Brands
+             Double RL Brands
           </h1>
           
           <p>From the iconic men’s Ralph Lauren Polo shirt to the artful craftsmanship of Purple Label, rugged luxury of Double RL and peak RLX performance, the World of Ralph Lauren men is rooted in timeless design</p>

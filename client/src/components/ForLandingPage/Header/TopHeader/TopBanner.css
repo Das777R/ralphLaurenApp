@@ -30,6 +30,9 @@
   .ralph-categories {
     display: none;
   }
+  .category-nav{
+    display: none;
+  }
   .banner-icon {
   font-size: 1.1rem;
 }

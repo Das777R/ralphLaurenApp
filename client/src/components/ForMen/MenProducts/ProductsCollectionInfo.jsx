@@ -1,5 +1,5 @@
 import './ProductsCollectionInfo.css';
-import ProductBox from '../MenProductBox/ProductBox';
+import MenProducts from '../MenProductBox/MenProducts';
 import { useParams, Link } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import { useMenContext } from '../../../context/men/MenProductContext';
@@ -484,7 +484,7 @@ function ProductsCollectionInfo() {
       <div className="products-collection-product-container d-flex flex-wrap justify-content-center mt-5">
  
         
-        <ProductBox />
+        <MenProducts />
       </div>
     </>
   );

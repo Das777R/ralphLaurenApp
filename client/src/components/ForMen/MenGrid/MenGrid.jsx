@@ -51,8 +51,8 @@ function MenGrid() {
     <div className="grid-container">
       <div className="box-grid box-grid-1">
         <Link to={m_casual_shirts_path}>
-        <img src={getImageUrl("Shirts", false)} alt="women-category-shirts" className="women-men-cat-desktop"/>
-        <img src={getImageUrl("Shirts", true)} alt="women-category-shirts-mobile" className="women-men-cat-mobile"/>
+        <img src={getImageUrl("Casual Shirts", false)} alt="women-category-shirts" className="women-men-cat-desktop"/>
+        <img src={getImageUrl("Casual Shirts", true)} alt="women-category-shirts-mobile" className="women-men-cat-mobile"/>
         <div className="text-label">Shirts</div>
         </Link>
       </div>

@@ -1,0 +1,19 @@
+/* Desktop / Mobile switch row */
+.device-switch .form-check-input {
+  cursor: pointer;
+}
+
+/* Background swatches */
+.swatch {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  outline-offset: 2px;
+}
+
+.swatch.active {
+  border-color: var(--bs-body-color);
+}

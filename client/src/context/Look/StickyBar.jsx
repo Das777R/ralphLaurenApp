@@ -5,7 +5,7 @@ import { UIContext } from "../UIContext";
 import './StickyBar.css';
 
 function StickyBar() {
-  const { productLook, formatImgSrc, handleAddToBag, addedToBag, lookSize} = useLookProduct();
+  const { productLook, handleAddToBag, addedToBag, lookSize} = useLookProduct();
   const [headBag, ShowHeadBag] = useState(false);
   const {completeLookOpen} = useContext(UIContext);
 
@@ -18,12 +18,13 @@ function StickyBar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  
   return (
     <>
       <div className={`bg-body z-3 w-100  justify-content-between align-items-center position-sticky top-0 sticky-bar-container ${headBag ? 'sticky-bar-visible' : ''} ${completeLookOpen ? 'd-none': ''}`}>
         <div className="d-flex gap-3 align-content-center">
           <div className="sticky-bar-img-wrapper">
-            <img src={formatImgSrc(productLook.lookImage)} alt="" className="w-100 h-100 object-fit-contain" />
+            <img src={productLook.lookImage} alt="" className="w-100 h-100 object-fit-contain" />
           </div>
           <div className="sticky-bar-info mt-2">
             <h3 className="sticky-bar-title">{productLook.productName}</h3>

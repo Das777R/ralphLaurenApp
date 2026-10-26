@@ -47,7 +47,6 @@ function LookProductContent() {
     getProductByName,
     getProductByColor,
     productId,
-    formatImgSrc,
     handleAddToBag,
     setProductsLook,
     setIsLoading,
@@ -202,7 +201,7 @@ function LookProductContent() {
       <div className={`product-look-container d-flex ${completeLookOpen ? 'd-none': ''}`}>
         <div className="product-image-look-container">
           <img
-            src={formatImgSrc(productLook?.lookImage)}
+            src={productLook?.lookImage}
             alt=""
             className="product-lookImage position-relative"
           />
@@ -217,7 +216,7 @@ function LookProductContent() {
             <div key={index} className="product-slideImage">
               {isVideo(slideUrl) ? (
                 <video
-                  src={formatImgSrc(slideUrl)}
+                  src={slideUrl}
                   autoPlay
                   muted
                   loop
@@ -225,7 +224,7 @@ function LookProductContent() {
                   className="w-100"
                 />
               ) : (
-                <img src={formatImgSrc(slideUrl)} alt="Product" />
+                <img src={slideUrl} alt="Product" />
               )}
             </div>
           ))}
@@ -233,7 +232,7 @@ function LookProductContent() {
           <div className="w-100 look-product-carousel d-flex">
             <div className="slide-img-look-container">
               <img
-                src={formatImgSrc(productLook?.lookImage)}
+                src={productLook?.lookImage}
                 className="slide-img-look"
                 alt=""
               />
@@ -242,7 +241,7 @@ function LookProductContent() {
               <div key={index} className="slide-img-look-container">
                 {isVideo(slideUrl) ? (
                   <video
-                    src={formatImgSrc(slideUrl)}
+                    src={slideUrl}
                     autoPlay
                     muted
                     loop
@@ -251,7 +250,7 @@ function LookProductContent() {
                   />
                 ) : (
                   <img
-                    src={formatImgSrc(slideUrl)}
+                    src={slideUrl}
                     alt="Product"
                     className="slide-img-look"
                   />
@@ -319,7 +318,7 @@ function LookProductContent() {
                 {availableColor?.map((clr, index) => (
                   <img
                     key={index}
-                    src={formatImgSrc(clr)}
+                    src={clr}
                     alt="color option"
                     className={`look-product-color-img ${
                       clr === productLook?.colorImage ? "currentColor" : ""
@@ -375,7 +374,7 @@ function LookProductContent() {
 
             <div className="slide-img-look-container d-lg-none d-md-none d-block mt-5">
               <img
-                src={formatImgSrc(productLook?.lookImage)}
+                src={productLook?.lookImage}
                 className="slide-img-look w-100 h-100"
                 alt=""
               />
@@ -418,7 +417,7 @@ function LookProductContent() {
                     }}
                   >
                     <img
-                      src={formatImgSrc(item.lookImage)}
+                      src={item.lookImage}
                       alt={item.productName}
                       className="w-100 h-100 object-fit-cover"
                     />
@@ -475,7 +474,7 @@ function LookProductContent() {
               <div className="bag-offcanvas-item-image">
                 <Link style={{ textDecoration: "inherit" }} to="#">
                   <img
-                    src={formatImgSrc(canvasData?.lookImage)}
+                    src={canvasData?.lookImage}
                     alt=""
                     className="w-100 h-100"
                   />
@@ -563,7 +562,7 @@ function LookProductContent() {
                   style={{ cursor: "pointer" }}
                 >
                   <img
-                    src={formatImgSrc(item.lookImage)}
+                    src={item.lookImage}
                     alt={item.productName}
                     className="w-100 h-100"
                   />
@@ -591,14 +590,14 @@ function LookProductContent() {
           <div className="d-flex overflow-auto recommend-offcanvas-con h-100 w-100">
             <div className="d-flex flex-column w-75 recommend-offcanvas-image-con p-0">
               <img
-                src={formatImgSrc(offCanavasRecommendData.lookImage)}
+                src={offCanavasRecommendData.lookImage}
                 className="w-100"
                 alt=""
               />
               {offCanavasRecommendData?.slideImage?.map((item, index) => (
                 <img
                   key={index}
-                  src={formatImgSrc(item)}
+                  src={item}
                   className="w-100"
                   alt=""
                 />
@@ -638,7 +637,7 @@ function LookProductContent() {
                     {offCanavasRecommendData?.availableColors?.map((clr, index) => (
                       <img
                         key={index}
-                        src={formatImgSrc(clr)}
+                        src={clr}
                         alt="color option"
                          className={`look-product-color-img ${
                           clr === offCanavasRecommendData.colorImage

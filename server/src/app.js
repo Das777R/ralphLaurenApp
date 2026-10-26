@@ -32,8 +32,8 @@ Navs.map((nav) => {
 
 
 
+
 app.use('/api/products', productsRoute);
-app.use('/api/product', productsRoute);
 app.use('/api/mediaforpage', mediaForPage);
 app.use('/api/landingPage',mediaForHomePage);
 
@@ -51,6 +51,8 @@ app.get("/api/check", (req,res) => {
     message: "success"
   })
 })
+
+
 
 export default app;
 

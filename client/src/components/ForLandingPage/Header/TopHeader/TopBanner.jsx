@@ -62,7 +62,7 @@ function TopBanner() {
       </div>
       </Link>
 
-      <div className="ralph-categories text-uppercase d-lg-flex gap-lg-3 gap-4 pt-3 pe-5">
+      <div className="ralph-categories text-uppercase d-lg-flex d-none gap-lg-3 gap-4 pt-3 pe-5">
         <NavLink to={mensPath} className={({isActive}) => isActive ? 'text-decoration-underline original-link' : 'original-link'}>
         <div className="category-nav men-nav" onClick={handleNav}>Men</div>
         </NavLink>

@@ -5,10 +5,14 @@ const api = axios.create({
   withCredentials: true,
 });
 
-let accessToken = '';
+// Separate tokens so a user session and an admin session can't overwrite each other
+const tokens = { user: '', admin: '' };
 
-export const setAccessToken = (token) => {
-  accessToken = token || '';
+const typeOf = (url = '') => (url.startsWith('/admin') ? 'admin' : 'user');
+
+// setAccessToken(token) keeps working for existing user code; admin passes 'admin'
+export const setAccessToken = (token, type = 'user') => {
+  tokens[type] = token || '';
 };
 
 const REFRESH_URLS = {
@@ -16,7 +20,7 @@ const REFRESH_URLS = {
   admin: '/api/admin/token',
 };
 
-
+// De-duplicates concurrent refreshes (also covers React StrictMode double effects)
 const inFlight = { user: null, admin: null };
 
 export const refreshSession = (type = 'user') => {
@@ -24,11 +28,8 @@ export const refreshSession = (type = 'user') => {
     inFlight[type] = axios
       .post(REFRESH_URLS[type], {}, { withCredentials: true })
       .then((res) => {
-      
-        console.log(`[refresh:${type}]`, res.status, res.headers['content-type'], res.data);
-
         const data = res.data?.data;
-        if (data?.accessToken) setAccessToken(data.accessToken);
+        if (data?.accessToken) setAccessToken(data.accessToken, type);
         return data;
       })
       .finally(() => {
@@ -38,22 +39,20 @@ export const refreshSession = (type = 'user') => {
   return inFlight[type];
 };
 
-api.interceptors.request.use(
-  (config) => {
-    if (accessToken) {
-      config.headers['Authorization'] = `Bearer ${accessToken}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
-
+api.interceptors.request.use((config) => {
+  const token = tokens[typeOf(config.url)];
+  if (token) config.headers['Authorization'] = `Bearer ${token}`;
+  return config;
+});
 
 const isAuthCall = (url) =>
   url.includes('/auth/token') ||
   url.includes('/admin/token') ||
   url.includes('/auth/login') ||
-  url.includes('/auth/signup');
+  url.includes('/auth/signup') ||
+  url.includes('/logout');
+
+export const ADMIN_EXPIRED_EVENT = 'admin:session-expired';
 
 api.interceptors.response.use(
   (response) => response,
@@ -61,25 +60,24 @@ api.interceptors.response.use(
     const originalRequest = error.config;
     const status = error.response?.status;
     const url = originalRequest?.url || '';
+    const type = typeOf(url);
 
-    if (
-      (status === 401 || status === 403) &&
-      originalRequest &&
-      !originalRequest._retry &&
-      !isAuthCall(url)
-    ) {
+    // Admin: only 401 means "token expired" (403 = not allowed, refreshing won't help)
+    const retryable = status === 401 || (status === 403 && type === 'user');
+
+    if (retryable && originalRequest && !originalRequest._retry && !isAuthCall(url)) {
       originalRequest._retry = true;
 
       try {
-        const type = url.startsWith('/admin') ? 'admin' : 'user';
         const data = await refreshSession(type);
-
         if (!data?.accessToken) throw new Error('No access token returned');
 
         originalRequest.headers['Authorization'] = `Bearer ${data.accessToken}`;
         return api(originalRequest);
       } catch {
-        setAccessToken('');
+        setAccessToken('', type);
+        // Tell AdminLayout to drop back to the login screen
+        if (type === 'admin') window.dispatchEvent(new Event(ADMIN_EXPIRED_EVENT));
         return Promise.reject(error);
       }
     }

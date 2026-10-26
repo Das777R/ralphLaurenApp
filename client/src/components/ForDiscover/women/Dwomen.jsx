@@ -36,7 +36,7 @@ function Dwomen() {
         <div className="women-discover-intro position-relative overflow-hidden d-flex flex-column justify-content-center text-white">
           <p className="d-block text-uppercase text-center">Discover</p>
           <h1 className="text-capitalize">
-             Women’s Brands
+             Men’s Brands
           </h1>
   
           <p>Ralph Lauren for women showcases classic design with modern style, from Polo Ralph Lauren women to Ralph Lauren Collection, Lauren Ralph Lauren, Double RL and RLX</p>

@@ -18,7 +18,7 @@ router.post("/signin", signupController);
 router.post("/login", loginController);
 router.post("/token", refreshTokenController);
 
-router.get("/customer", verifyToken, isAdmin, getCustomer);
+router.get("/customers", verifyToken, isAdmin, getCustomer);
 
 router.delete("/userBag/:userId", verifyToken, isOwner, deleteUserBag);
 router.get("/:userId", verifyToken, isOwner, getUserBag);

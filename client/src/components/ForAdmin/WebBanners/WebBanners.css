@@ -1,91 +1,9 @@
-/* Banner preview */
-.banner-preview {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 7;
-  color: #fff;
-  overflow: hidden;
-}
-.banner-preview.rounded-all {
-  border-radius: 0.75rem;
-}
-.banner-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.35rem;
-  padding: 1rem 1.25rem;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0) 70%);
-}
-.banner-title {
-  font-weight: 700;
-  font-size: clamp(0.95rem, 1.6vw, 1.35rem);
-  line-height: 1.2;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-}
-.banner-sub {
-  max-width: 70%;
-  font-size: 0.8rem;
-  opacity: 0.9;
-}
-.banner-cta {
-  align-self: flex-start;
-  margin-top: 0.25rem;
-  padding: 0.25rem 0.7rem;
-  border-radius: 999px;
-  background: #fff;
-  color: #111827;
-  font-size: 0.72rem;
-  font-weight: 700;
+.toolbar-search {
+  max-width: 280px;
+  flex: 1 1 200px;
 }
 
-/* Card */
-.banner-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-}
-.banner-card:hover {
-  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.1);
-  transform: translateY(-2px);
-}
-.banner-card.dimmed .banner-preview {
-  filter: grayscale(0.85);
-  opacity: 0.7;
-}
-
-/* Upload dropzone */
-.dropzone {
-  padding: 1.5rem 1rem;
-  border: 2px dashed var(--bs-border-color);
-  border-radius: 0.75rem;
-  background: var(--bs-tertiary-bg);
-  text-align: center;
-  cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease;
-}
-.dropzone:hover,
-.dropzone:focus-visible,
-.dropzone.over {
-  border-color: var(--bs-primary);
-  background: rgba(13, 110, 253, 0.06);
-  outline: none;
-}
-
-/* Background swatches */
-.swatch {
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  border: 2px solid transparent;
-  border-radius: 50%;
-  cursor: pointer;
-  outline-offset: 2px;
-}
-.swatch.active {
-  border-color: var(--bs-body-color);
+.toolbar-select {
+  width: auto;
+  min-width: 140px;
 }

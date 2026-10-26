@@ -1,70 +1,77 @@
-
-import mongoose, {Schema} from "mongoose"
-import { type } from "os";
-
+import mongoose, { Schema } from "mongoose";
 
 const infoForWebPage = new Schema({
   media: {
     type: [String],
-    required: true
+    required: true,
+  },
+  thumb: {
+    type: String,
+    required: false,
+    trim: true,
+  },
+  background: {
+    type: String,
+    required: false,
+    trim: true,
   },
   brand: {
     type: String,
     required: false,
-    trim: true
+    trim: true,
   },
   title: {
     type: String,
     required: false,
-    trim: true
+    trim: true,
   },
   description: {
     type: String,
     required: false,
-    trim: true
+    trim: true,
   },
-  forMobile:{
+  forMobile: {
     type: Boolean,
-    required: false
-  } 
-})
-
-const mediaForWebPage = new Schema({
-  carousel:{
-    type: [infoForWebPage],
-    required: false
+    required: false,
   },
-  stories:{
-    type: [infoForWebPage],
-    required:false
-    },
-  category:{
-     type: [infoForWebPage],
-    required:false
-   },
-  trend:{
-    type: [infoForWebPage],
-    required:false
-   },
-   explore:{
-   type:[infoForWebPage],
-   required: false
-   }
 });
 
+const mediaForWebPage = new Schema({
+  carousel: {
+    type: [infoForWebPage],
+    required: false,
+  },
+  stories: {
+    type: [infoForWebPage],
+    required: false,
+  },
+  category: {
+    type: [infoForWebPage],
+    required: false,
+  },
+  trend: {
+    type: [infoForWebPage],
+    required: false,
+  },
+  explore: {
+    type: [infoForWebPage],
+    required: false,
+  },
+});
 
-
-
-const PartForWebPage = new Schema({
-  nav:{
-    type: String,
-    required: true,
-    trim: true
+const PartForWebPage = new Schema(
+  {
+    nav: {
+      type: String,
+      required: true,
+      trim: true,
     },
-   part:{
-    type: [mediaForWebPage],
-    required: true
-   }
-},{timestamps: true})
+    part: {
+      type: [mediaForWebPage],
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
-export default mongoose.model('PartForWebPage', PartForWebPage)
+export default mongoose.model("PartForWebPage", PartForWebPage);

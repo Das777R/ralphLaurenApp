@@ -21,7 +21,7 @@ function WproductBox() {
   useEffect(() => {
     const fetchForWomenGrid = async () => {
       try {
-        const result = await api.get(`/products/women/${cleanCategory}`);
+        const result = await api.get(`/products/women/${cleanCategory(category)}`);
           const uniqueProducts = Array.from(
             result.data.data.reduce((map, item) => {
             const productName = item.product;
@@ -120,7 +120,7 @@ return (
           <div className="product-box-img-container-carousel ">
             <div className="product-box-carousel">
               <img
-                src={encodeURI(`/${data.lookImages?.[0]}`)}
+                src={data.lookImages}
                 alt=""
                 className={`w-100 object-fit-cover ${
                   productHovered ? "d-none" : "d-block"
@@ -144,7 +144,7 @@ return (
                       <Link to={lookPath} className="no-underline">
                         {isVideo(srcLink) ? (
                           <video
-                            src={encodeURI(`/${srcLink}`)}
+                            src={srcLink}
                             className="d-block w-100"
                             autoPlay
                             muted
@@ -153,7 +153,7 @@ return (
                           />
                         ) : (
                           <img
-                            src={encodeURI(`/${srcLink}`)}
+                            src={srcLink}
                             className="d-block w-100 object-fit-cover"
                             alt="Product"
                           />
@@ -217,7 +217,7 @@ return (
             onClick={() => selectVariant(clrImg, data.productName)}
           >
             <img
-              src={encodeURI(`/${clrImg}`)}
+              src={clrImg}
               alt=""
               className={`w-100 h-100 rounded-circle border border-1 border-dark`}
             />     
@@ -269,7 +269,7 @@ return (
                     onClick={() => selectVariant(clrImg, data.productName)}
                   >
                     <img
-                      src={encodeURI(`/${clrImg}`)}
+                      src={clrImg}
                       alt=""
                       className="w-100 h-100 rounded-circle border border-1 border-dark"
                     />

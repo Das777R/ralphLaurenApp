@@ -68,7 +68,7 @@
 }
 
 .color-quicklook-div {
-  background: #000;
+  /* background: #000; */
   bottom: 10rem;
   z-index: 5;
 }

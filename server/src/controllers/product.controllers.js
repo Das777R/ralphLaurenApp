@@ -2,6 +2,56 @@ import path from "path";
 import fs from "fs";
 import Products from "../schema/product.schema.js";
 import { productPath } from "../middleware/product.multer.middleware.js";
+import {
+  uploadFilesToCloudinary,
+  toCloudinarySlug,
+} from "../utils/uploadMediaToCloud.js";
+
+/* -------------------------------------------------------------------------- */
+/*                                  HELPERS                                   */
+/* -------------------------------------------------------------------------- */
+
+const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const toTitleCase = (str) =>
+  str
+    .toLowerCase()
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+// Removes multer temp files that never got uploaded (validation failures etc.)
+const cleanupTempFiles = (files) => {
+  if (!files) return;
+  Object.values(files)
+    .flat()
+    .forEach((file) => {
+      try {
+        if (file?.path && fs.existsSync(file.path)) fs.unlinkSync(file.path);
+      } catch (err) {
+        console.error(`Temp file cleanup failed: ${err.message}`);
+      }
+    });
+};
+
+const parseSizes = (sizesAvailable) => {
+  if (Array.isArray(sizesAvailable)) return sizesAvailable;
+  if (typeof sizesAvailable !== "string" || !sizesAvailable.trim()) return [];
+
+  try {
+    const parsed = JSON.parse(sizesAvailable);
+    return Array.isArray(parsed) ? parsed : [String(parsed)];
+  } catch {
+    return sizesAvailable
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+};
+
+/* -------------------------------------------------------------------------- */
+/*                                   READ                                     */
+/* -------------------------------------------------------------------------- */
 
 export const getProducts = async (req, res) => {
   try {
@@ -13,10 +63,7 @@ export const getProducts = async (req, res) => {
       data: products,
     });
   } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: err.message,
-    });
+    return res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -30,22 +77,17 @@ export const searchProducts = async (req, res) => {
       });
     }
 
+    const safeQ = escapeRegex(q);
+
     const products = await Products.find({
       $or: [
-        { brand: { $regex: q, $options: "i" } },
-        { productName: { $regex: q, $options: "i" } },
-        { description: { $regex: q, $options: "i" } },
-        { category: { $regex: q, $options: "i" } },
-        { kind: { $regex: q, $options: "i" } },
+        { brand: { $regex: safeQ, $options: "i" } },
+        { productName: { $regex: safeQ, $options: "i" } },
+        { description: { $regex: safeQ, $options: "i" } },
+        { category: { $regex: safeQ, $options: "i" } },
+        { kind: { $regex: safeQ, $options: "i" } },
       ],
     }).limit(20);
-
-    if (!products) {
-      return res.status(404).json({
-        message: "Products not found",
-        success: false,
-      });
-    }
 
     return res.status(200).json({
       message: "Searched Products",
@@ -53,66 +95,42 @@ export const searchProducts = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    return res.status(500).json({
-      message: err.message,
-      success: false,
-    });
+    return res.status(500).json({ message: err.message, success: false });
   }
 };
 
-export const filterController = async (req,res) => {
-  try{
-    const {cat,kind} = req.params;
-    const {type} = req.query;
-    
-    if(!cat && !kind && !type) {
+export const filterController = async (req, res) => {
+  try {
+    const { cat, kind } = req.params;
+    const { type } = req.query;
+
+    if (!cat || !kind) {
       return res.status(400).json({
-        message:"cat is empty",
-        success: false
-      })
+        message: "cat and kind are required",
+        success: false,
+      });
     }
-
-
-
-    const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
     const query = {
       category: new RegExp(`^${escapeRegex(cat.trim())}$`, "i"),
       kind: new RegExp(`^${escapeRegex(kind.trim())}$`, "i"),
     };
 
-
-
     if (type && type.trim()) {
-    query.productName = new RegExp(escapeRegex(type.trim()), "i");
+      query.productName = new RegExp(escapeRegex(type.trim()), "i");
     }
 
- 
- 
-    const FilteredProducts = await Products.find(query).sort({createdAt: -1})
-
-    if(!FilteredProducts){
-      return res.status(404).json({
-        message:"product is empty",
-        data: FilteredProducts,
-        success: false
-      })
-    }
+    const filteredProducts = await Products.find(query).sort({ createdAt: -1 });
 
     return res.status(200).json({
       message: "Successfully filtered",
-      data: FilteredProducts,
-      success: true
-    })
-
-
-  }catch(err){
-    res.status(500).json({
-      message: err.message,
-      success: false
-    })
+      data: filteredProducts,
+      success: true,
+    });
+  } catch (err) {
+    return res.status(500).json({ message: err.message, success: false });
   }
-}
+};
 
 export const getProductsByCategory = async (req, res) => {
   try {
@@ -125,27 +143,10 @@ export const getProductsByCategory = async (req, res) => {
       });
     }
 
-   const capitalizedKind = kind
-  .toLowerCase()
-  .split(" ")
-  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-  .join(" ");
-
-  const capitalizedCategory= category
-  .toLowerCase()
-  .split(" ")
-  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-  .join(" ");
-
-    
-    const productByCategory = await Products.find({ category: capitalizedCategory, kind: capitalizedKind });
-  
-    if (!productByCategory) {
-      return res.status(404).json({
-        message: `No product found by ${kind}`,
-        success: false,
-      });
-    }
+    const productByCategory = await Products.find({
+      category: toTitleCase(category),
+      kind: toTitleCase(kind),
+    });
 
     return res.status(200).json({
       message: `Product successfully found by ${kind}`,
@@ -153,17 +154,14 @@ export const getProductsByCategory = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    return res.status(500).json({
-      message: err.message,
-      success: false,
-    });
+    return res.status(500).json({ message: err.message, success: false });
   }
 };
 
 export const getProductsByName = async (req, res) => {
   try {
     const { productName } = req.query;
-  
+
     if (!productName) {
       return res.status(400).json({
         message: "product is not found!!",
@@ -171,9 +169,9 @@ export const getProductsByName = async (req, res) => {
       });
     }
 
-    const products = await Products.find({ productName: productName });
+    const products = await Products.find({ productName });
 
-    if (!products || products.length === 0) {
+    if (products.length === 0) {
       return res.status(404).json({
         message: "products by that name does not exist",
         success: false,
@@ -186,10 +184,7 @@ export const getProductsByName = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    return res.status(500).json({
-      message: err.message,
-      success: false,
-    });
+    return res.status(500).json({ message: err.message, success: false });
   }
 };
 
@@ -222,10 +217,7 @@ export const getProductByColor = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    return res.status(500).json({
-      message: err.message,
-      success: false,
-    });
+    return res.status(500).json({ message: err.message, success: false });
   }
 };
 
@@ -258,46 +250,118 @@ export const getProductByColorAndProduct = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    res.status(500).json({
-      message: err.message,
-      success: false,
-    });
+    return res.status(500).json({ message: err.message, success: false });
   }
 };
 
-export const removeProduct = async (req, res) => {
+export const getProductById = async (req, res) => {
   try {
-    const id = req.params.id;
+    const { id } = req.params;
 
-    const product = await Products.findByIdAndDelete(id);
-
-    if (!product) {
-      return res.status(404).json({
-        message: "Product not found",
+    if (!id) {
+      return res.status(400).json({
+        message: "Id missing",
         success: false,
       });
     }
 
-    const folderPath = path.join(
-      productPath,
-      product.category,
-      product.kind,
-      product.productName
-    );
+    const product = await Products.findById(id);
+    if (!product) {
+      return res.status(404).json({
+        message: "Product not found in database",
+        success: false,
+      });
+    }
 
-    fs.rmSync(folderPath, { recursive: true, force: true });
+    return res.status(200).json({ success: true, data: product });
+  } catch (err) {
+    return res.status(500).json({ message: err.message, success: false });
+  }
+};
+
+export const getproductsForGuestBag = async (req, res) => {
+  try {
+    const { products } = req.query;
+
+    if (!products) {
+      return res.status(400).json({
+        message: "products query is required",
+        success: false,
+      });
+    }
+
+    const favItems = Array.isArray(products) ? products : [products];
+
+    const guestBag = await Products.find({ productName: { $in: favItems } });
 
     return res.status(200).json({
-      message: "Product Deleted Successfully!!🗑️",
+      message: "Found for Guest",
+      data: guestBag,
       success: true,
     });
   } catch (err) {
-    res.status(500).json({
-      message: err.message || "Failed to Delete!",
-      success: false,
-    });
+    return res.status(500).json({ message: err.message, success: false });
   }
 };
+
+export const getProductByKind = async (req, res) => {
+  try {
+    const { kind } = req.params;
+
+    const products = await Products.find({ kind });
+
+    if (products.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No products found for this kind.",
+      });
+    }
+
+    return res.status(200).json({ success: true, data: products });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+
+export const getMatchedProducts = async (req, res) => {
+  try {
+    const { match } = req.query;
+    const { category } = req.params;
+
+    if (!match) {
+      return res.status(400).json({
+        message: "query is undefined",
+        success: false,
+      });
+    }
+
+    const matchArray = match.split(",");
+
+    const products = await Products.find({
+      category,
+      kind: { $nin: matchArray },
+    });
+
+    if (products.length === 0) {
+      return res.status(404).json({
+        message: "products are not found",
+        success: false,
+      });
+    }
+
+    return res.status(200).json({
+      message: "Matched Products are found!",
+      data: products,
+      success: true,
+    });
+  } catch (err) {
+    return res.status(500).json({ message: err.message, success: false });
+  }
+};
+
+/* -------------------------------------------------------------------------- */
+/*                                  UPDATE                                    */
+/* -------------------------------------------------------------------------- */
 
 export const updateProductInfo = async (req, res) => {
   try {
@@ -309,6 +373,10 @@ export const updateProductInfo = async (req, res) => {
         message: "id is required",
         success: false,
       });
+    }
+
+    if (updateData.stock !== undefined) {
+      updateData.stock = Number(updateData.stock) || 0;
     }
 
     const updatedProduct = await Products.findByIdAndUpdate(id, updateData, {
@@ -324,29 +392,55 @@ export const updateProductInfo = async (req, res) => {
 
     return res.status(200).json({
       message: "Updated Successfully🚀",
+      success: true,
       updatedProduct,
     });
   } catch (err) {
-    return res.status(400).json({
-      message: err.message,
+    return res.status(400).json({ message: err.message, success: false });
+  }
+};
+
+/* -------------------------------------------------------------------------- */
+/*                                  DELETE                                    */
+/* -------------------------------------------------------------------------- */
+
+export const removeProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const product = await Products.findByIdAndDelete(id);
+
+    if (!product) {
+      return res.status(404).json({
+        message: "Product not found",
+        success: false,
+      });
+    }
+
+    // Legacy local folder cleanup (harmless if it doesn't exist)
+    const folderPath = path.join(
+      productPath,
+      product.category,
+      product.kind,
+      product.productName
+    );
+    fs.rmSync(folderPath, { recursive: true, force: true });
+
+    return res.status(200).json({
+      message: "Product Deleted Successfully!!🗑️",
+      success: true,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: err.message || "Failed to Delete!",
       success: false,
     });
   }
 };
 
-
-const moveIntoProductFolder = (file, category, kind, product, subFolder) => {
-  const targetDir = path.join(productPath, category, kind, product, subFolder);
-  if (!fs.existsSync(targetDir)) {
-    fs.mkdirSync(targetDir, { recursive: true });
-  }
-
-  const targetPath = path.join(targetDir, path.basename(file.path));
-  fs.renameSync(file.path, targetPath);
-
-  const relativePath = path.relative(productPath, targetPath);
-  return "products/" + relativePath.split(path.sep).join("/");
-};
+/* -------------------------------------------------------------------------- */
+/*                                  UPLOAD                                    */
+/* -------------------------------------------------------------------------- */
 
 export const uploadProducts = async (req, res) => {
   try {
@@ -360,15 +454,14 @@ export const uploadProducts = async (req, res) => {
       sizesAvailable,
       description,
       trending,
-      stock
+      stock,
     } = req.body;
-
 
     const slideImageFiles = req.files?.slideImage || [];
     const colorImageFile = req.files?.colorImage?.[0];
     const lookImageFile = req.files?.lookImage?.[0];
 
-
+    // ---------- 1. VALIDATE (before any upload happens) ----------
     if (slideImageFiles.length === 0 && !colorImageFile && !lookImageFile) {
       return res.status(400).json({
         success: false,
@@ -376,205 +469,91 @@ export const uploadProducts = async (req, res) => {
       });
     }
 
-    if (!category || !kind || !product) {
+    if (!category || !kind || !product || !color) {
+      cleanupTempFiles(req.files);
       return res.status(400).json({
         success: false,
-        message: "category, kind and productName are required",
+        message: "category, kind, productName and colorName are required",
       });
     }
 
-    const slideImagePaths = slideImageFiles.map((file) =>
-      moveIntoProductFolder(file, category, kind, product, "slide")
-    );
-    const colorImagePath = colorImageFile
-      ? moveIntoProductFolder(colorImageFile, category, kind, product, "colors")
-      : null;
-    const lookImagePath = lookImageFile
-      ? moveIntoProductFolder(lookImageFile, category, kind, product, "look")
-      : null;
-
-
-    let productUploaded = await Products.findOne({
+    // ---------- 2. CHECK EXISTING PRODUCT + COLOR ----------
+    let productDoc = await Products.findOne({
       category,
       kind,
       productName: product,
       colorName: color,
     });
 
-    if (!productUploaded) {
+    if (!productDoc && !colorImageFile) {
+      cleanupTempFiles(req.files);
+      return res.status(400).json({
+        success: false,
+        message: "Color image is required for the first upload of a new product!",
+      });
+    }
 
-      if (!colorImagePath) {
-        return res.status(400).json({
-          message: "Color image is required for the first upload of a new product!",
-          success: false,
-        });
-      }
+    // ---------- 3. UPLOAD TO CLOUDINARY ----------
+    // Sanitized path: products/kids-and-baby/shirt/slim-clasic/navy/...
+    const baseFolder = [
+      "products",
+      toCloudinarySlug(category),
+      toCloudinarySlug(kind),
+      toCloudinarySlug(product),
+      toCloudinarySlug(color),
+    ].join("/");
 
-      let parsedSizes = sizesAvailable;
-      if (typeof sizesAvailable === "string") {
-        try {
-          parsedSizes = JSON.parse(sizesAvailable);
-        } catch {
-          parsedSizes = sizesAvailable.split(",").map((s) => s.trim());
-        }
-      }
+    const slideImageUrls = await Promise.all(
+      slideImageFiles.map((file) =>
+        uploadFilesToCloudinary(file.path, `${baseFolder}/slide`)
+      )
+    );
 
-      productUploaded = await Products.create({
+    const colorImageUrl = colorImageFile
+      ? await uploadFilesToCloudinary(colorImageFile.path, `${baseFolder}/color`)
+      : null;
+
+    const lookImageUrl = lookImageFile
+      ? await uploadFilesToCloudinary(lookImageFile.path, `${baseFolder}/look`)
+      : null;
+
+    // ---------- 4. SAVE TO DB ----------
+    if (!productDoc) {
+      productDoc = await Products.create({
         category,
         kind,
         productName: product,
         brand,
         colorName: color,
-        colorImage: colorImagePath,
-        price: Number(price),
-        stock,
-        sizesAvailable: parsedSizes,
+        colorImage: colorImageUrl,
+        price: Number(price) || 0,
+        stock: Number(stock) || 0,
+        sizesAvailable: parseSizes(sizesAvailable),
         description,
         trending: trending === "true" || trending === true,
-        slideImage: slideImagePaths,
-        lookImage: lookImagePath || "",
+        slideImage: slideImageUrls,
+        lookImage: lookImageUrl || "",
       });
     } else {
-      if (slideImagePaths.length > 0) {
-        productUploaded.slideImage.push(...slideImagePaths);
-      }
-      if (lookImagePath) {
-        productUploaded.lookImage = lookImagePath;
-      }
-      await productUploaded.save();
+      if (slideImageUrls.length > 0) productDoc.slideImage.push(...slideImageUrls);
+      if (lookImageUrl) productDoc.lookImage = lookImageUrl;
+      if (colorImageUrl) productDoc.colorImage = colorImageUrl;
+      if (stock !== undefined && stock !== "") productDoc.stock = Number(stock) || 0;
+
+      await productDoc.save();
     }
 
     return res.status(200).json({
       success: true,
-      message: "Files uploaded successfully!",
-      data: productUploaded,
+      message: "Files uploaded successfully to Cloudinary!",
+      data: productDoc,
     });
   } catch (err) {
+    console.error("Upload error:", err);
+    cleanupTempFiles(req.files);
     return res.status(500).json({
       success: false,
       message: err.message,
     });
   }
 };
-
-export const getProductById = async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    if (!id) {
-      return res.status(404).json({
-        message: "Id missing, can't be edited",
-        success: false,
-      });
-    }
-
-    const product = await Products.findById(id);
-    if (!product) {
-      return res.status(404).json({
-        message: "Product not found in database",
-        success: false,
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      data: product,
-    });
-  } catch (err) {
-    return res.status(500).json({
-      message: err.message,
-      success: false,
-    });
-  }
-};
-
-export const getproductsForGuestBag = async (req, res) => {
-  try {
-    const { products } = req.query;
-
-    const favItems = Array.isArray(products) ? products : [products];
-
-    if (!Array.isArray(favItems)) {
-      return res.status(400).json({
-        message: "guestBag is not an Array",
-        success: false,
-      });
-    }
-
-    const GuestBag = await Products.find({ productName: { $in: favItems } });
-
-    return res.status(200).json({
-      message: "Found for Guest",
-      data: GuestBag,
-      success: true,
-    });
-  } catch (err) {
-    return res.status(500).json({
-      message: err.message,
-      success: false,
-    });
-  }
-};
-
-
-export const getProductByKind = async (req, res) => {
-  try {
-    const { kind } = req.params;
-   
-
-
-    const products = await Products.find({ kind});
-
-  
-    if (!products || products.length === 0) {
-      return res.status(404).json({ 
-        success: false, 
-        message: "No products found for this kind." 
-      });
-    }
-
-    res.status(200).json({ 
-      success: true, 
-      data: products 
-    });
-  } catch (error) {
-    res.status(500).json({ 
-      success: false, 
-      message: "Server Error" 
-    });
-  }
-};
-
-
-export const getMatchedProducts = async (req,res) => {
-  const {match } = req.query;
-  const { category } = req.params;
-
-  if(!match){
-    return res.status(400).json({
-      message:"query is undefined",
-      success: false
-    })
-  }
-  const matchArray = match.split(',');
-
-  const isProducts = await Products.find({
-    category: category,
-    kind: {$nin: matchArray}
-  })
-
-  if(!isProducts || isProducts.length === 0){
-    return res.status(404).json({
-      message: "products are not found",
-      success: false
-    })
-  }
-
-
-  return res.status(200).json({
-    message:"Matched Products are found!",
-    data: isProducts,
-    success: true
-  })
-}
-

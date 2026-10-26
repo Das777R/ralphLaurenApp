@@ -36,7 +36,7 @@ function Dhome() {
         <div className="discover-carousel-intro position-relative overflow-hidden d-flex flex-column justify-content-center text-white">
           <p className="d-block text-uppercase text-center">Discover</p>
           <h1 className="text-capitalize">
-             Home Brands
+             Women Brands
           </h1>
           <p>With each Ralph Lauren Home collection, a dream is brought to life. The distinct lifestyles created by Ralph Lauren Home – along with the Lauren, Polo Ralph Lauren, Double RL and Ralph’s Coffee brands – reflect the timelessness of Ralph Lauren Home style</p>
         </div>

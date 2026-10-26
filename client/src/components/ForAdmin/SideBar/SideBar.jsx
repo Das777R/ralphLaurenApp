@@ -15,9 +15,11 @@ import {
 } from "react-icons/fi";
 import "./SideBar.css";
 
-function SideBar({ isOpen, onClose }) {
-  const pendingOrdersCount = 5;
+const getInitial = (name) => (name?.trim()?.[0] || "A").toUpperCase();
+
+function SideBar({ isOpen, onClose, onLogout, admin, pendingOrdersCount = 0 }) {
   const { pathname } = useLocation();
+  const adminId = admin?.id;
 
   const [mediaOpen, setMediaOpen] = useState(pathname.startsWith("/admin/media"));
 
@@ -34,6 +36,20 @@ function SideBar({ isOpen, onClose }) {
   const subLinkClass = ({ isActive }) =>
     `nav-link py-1 px-2 small ${isActive ? "text-white fw-bold" : "sidebar-sublink"}`;
 
+  const displayName = admin?.name || "Admin Account";
+
+  const dashPath = adminId ? `/admin/dashboard/${adminId}` : "/admin/dashboard";
+  const productsPath = adminId ? `/admin/products/${adminId}` : "/admin/products";
+  const ordersPath = adminId ? `/admin/orders/${adminId}` : "/admin/orders";
+  const customersPath = adminId ? `/admin/customers/${adminId}` : "/admin/customers";
+  const analyticsPath = adminId ? `/admin/analytics/${adminId}` : "/admin/analytics";
+  const webContentPath = adminId
+    ? `/admin/media/web-content/${adminId}`
+    : "/admin/media/web-content";
+  const productMediaPath = adminId
+    ? `/admin/media/products/${adminId}`
+    : "/admin/media/products";
+
   return (
     <aside
       className={`sidebar-wrapper ${isOpen ? "open" : ""}`}
@@ -41,7 +57,7 @@ function SideBar({ isOpen, onClose }) {
     >
       {/* Brand + mobile close button */}
       <div className="d-flex align-items-center justify-content-between mb-3 px-2">
-        <Link to="/admin/dashboard" className="text-white text-decoration-none">
+        <Link to={dashPath} className="text-white text-decoration-none">
           <span className="fs-4 fw-bold">
             <span className="text-primary">E</span>Store Admin
           </span>
@@ -62,21 +78,22 @@ function SideBar({ isOpen, onClose }) {
       <nav className="sidebar-nav">
         <ul className="nav nav-pills flex-column">
           <li className="nav-item mb-1">
-            <NavLink to="/admin/dashboard" className={linkClass} end>
+            {/* No `end`: the URL carries the admin id, so an exact match would never be active */}
+            <NavLink to={dashPath} className={linkClass}>
               <FiGrid size={18} />
               <span>Dashboard</span>
             </NavLink>
           </li>
 
           <li className="nav-item mb-1">
-            <NavLink to="/admin/products" className={linkClass}>
+            <NavLink to={productsPath} className={linkClass}>
               <FiBox size={18} />
               <span>Products</span>
             </NavLink>
           </li>
 
           <li className="nav-item mb-1">
-            <NavLink to="/admin/orders" className={linkClass}>
+            <NavLink to={ordersPath} className={linkClass}>
               <FiShoppingBag size={18} />
               <span className="flex-grow-1">Orders</span>
               {pendingOrdersCount > 0 && (
@@ -86,14 +103,14 @@ function SideBar({ isOpen, onClose }) {
           </li>
 
           <li className="nav-item mb-1">
-            <NavLink to="/admin/customers" className={linkClass}>
+            <NavLink to={customersPath} className={linkClass}>
               <FiUsers size={18} />
               <span>Customers</span>
             </NavLink>
           </li>
 
           <li className="nav-item mb-1">
-            <NavLink to="/admin/analytics" className={linkClass}>
+            <NavLink to={analyticsPath} className={linkClass}>
               <FiBarChart2 size={18} />
               <span>Analytics</span>
             </NavLink>
@@ -106,6 +123,7 @@ function SideBar({ isOpen, onClose }) {
               onClick={() => setMediaOpen((v) => !v)}
               className="nav-link sidebar-link w-100 d-flex align-items-center gap-3 py-2 px-3 border-0 bg-transparent text-start"
               aria-expanded={mediaOpen}
+              aria-controls="media-submenu"
             >
               <FiFolder size={18} />
               <span className="flex-grow-1">Media Manager</span>
@@ -119,14 +137,14 @@ function SideBar({ isOpen, onClose }) {
             </button>
 
             {mediaOpen && (
-              <ul className="nav flex-column ps-4 mt-1">
+              <ul id="media-submenu" className="nav flex-column ps-4 mt-1">
                 <li className="nav-item mb-1">
-                  <NavLink to="/admin/media/web-content" className={subLinkClass}>
+                  <NavLink to={webContentPath} className={subLinkClass}>
                     Web Page Banners
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink to="/admin/media/products" className={subLinkClass}>
+                  <NavLink to={productMediaPath} className={subLinkClass}>
                     Product Images/Videos
                   </NavLink>
                 </li>
@@ -145,16 +163,21 @@ function SideBar({ isOpen, onClose }) {
           type="button"
           className="sidebar-user w-100 d-flex align-items-center text-white border-0 bg-transparent p-2 rounded"
         >
-          <span className="sidebar-avatar me-2">A</span>
-          <strong className="small flex-grow-1 text-start">Admin Account</strong>
+          <span className="sidebar-avatar me-2">{getInitial(admin?.name)}</span>
+          <strong className="small flex-grow-1 text-start">{displayName}</strong>
         </Dropdown.Toggle>
 
         <Dropdown.Menu variant="dark" className="shadow w-100">
-          <Dropdown.Item href="#settings" className="d-flex align-items-center gap-2">
+          <Dropdown.Item as="button" type="button" className="d-flex align-items-center gap-2" disabled>
             <FiSettings size={14} /> Settings
           </Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item href="#logout" className="d-flex align-items-center gap-2 text-danger">
+          <Dropdown.Item
+            as="button"
+            type="button"
+            className="d-flex align-items-center gap-2 text-danger"
+            onClick={onLogout}
+          >
             <FiLogOut size={14} /> Sign out
           </Dropdown.Item>
         </Dropdown.Menu>

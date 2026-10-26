@@ -2,14 +2,14 @@ import { Button } from "react-bootstrap";
 import { FiUploadCloud } from "react-icons/fi";
 import "../../../styles/AdminUI.css";
 import "./ProductMedia.css";
-import { ProductMediaProvider, useProductMedia } from "./ProductMediaContext";
-import ProductStats from "./components/ProductStats";
-import ProductToolbar from "./components/ProductToolbar";
-import ProductGrid from "./components/ProductGrid";
-import ProductList from "./components/ProductList";
-import PreviewModal from "./components/PreviewModal";
-import UploadModal from "./components/UploadModal";
-import DeleteConfirmModal from "./components/DeleteConfirmModal";
+import { ProductMediaProvider, useProductMedia } from "../../../context/admin/ProductMediaContext";
+import ProductStats from "./components/ProductStats/ProductStats";
+import ProductToolbar from "./components/ProductToolbar/ProductToolBar";
+import ProductGrid from "./components/ProductGrid/ProductGrid";
+import ProductList from "./components/ProductList/ProductList";
+import PreviewModal from "./components/PreviewModal/PreviewModal";
+import UploadModal from "./components/UploadModal/UploadModal";
+import DeleteConfirmModal from "./components/DeleteConfirmModal/DeleteConfirmModal";
 
 function ProductMediaPage() {
   const { openUpload, view } = useProductMedia();
