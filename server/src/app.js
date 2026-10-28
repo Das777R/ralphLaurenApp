@@ -16,7 +16,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:5174",
-    'https://ralph-lauren-app-jd1x.vercel.app',
+    'https://ralph-lauren-app-aing.vercel.app',
     process.env.FRONTEND_URL],
   credentials: true
 }));
