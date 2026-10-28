@@ -13,9 +13,8 @@ const app = express();
 
 app.use(cors({
   origin: [
-    "http://localhost:5172",
     "http://localhost:5173",
-    "https://ralph-lauren-app-2pxd.vercel.app"],
+    process.env.FRONTEND_URL],
   credentials: true
 }));
 
