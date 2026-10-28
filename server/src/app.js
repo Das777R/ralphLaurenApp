@@ -15,8 +15,7 @@ app.use(cors({
   origin: [
     "http://localhost:5172",
     "http://localhost:5173",
-    "https://ralph-lauren-app-aing-lnm9yo9ca.vercel.app",
-  "https://ralph-lauren-app-git-3d9cc7-ronalddas21july-gmailcoms-projects.vercel.app",],
+    "https://ralph-lauren-app-2pxd.vercel.app/"],
   credentials: true
 }));
 
