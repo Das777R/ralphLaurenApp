@@ -62,13 +62,13 @@ function WorldLuxury() {
   }
 
   return (
-    <div className="wrld-lxry-container pb-5">
+    <div className="wrld-lxry-container pb-5  w-100 mx-0">
       <div className="wrld-lxry-para ms-3">
         <h1 className="wrld-lxry-title text-capitalize text-dark fs-1">the world of luxury</h1>
         <p className="wrld-lxry-text">Explore seasonal collections, iconic accessories, and more</p>
       </div>
 
-      <div className="btn-group ms-3 mb-3 w-100 d-flex justify-content-end pe-5 position-relative" role="group">
+      <div className="btn-group ms- mb-3 w-100 d-flex justify-content-end pe-2 pe-lg-5 position-relative" role="group">
         <div 
           className="fs-3 move-right-btn btn-md rounded-start-1 px-3 position-relative"
           onClick={scrollLeft}
@@ -83,7 +83,7 @@ function WorldLuxury() {
         >&rsaquo;</div>
       </div>
 
-      <div className="wrld-lxry-prefall-container d-flex gap-2 py-2 overflow-x-auto" ref={scrollBoxRef}>
+      <div className="wrld-lxry-prefall-container  d-flex gap-2 py-2 overflow-x-auto" ref={scrollBoxRef}>
         {fetchData.map((item, index) => {
           return (
             <div className="wrld-lxry-prefall-2026 rlc-collection position-relative flex-shrink-0" key={index}>
