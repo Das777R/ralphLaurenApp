@@ -20,7 +20,7 @@ const logInSchema = z.object({
 const refreshCookieOptions = {
   httpOnly: true,
   secure: true,
-  sameSite: "strict",
+  sameSite: "none",
   path: "/api/auth",
   maxAge: 7 * 24 * 60 * 60 * 1000
 };

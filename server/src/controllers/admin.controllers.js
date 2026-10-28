@@ -50,7 +50,7 @@ const isProd = process.env.NODE_ENV === 'production';
 const refreshCookieOptions = {
   httpOnly: true,
   secure: isProd,
-  sameSite: 'lax',
+  sameSite: isProd ? "none" : "lax",
   path: '/',
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
@@ -59,7 +59,7 @@ const refreshCookieOptions = {
 const clearCookieOptions = {
   httpOnly: true,
   secure: isProd,
-  sameSite: 'lax',
+  sameSite: isProd ? "none" : "lax",
   path: '/',
 };
 

@@ -25,7 +25,7 @@ import Products from './components/ForAdmin/Products/Products';
 import Orders from './components/ForAdmin/Orders/Orders';
 import Customers from './components/ForAdmin/Customers/Customer';
 import Analytics from './components/ForAdmin/Analytics/Analytics';
-import WebBanners from './components/ForAdmin/Webbanners/Webbanners';
+import WebBanners from './components/ForAdmin/WebBanners/WebBanners';
 import ProductMedia from './components/ForAdmin/ProductMedia/ProductMedia';
 import ScrollToTop from './ScrollToTop';
 
