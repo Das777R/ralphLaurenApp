@@ -41,10 +41,14 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 12px;
+  /* padding: 10px 12px; */
   margin-bottom: 28px;
-  border: 1px solid var(--line);
   border-radius: 12px;
+}
+
+.admin-logo-img{
+   width: 4em;
+  border: 1px solid var(--line);
 }
 
 .auth-logo {
@@ -60,7 +64,8 @@
 
 .auth-brand-name {
   font-weight: 600;
-  line-height: 1.1;
+  line-height: 1;
+ font-family: "Playfair Display", serif;;
 }
 
 .auth-brand-sub {

@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Environment variables
+.env
+.env.local
+
+# Local server media/uploads (if applicable)
+server/MediaForHome/
+server/MediaForPage/
+server/Products/

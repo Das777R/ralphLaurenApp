@@ -24,10 +24,10 @@ import {
   FiTrash2,
   FiRefreshCw,
 } from "react-icons/fi";
-import api from "../../../api/api.js"; // adjust path
+import api from "../../../api/api.js"; 
 import "../../../styles/AdminUI.css";
 
-/* ---------- Helpers ---------- */
+
 const TILE_COLORS = [
   "#0d6efd",
   "#198754",
@@ -70,7 +70,7 @@ const toAbsolute = (path) => {
   return path.startsWith("/") ? path : `/${path}`;
 };
 
-/** Mongo product → table row */
+
 const normalizeProduct = (p) => {
   const stock = Number(p.stock);
   return {
@@ -106,12 +106,12 @@ function Products() {
   const [page, setPage] = useState(1);
   const [selected, setSelected] = useState(new Set());
 
-  /* ---------- Load ---------- */
+
   const loadProducts = useCallback(async () => {
     setLoading(true);
     setLoadError("");
     try {
-      const res = await api.get("/product");
+      const res = await api.get("/products");
       const list = res.data?.data || [];
       setProducts(list.map(normalizeProduct));
     } catch (err) {
@@ -129,7 +129,7 @@ function Products() {
     loadProducts();
   }, [loadProducts]);
 
-  /* ---------- Category options from data ---------- */
+
   const categoryOptions = useMemo(() => {
     const set = new Set(products.map((p) => p.category).filter(Boolean));
     return [...set].sort((a, b) => a.localeCompare(b));

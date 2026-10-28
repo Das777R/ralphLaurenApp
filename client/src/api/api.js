@@ -1,16 +1,24 @@
 import axios from 'axios';
 
+// const api = axios.create({
+//   baseURL: '/api',
+//   withCredentials: true,
+// });
+
+
+// import axios from 'axios';
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,
   withCredentials: true,
 });
 
-// Separate tokens so a user session and an admin session can't overwrite each other
+
 const tokens = { user: '', admin: '' };
 
 const typeOf = (url = '') => (url.startsWith('/admin') ? 'admin' : 'user');
 
-// setAccessToken(token) keeps working for existing user code; admin passes 'admin'
+
 export const setAccessToken = (token, type = 'user') => {
   tokens[type] = token || '';
 };
@@ -20,7 +28,7 @@ const REFRESH_URLS = {
   admin: '/api/admin/token',
 };
 
-// De-duplicates concurrent refreshes (also covers React StrictMode double effects)
+
 const inFlight = { user: null, admin: null };
 
 export const refreshSession = (type = 'user') => {
@@ -62,7 +70,7 @@ api.interceptors.response.use(
     const url = originalRequest?.url || '';
     const type = typeOf(url);
 
-    // Admin: only 401 means "token expired" (403 = not allowed, refreshing won't help)
+  
     const retryable = status === 401 || (status === 403 && type === 'user');
 
     if (retryable && originalRequest && !originalRequest._retry && !isAuthCall(url)) {
@@ -76,7 +84,7 @@ api.interceptors.response.use(
         return api(originalRequest);
       } catch {
         setAccessToken('', type);
-        // Tell AdminLayout to drop back to the login screen
+      
         if (type === 'admin') window.dispatchEvent(new Event(ADMIN_EXPIRED_EVENT));
         return Promise.reject(error);
       }
