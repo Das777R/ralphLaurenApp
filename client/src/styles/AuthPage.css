@@ -1,50 +1,55 @@
-
 .auth-container {
   height: auto;
-  width: 28rem;
+  width: min(28rem, calc(100% - 2rem));
   background-color: #fff;
   padding-bottom: 2rem;
-  margin-top: 10rem;
-  margin-bottom: 5rem;
+  margin: 10rem auto 5rem;
   border: 1px solid rgb(201, 198, 198);
-
-  
 }
 
-
-.signin-div {
-  background: #fff;
-}
-.create-div {
-  background-color: rgb(177, 174, 174);
-  
-}
-
+/* Tabs */
 .auth-option-con {
   display: flex;
   justify-content: space-between;
   font-size: 1.3em;
 }
-.signin-div, 
+
+.signin-div,
 .create-div {
-   font-family: "Playfair Display", serif;
-   width: 50%;
-   height: 5rem;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   user-select: none;
-   cursor: pointer;
-   color: #041e3a;
+  font-family: "Playfair Display", serif;
+  width: 50%;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
+  color: #041e3a;
+  background: #fff;
+}
+
+.current-active-auth {
+  background: #f4f5f5;
+  box-shadow: 2px 1px 4px #656464 inset;
+}
+
+/* Social buttons */
+.auth-with-con {
+  gap: 8px;
 }
 
 .fb-con,
 .google-con,
 .apple-con {
+  flex: 1;
+  min-width: 0;
+  justify-content: center;
+  align-items: center;
   border: 1px solid #000;
-  padding: 15px 30px;
+  padding: 15px 10px;
   font-size: 10px;
   font-family: sans-serif;
+  white-space: nowrap;
   user-select: none;
   cursor: pointer;
   color: #041e3a;
@@ -53,8 +58,6 @@
   transition: all 0.5s ease-in-out;
 }
 
-
-
 .fb-con:hover,
 .google-con:hover,
 .apple-con:hover {
@@ -62,39 +65,41 @@
   color: #fff;
 }
 
-
-
-img[alt="fb-favi"] {
-  width: 15px;
-  height: 15px;
+/* Icons: high specificity so no other stylesheet can enlarge them */
+.auth-container .fb-con img,
+.auth-container .google-con img,
+.auth-container .apple-con img {
+  width: 12px !important;
+  height: 12px !important;
+  min-width: 12px;
+  max-width: 12px;
+  max-height: 12px;
   object-fit: contain;
+  flex-shrink: 0;
+  display: block;
 }
 
-
+/* Inputs */
 .email-div,
-.pass-div{
-  height: 2em;
+.pass-div {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 12px;
 }
 
-.email-div > input {
-  padding: 10px 15px;
-  outline: none;
-  flex: 1;
-  border: 1px solid #000;
-}
-
+.email-div > input,
 .pass-div > input {
-  padding: 10px 15px;
+  padding: 12px 15px;
   outline: none;
   flex: 1;
+  min-width: 0;
+  font-size: 12px;
   border: 1px solid #000;
 }
 
+/* Links and text */
 .forgot-pass-text {
   font-size: 12px;
   font-family: Georgia, 'Times New Roman', Times, serif;
@@ -111,7 +116,7 @@ img[alt="fb-favi"] {
 .required-text {
   font-size: 12px;
   color: rgb(154, 154, 156);
-   font-family: sans-serif;
+  font-family: sans-serif;
   user-select: none;
 }
 
@@ -123,86 +128,48 @@ img[alt="fb-favi"] {
   font-size: 14px;
   user-select: none;
   cursor: pointer;
- 
 }
 
-.current-active-auth {
-  background: #f4f5f5;
-  box-shadow: 2px 1px 4px #656464 inset;
+@media (max-width: 426px) {
+  .auth-option-con {
+    font-size: 1.1em;
+  }
+
+  .fb-con,
+  .google-con,
+  .apple-con {
+    padding: 13px 8px;
+  }
 }
 
+@media (max-width: 376px) {
+  .fb-con,
+  .google-con,
+  .apple-con {
+    padding: 12px 6px;
+    font-size: 9px;
+    gap: 4px;
+  }
 
-@media (max-width: 426px){
-  .auth-container {
-  height: auto;
-  width: 25rem;
-  background-color: #fff;
-  padding-bottom: 2rem;
-  margin-top: 10rem;
-  margin-bottom: 5rem;
-  border: 1px solid rgb(201, 198, 198);  
+  .auth-container .fb-con img,
+  .auth-container .google-con img,
+  .auth-container .apple-con img {
+    width: 11px !important;
+    height: 11px !important;
+    min-width: 11px;
+    max-width: 11px;
+    max-height: 11px;
+  }
 }
 
-.fb-con,
-.google-con,
-.apple-con {
-  border: 1px solid #000;
-  padding: 13px 25px;
-  font-size: 10px;
-  font-family: sans-serif;
-  user-select: none;
-  cursor: pointer;
-  color: #041e3a;
-  display: flex;
-  gap: 5px;
-  transition: all 0.5s ease-in-out;
-    margin: 0 3px;
-}
+@media (max-width: 326px) {
+  .auth-with-con {
+    gap: 5px;
+  }
 
-
-
-}
-
-
-@media (max-width: 376px){
-  .auth-container {
-  height: auto;
-  width: 23rem;
-  background-color: #fff;
-  padding-bottom: 2rem;
-  margin-top: 10rem;
-  margin-bottom: 5rem;
-  border: 1px solid rgb(201, 198, 198);
-}
-
-.fb-con,
-.google-con,
-.apple-con {
-  border: 1px solid #000;
-  padding: 12px 20px;
-  margin: 0 2px;
-  
-}
-}
-
-@media (max-width: 326px){
-  .auth-container {
-  height: auto;
-  width: 19rem;
-
-  background-color: #fff;
-  padding-bottom: 2rem;
-  margin-top: 10rem;
-  margin-bottom: 5rem;
-  border: 1px solid rgb(201, 198, 198);
-}
-
-.fb-con,
-.google-con,
-.apple-con {
-  border: 1px solid #000;
-  padding: 10px 9px;
-  margin: 0 1px;
-  
-}
+  .fb-con,
+  .google-con,
+  .apple-con {
+    padding: 10px 4px;
+  }
 }

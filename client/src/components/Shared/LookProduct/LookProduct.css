@@ -390,10 +390,11 @@
 }
 
 .brand-name {
-  font-size: 1.5rem;
-  color: #000;
+  font-size: 0.8rem;
+  color: #0a1a3c;
+  font-weight: 500;
   margin-bottom: 0.2rem;
-  font-family: monospace;
+  font-family: "Playfair Display", serif;
 }
 
 .product-title {

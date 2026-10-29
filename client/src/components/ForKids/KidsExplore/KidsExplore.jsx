@@ -30,9 +30,9 @@ function KidsExplore() {
     fetchForKidsSlide();
   }, []);
 
-  const scrollBoxRef = useRef();
-  const scrolledRightBtnRef = useRef();
-  const scrolledLeftBtnRef = useRef();
+  const scrollBoxRef = useRef(null);
+  const scrolledRightBtnRef = useRef(null);
+  const scrolledLeftBtnRef = useRef(null);
 
   const scrollLeft = () => {
     if (scrollBoxRef.current) {
@@ -62,6 +62,11 @@ function KidsExplore() {
     }
   };
 
+  function getLink(title = '') {
+    const section = SECTION_BY_TITLE[title.trim().toLowerCase()] || 'kids-section';
+    return userId ? `/${section}/${userId}` : `/${section}`;
+  }
+
   if (isLoading) {
     return (
       <div className="d-flex w-100 justify-content-center align-items-center" style={{ height: "20rem" }}>
@@ -70,45 +75,43 @@ function KidsExplore() {
     );
   }
 
-  function getLink(title = '') {
-    const section = SECTION_BY_TITLE[title.trim().toLowerCase()] || 'kids-section';
-    return userId ? `/${section}/${userId}` : `/${section}`;
-  }
-
   return (
-    <div className="home-explore-cont p-lg-1 p-md-5 py-1 px-1 d-flex">
-      <div className="home-explore-img-cont">
-        <div className="home-explore-img position-relative overflow-hidden d-flex flex-column justify-content-center">
+    <div className="kids-explore-cont p-lg-1 py-1 px-1 d-flex">
+      <div className="kids-explore-img-cont">
+        <div className="kids-explore-img position-relative overflow-hidden d-flex flex-column justify-content-center">
           <h1 className="text-capitalize">More to <span className="d-block">Explore</span></h1>
           <p>Discover our curated edits and seasonal collections</p>
         </div>
       </div>
 
-      <div className="home-explore-carousel-cont">
-       
-        <div className="btn-group mb-2 w-100 d-flex justify-content-end pe-3 mt-4 position-relative" role="group">
-          <div 
-            className="fs-3 move-right-btn btn-md rounded-start-1 px-3 position-relative"
+      <div className="kids-explore-carousel-cont">
+        <div className="btn-group ms-0 mb-3 w-100 pe-1 pe-lg-5 mt-5 d-flex justify-content-end position-relative" role="group">
+          <div
+            className="fs-3 kids-move-right-btn btn-md rounded-start-1 px-3 position-relative"
             onClick={scrollLeft}
             ref={scrolledLeftBtnRef}
             style={{ cursor: "pointer" }}
           >&lsaquo;</div>
-          <div 
-            className="fs-3 move-left-btn btn-md rounded-end-1 px-3 position-relative"
+          <div
+            className="fs-3 kids-move-left-btn btn-md rounded-end-1 px-3 position-relative"
             onClick={scrollRight}
             ref={scrolledRightBtnRef}
             style={{ cursor: "pointer" }}
           >&rsaquo;</div>
         </div>
 
-        {/* Carousel Container */}
-        <div className="home-explore-img-carosuel-cont d-flex gap-2 overflow-x-auto" ref={scrollBoxRef}>
+        <div className="kids-explore-img-carosuel-cont d-flex gap-2 overflow-x-auto" ref={scrollBoxRef}>
           {kidsExploreData?.map((item) => (
-            <Link to={getLink(item?.title)} key={item._id || item.title} className="flex-shrink-0 text-decoration-none">
-              <div className="home-explore-img-carousel position-relative">
-                <img src={item?.media[0]} alt="" className="home-explore-img-carousel-img" />
-                <div className="home-explore-img-info position-absolute">
-                  <h2 className="home-explore-category-carousel-text text-capitalize text-white">{item?.title}</h2>
+            <Link
+              to={getLink(item?.title)}
+              key={item?._id || item?.title}
+              className="flex-shrink-0 text-decoration-none"
+            >
+              <div className="kids-explore-img-carousel position-relative">
+                <img src={item?.media[0]} alt="" className="kids-explore-img-carousel-img"/>
+                <div className="kids-explore-img-info position-absolute">
+                  <h2 className="kids-explore-category-carousel-text text-capitalize text-white">{item?.title}</h2>
+                  <p className="text-uppercase text-white text-decoration-underline shopnow-kids">shop now</p>
                 </div>
               </div>
             </Link>

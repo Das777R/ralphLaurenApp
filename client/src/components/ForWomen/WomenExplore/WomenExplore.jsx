@@ -71,7 +71,7 @@ function WomenExplore() {
       </div>
       
       <div className="home-explore-carousel-cont">
-        <div className="btn-group ms-3 mb-3 w-100 pe-5 mt-5 d-flex justify-content-end position-relative" role="group">
+        <div className="btn-group ms-0 mb-3 w-100 pe-1 pe-lg-5 mt-5 d-flex justify-content-end position-relative" role="group">
           <div 
             className="fs-3 move-right-btn btn-md rounded-start-1 px-3 position-relative"
             onClick={scrollLeft}
