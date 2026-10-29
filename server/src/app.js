@@ -16,7 +16,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    'https://ralph-lauren-app.vercel.app'
+    'https://ralph-lauren-app-qu1o.vercel.app',
    ],
   credentials: true
 }));
@@ -42,13 +42,10 @@ app.use('/api/products', productsRoute);
 app.use('/api/mediaforpage', mediaForPage);
 app.use('/api/landingPage',mediaForHomePage);
 
-
 app.use('/api/auth', authRoutes)
 
 
 app.use('/api/admin', adminAuthRoutes)
-
-
 
 app.get("/api/check", (req,res) => {
   res.status(200).json({
