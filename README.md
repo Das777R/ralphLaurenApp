@@ -1,6 +1,6 @@
 # Hi, I'm Ronald Das 👋
 
-MERN stack developer from Bhubaneswar, Odisha, India. I build full-stack web apps with React and Node.js, and I'm looking for an entry-level developer role.
+MERN stack developer from India. I build full-stack web apps with React and Node.js, and I'm looking for an entry-level developer role.
 
 - 🎓 B.E. in Computer Science and Engineering (2025), Grace College of Engineering, Anna University
 - 🔨 Currently building e-commerce projects with admin dashboards, authentication, and media upload pipelines
