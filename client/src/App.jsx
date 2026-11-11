@@ -19,7 +19,7 @@ import MenProductsPage from './pages/MenProductsPage';
 import HomeProductsPage from './pages/HomeProductsPage';
 import DiscoverNavPage from './pages/DiscoverNavPage';
 import AdminLayout from './pages/AdminLayout';
-import { refreshSession } from './api/api';
+import api, { refreshSession } from './api/api';
 import Dashboard from './components/ForAdmin/Dashboard/Dashboard';
 import Products from './components/ForAdmin/Products/Products';
 import Orders from './components/ForAdmin/Orders/Orders';
@@ -34,8 +34,7 @@ function App() {
   const nav = useNavigate();
   const { pathname } = useLocation();
 
-  // Restore the *user* session on first load.
-  //  Admin pages manage their own session.
+
   useEffect(() => {
     if (pathname.startsWith('/admin')) return;
 

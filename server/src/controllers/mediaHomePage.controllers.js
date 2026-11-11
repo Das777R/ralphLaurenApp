@@ -30,10 +30,8 @@ export const uploadForHomePageMedia = async (req, res) => {
       });
     }
 
-    // Upload every file to Cloudinary
-    // Folder structure example: home/rlc_hero
-    const folder = `home/${dbField}`;
 
+    const folder = `home/${dbField}`;
     const mediaUrls = await Promise.all(
       req.files.map((file) => uploadFilesToCloudinary(file.path, folder))
     );
@@ -42,7 +40,7 @@ export const uploadForHomePageMedia = async (req, res) => {
       title,
       brand,
       description,
-      media: mediaUrls,               // now contains Cloudinary secure_urls
+      media: mediaUrls,             
       forMobile: forMobile === true || forMobile === "true",
     };
 

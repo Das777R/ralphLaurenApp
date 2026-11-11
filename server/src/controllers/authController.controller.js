@@ -1,10 +1,13 @@
+import crypto from 'crypto';
 import UserAccount from '../schema/AuthSignIn.schema.js';
 import RefreshToken from '../schema/RefreshToken.schema.js';
+import OrderList from '../schema/Order.schema.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { z } from 'zod';
 import { generateAccessToken,
          generateRefreshToken } from '../utils/token.js';
+import razorpayInstance from '../utils/razorpay.js';
 
 const signUpSchema = z.object({
   name: z.string().trim().min(1, { message: "Name is required!!" }),
@@ -24,6 +27,23 @@ const refreshCookieOptions = {
   path: "/api/auth",
   maxAge: 7 * 24 * 60 * 60 * 1000
 };
+
+const orderSchema = z.object({
+  products: z.array(z.any()).min(1, { message: 'Order has no products' }),
+  addressName: z.string().trim().min(1),
+  firstName: z.string().trim().min(1),
+  lastName: z.string().trim().min(1),
+  email: z.string().trim().pipe(z.email()),
+  country: z.string().trim().min(1),
+  address1: z.string().trim().min(1),
+  address2: z.string().trim().optional(),
+  city: z.string().trim().min(1),
+  postcode: z.string().trim().min(1),
+  mobileNumber: z.string().trim().min(1),
+  deliveryDate: z.coerce.date(),
+  razorpayOrderId: z.string().optional(),
+  razorpayPaymentId: z.string().optional()
+});
 
 const { maxAge, ...clearCookieOptions } = refreshCookieOptions;
 
@@ -147,15 +167,13 @@ export const refreshTokenController = async (req, res) => {
 
     return res.status(200).json({
       message: "New access token issued for user",
-      data: { accessToken: generateAccessToken(account), userId: account._id, role: "user"},
+      data: { accessToken: generateAccessToken(account), userId: account._id, role: "user" },
       success: true
     });
   } catch (err) {
     return serverError(res, err);
   }
 };
-
-
 
 export const getCustomer = async (req, res) => {
   try {
@@ -285,5 +303,111 @@ export const deleteUserBag = async (req, res) => {
     return res.status(200).json({ message: "Bag successfully removed!!", success: true });
   } catch (err) {
     return serverError(res, err);
+  }
+};
+
+export const ordersOfUsers = async (req, res) => {
+  try {
+    const parsed = orderSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ message: 'Order info is incomplete!!', success: false });
+    }
+
+    const order = await OrderList.create(parsed.data);
+    return res.status(201).json({ message: 'Order successfully placed!!', data: order, success: true });
+  } catch (err) {
+    return serverError(res, err);
+  }
+};
+
+export const createOrderController = async (req, res) => {
+  try {
+    const { products } = req.body;
+
+    if (!Array.isArray(products) || products.length === 0) {
+      return res.status(400).json({
+        message: "Can't order empty bag",
+        success: false
+      });
+    }
+
+    // Total in rupees, assuming each bag item has numeric `price` and `qty`.
+    // Better: look prices up from your Product collection by productId.
+    const totalRupees = products.reduce((sum, item) => {
+      return sum + Number(item.price) * Number(item.qty || 1);
+    }, 0);
+
+    if (!Number.isFinite(totalRupees) || totalRupees <= 0) {
+      return res.status(400).json({
+        message: 'Invalid order amount',
+        success: false
+      });
+    }
+
+    const options = {
+      amount: Math.round(totalRupees * 100), // Razorpay needs paise (integer)
+      currency: 'INR',
+      receipt: `receipt_${Date.now()}`,
+      notes: { itemCount: String(products.length) }
+    };
+
+    const order = await razorpayInstance.orders.create(options);
+
+    return res.status(200).json({
+      data: order,
+      success: true
+    });
+  } catch (error) {
+    console.error('Create order error:', error);
+    return res.status(500).json({ success: false, message: 'Could not create order' });
+  }
+};
+
+export const verifyPaymentController = (req, res) => {
+  try {
+    const {
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature
+    } = req.body;
+
+    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+      return res.status(400).json({
+        message: 'Payment failed or was cancelled',
+        success: false
+      });
+    }
+
+    const expectedSignature = crypto
+      .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+      .update(`${razorpay_order_id}|${razorpay_payment_id}`)
+      .digest('hex');
+
+    const expected = Buffer.from(expectedSignature);
+    const received = Buffer.from(razorpay_signature);
+
+    // timingSafeEqual throws if lengths differ, so check first
+    const isValid =
+      expected.length === received.length &&
+      crypto.timingSafeEqual(expected, received);
+
+    if (!isValid) {
+      return res.status(400).json({
+        message: 'Invalid payment signature',
+        success: false
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Payment verified',
+      data: { orderId: razorpay_order_id, paymentId: razorpay_payment_id },
+      success: true
+    });
+  } catch (err) {
+    console.error('Verify error:', err);
+    return res.status(500).json({
+      message: 'Payment verification failed',
+      success: false
+    });
   }
 };

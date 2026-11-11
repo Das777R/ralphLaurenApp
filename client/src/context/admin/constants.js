@@ -6,7 +6,7 @@ export const MAX_IMAGE = 5 * MB;
 export const MAX_VIDEO = 50 * MB;
 export const MAX_BATCH = 20;
 
-// Capitalized to match your MongoDB data or kept uniform
+
 export const CATEGORIES = ["Men", "Women", "Kids & Baby", "Home", "Discover"];
 
 

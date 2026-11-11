@@ -11,6 +11,7 @@ import PreviewModal from "./components/PreviewModal/PreviewModal";
 import UploadModal from "./components/UploadModal/UploadModal";
 import DeleteConfirmModal from "./components/DeleteConfirmModal/DeleteConfirmModal";
 
+
 function ProductMediaPage() {
   const { openUpload, view } = useProductMedia();
 

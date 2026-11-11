@@ -457,6 +457,8 @@ export const uploadProducts = async (req, res) => {
       stock,
     } = req.body;
 
+
+
     const slideImageFiles = req.files?.slideImage || [];
     const colorImageFile = req.files?.colorImage?.[0];
     const lookImageFile = req.files?.lookImage?.[0];

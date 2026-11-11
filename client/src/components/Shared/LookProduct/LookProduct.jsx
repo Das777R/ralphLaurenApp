@@ -57,6 +57,8 @@ function LookProductContent() {
     
   } = useLookProduct();
 
+  
+
   const {setCompleteLookOpen,completeLookOpen} = useContext(UIContext);
 
   const { userId } = useParams();
@@ -136,7 +138,7 @@ function LookProductContent() {
   useEffect(() => {
     const getProductsById = async () => {
       try {
-        const res = await api.get(`/products/${productId}`);
+        const res = await api.get(`/product/${productId}`);
         setProductsLook((prev) => ({
           ...prev,
           ...res.data.data,
@@ -634,7 +636,7 @@ function LookProductContent() {
                     {offCanavasRecommendData.color}
                   </span>
                   <div className="d-flex gap-2 mt-2 look-product-color-img-con">
-                    {offCanavasRecommendData?.availableColors?.map((clr, index) => (
+                    {offCanavasRecommendData?.availableColor?.map((clr, index) => (
                       <img
                         key={index}
                         src={clr}

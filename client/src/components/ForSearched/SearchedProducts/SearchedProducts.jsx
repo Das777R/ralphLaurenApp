@@ -93,7 +93,7 @@ return (
           <div className="product-box-img-container-carousel ">
             <div className="product-box-carousel">
               <img
-                src={encodeURI(`/${data.lookImage}`)}
+                src={encodeURI(`${data.lookImage}`)}
                 alt=""
                 className={`w-100 object-fit-cover ${
                   productHovered ? "is-hidden" : "is-visible"
@@ -119,7 +119,7 @@ return (
                       <Link to={lookPath} className="no-underline">
                         {isVideo(srcLink) ? (
                           <video
-                            src={encodeURI(`/${srcLink}`)}
+                            src={encodeURI(`${srcLink}`)}
                             className="d-block w-100"
                             autoPlay
                             muted
@@ -128,7 +128,7 @@ return (
                           />
                         ) : (
                           <img
-                            src={encodeURI(`/${srcLink}`)}
+                            src={encodeURI(`${srcLink}`)}
                             className="d-block w-100 object-fit-cover"
                             alt="Product"
                           />
@@ -191,7 +191,7 @@ return (
             onClick={() => selectVariant(clrImg, data.productName)}
           >
             <img
-              src={encodeURI(`/${clrImg}`)}
+              src={encodeURI(`${clrImg}`)}
               alt=""
               className={`w-100 h-100 rounded-circle border border-1 border-dark`}
             />     
@@ -244,7 +244,7 @@ return (
                     onClick={() => selectVariant(clrImg, data.productName)}
                   >
                     <img
-                      src={encodeURI(`/${clrImg}`)}
+                      src={encodeURI(`${clrImg}`)}
                       alt=""
                       className="w-100 h-100 rounded-circle border border-1 border-dark"
                     />

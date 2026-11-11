@@ -79,13 +79,7 @@ const colorFromId = (id) => {
   return TILE_COLORS[hash % TILE_COLORS.length];
 };
 
-/**
- * Map one Mongo order document → UI row shape.
- * Backend fields (from orderSchema):
- *   products, addressName, firstName, lastName, email, country,
- *   address1, address2, city, postcode, mobileNumber, deliveryDate
- * Optional if you add them later: status, payment
- */
+
 const normalizeOrder = (raw) => {
   const products = Array.isArray(raw.products) ? raw.products : [];
 
@@ -463,7 +457,7 @@ function Orders() {
                           <td className="d-none d-lg-table-cell">
                             {o.items.reduce((n, it) => n + it.qty, 0)} items
                           </td>
-                          <td className="fw-semibold">{inr(o.total)}</td>
+                          <td className="fw-semibold text-nowrap">{inr(o.total)}</td>
                           <td className="d-none d-sm-table-cell">
                             <span className={`pill ${PAYMENT_PILL[o.payment]}`}>
                               {o.payment}

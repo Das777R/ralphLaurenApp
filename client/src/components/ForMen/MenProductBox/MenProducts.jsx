@@ -1,41 +1,33 @@
-import { useContext, useState,useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UIContext } from "../../../context/UIContext";
-import { useParams} from "react-router-dom"; 
+import { useParams } from "react-router-dom";
 import api from "../../../api/api";
 import ProductCard from "../../Shared/ProductCard/ProductCard";
+import { useMenContext } from "../../../context/men/MenProductContext";
 
 function MenProducts() {
-  const { userId } = useParams();
+  const { userId, category } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-
-  const { setAddedToFav, addedToFav} = useContext(UIContext);
-  const [productData, setProductData] = useState([]);
-
-
-
+  const { setAddedToFav, addedToFav } = useContext(UIContext);
+  // const [productData, setProductData] = useState([]);
+  const {productData, setProductData} = useMenContext()
+ 
   useEffect(() => {
-    const getItemForGuestFav = async () => {
-      if (addedToFav.length === 0) {
-        setProductData([]);
-        setIsLoading(false);
-        return;
-      }
-
+    const getProducts = async () => {
       try {
-        const result = await api.get("/products/guestBag", {
-          params: { products: addedToFav },
-          paramsSerializer: { indexes: null },
-        });
+        const result = await api.get(
+          `/product/men/${category}`
+        );
 
         const uniqueProducts = Array.from(
-          result.data.data
+          (result?.data?.data || [])
             .reduce((map, item) => {
-              const productName = item.productName;
+              const productName = item?.productName;
 
               if (!map.has(productName)) {
                 map.set(productName, {
                   ...item,
-                  availableColors: item.colorImage ? [item.colorImage] : [],
+                  availableColors: item?.colorImage ? [item.colorImage] : [],
                 });
               } else {
                 const existing = map.get(productName);
@@ -53,14 +45,16 @@ function MenProducts() {
 
         setProductData(uniqueProducts);
       } catch (err) {
-        console.error("Failed to fetch guest favorites:", err);
+        console.error("Failed to fetch men's products:", err);
         setProductData([]);
       } finally {
         setIsLoading(false);
       }
     };
-    getItemForGuestFav();
-  }, [addedToFav, setProductData]);
+
+    getProducts();
+  }, []);
+
 
   const selectVariant = async (clrImg, product) => {
     try {
@@ -82,20 +76,31 @@ function MenProducts() {
     }
   };
 
-  const addToFav = (product) => {
-    setAddedToFav((prev) => [...prev, product]);
+
+  const addToFav = (productName) => {
+    if (addedToFav?.includes(productName)) return;
+
+    setAddedToFav((prev) => [...(prev || []), productName]);
 
     if (!userId) {
       const current = JSON.parse(localStorage.getItem("fav")) || [];
-      localStorage.setItem("fav", JSON.stringify([...current, product]));
+      if (!current.includes(productName)) {
+        localStorage.setItem("fav", JSON.stringify([...current, productName]));
+      }
     }
   };
 
-  const removeFromFav = (product) => {
-    const current = JSON.parse(localStorage.getItem("fav")) || [];
-    const updated = current.filter((x) => x !== product);
-    localStorage.setItem("fav", JSON.stringify(updated));
-    setAddedToFav(updated);
+  
+  const removeFromFav = (productName) => {
+    setAddedToFav((prev) => (prev || []).filter((x) => x !== productName));
+
+    if (!userId) {
+      const current = JSON.parse(localStorage.getItem("fav")) || [];
+      localStorage.setItem(
+        "fav",
+        JSON.stringify(current.filter((x) => x !== productName))
+      );
+    }
   };
 
   if (isLoading) {
@@ -116,22 +121,22 @@ function MenProducts() {
   if (productData.length === 0) {
     return (
       <div className="d-flex w-100 justify-content-center py-5">
-        <p className="text-uppercase">No favourites yet</p>
+        <p className="text-uppercase">Products are out of stock...</p>
       </div>
     );
   }
 
   return (
     <div className="d-flex flex-wrap justify-content-center fav-products-container">
-      {productData.map((data, index) => (
+      {productData.map((data) => (
         <ProductCard
-          key={data._id || index}
+          key={data.productName}
           data={data}
           userId={userId}
-          addedToFav={() => addedToFav(data?.product)}
-          selectVariant={() => selectVariant(data.clrImg, data.product)}
-          addToFav={() => addToFav(data._id)}
-          removeFromFav={() => removeFromFav(data?.product)}
+          addedToFav={addedToFav}
+          selectVariant={selectVariant}
+          addToFav={addToFav}
+          removeFromFav={removeFromFav}
         />
       ))}
     </div>

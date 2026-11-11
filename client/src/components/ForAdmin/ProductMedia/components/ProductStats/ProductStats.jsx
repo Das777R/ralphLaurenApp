@@ -15,6 +15,7 @@ export default function ProductStats() {
   const stockValue = stats?.stockValue ?? 0;
   const lowStock = stats?.lowStock ?? 0;
 
+  
   return (
     <Row className="g-3 mb-4">
       <Col xs={12} sm={6} xl={3}>

@@ -7,7 +7,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import './CompleteLook.css'
 
 function CompleteLook() {
-    const {productLook,   formatImgSrc,} = useLookProduct();
+    const {productLook,   formatImgSrc} = useLookProduct();
     const {completeLookOpen,setCompleteLookOpen} = useContext(UIContext);
    
     const [activeSlide, setActiveSlide] = useState(0);
@@ -22,7 +22,7 @@ function CompleteLook() {
         </div>
        
         <div
-          className="d-flex flex-column gap-2 position-fixed ms-2"
+          className="d-flex flex-column gap-2 position-fixed ms-2 user-select-none"
           style={{ marginTop: "6rem" }}
         >
           {productLook?.slideImage?.map((slideUrl, index) => (
@@ -43,14 +43,14 @@ function CompleteLook() {
             >
               {isVideo(slideUrl) ? (
                 <video
-                  src={formatImgSrc(slideUrl)}
+                  src={slideUrl}
                   muted
                   playsInline
                   className="w-100 object-fit-contain"
                 />
               ) : (
                 <img
-                  src={formatImgSrc(slideUrl)}
+                  src={slideUrl}
                   className="object-fit-contain w-100"
                   alt="Product"
                 />
@@ -68,7 +68,7 @@ function CompleteLook() {
             >
               {isVideo(slideUrl) ? (
                 <video
-                  src={formatImgSrc(slideUrl)}
+                  src={slideUrl}
                   autoPlay
                   muted
                   loop
@@ -77,7 +77,7 @@ function CompleteLook() {
                 />
               ) : (
                 <img
-                  src={formatImgSrc(slideUrl)}
+                  src={slideUrl}
                   className="w-100 h-auto object-fit-contain"
                   alt="Product"
                 />

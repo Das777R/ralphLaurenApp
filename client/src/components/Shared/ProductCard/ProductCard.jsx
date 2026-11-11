@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState} from "react";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
-
-
 import './ProductCard.css'
 
 const isVideo = (url) => /\.(mp4|webm|mov|ogg)$/i.test(url);
@@ -18,11 +16,11 @@ function ProductCard({
   const [productHovered, setProductHovered] = useState(false);
   const [carouselPrevIconHovered, setCarouselPrevIconHovered] = useState(false);
   const [carouselNextIconHovered, setCarouselNextIconHovered] = useState(false);
-
-  const lookPath = userId ? `/lookup/${data._id}/${userId}` : `/lookup/${data._id}`;
-  const colors = data.availableColors || [];
-  const isFavorite = addedToFav.includes(data.productName);
-
+  
+  const lookPath = userId ? `/lookup/${data?._id}/${userId}` : `/lookup/${data?._id}`;
+  const colors = data?.availableColors || [];
+  const isFavorite = addedToFav?.includes(data?.productName);
+  
   return (
     <div className="fav-page-box-container position-relative">
       {/* Image & Carousel Container */}
@@ -33,20 +31,20 @@ function ProductCard({
         <div className="fav-page-box-img-container-carousel">
           <div className="fav-page-box-carousel">
             <img
-              src={data.lookImage}
-              alt={data.productName || "Product"}
+              src={data?.lookImage}
+              alt={data?.productName || "Product"}
               className={`w-100 object-fit-cover ${productHovered ? "is-hidden" : "is-visible"}`}
               style={{ transition: "all ease-in-out 0.8s" }}
             />
             <div
-              id={data._id}
+              id={data?._id}
               className={`carousel carousel-dark slide fav-page-box-carousel fade-element ${
                 productHovered ? "is-visible" : "is-hidden"
               }`}
               data-bs-ride="carousel"
             >
               <div className="carousel-inner fav-page-box-carousel-inner">
-                {data.slideImage?.map((srcLink, slideIndex) => (
+                {data?.slideImage?.map((srcLink, slideIndex) => (
                   <div
                     className={`carousel-item fav-page-box-carousel-item ${
                       slideIndex === 0 ? "active" : ""
@@ -79,7 +77,7 @@ function ProductCard({
               <button
                 className="carousel-control-prev fav-page-box-carousel-control-prev"
                 type="button"
-                data-bs-target={`#${data._id}`}
+                data-bs-target={`#${data?._id}`}
                 data-bs-slide="prev"
               >
                 <span
@@ -97,7 +95,7 @@ function ProductCard({
               <button
                 className="carousel-control-next fav-page-box-carousel-control-next"
                 type="button"
-                data-bs-target={`#${data._id}`}
+                data-bs-target={`#${data?._id}`}
                 data-bs-slide="next"
               >
                 <span
@@ -150,24 +148,24 @@ function ProductCard({
       <div className="fav-page-box-info-container pe-2 ps-3 py-3">
         <div className="fav-page-box-name-container d-flex justify-content-between">
           <Link to={lookPath} className="text-decoration-none">
-            <h4 className="fav-page-box-name-text w-100">{data.productName}</h4>
+            <h4 className="fav-page-box-name-text w-100">{data?.productName}</h4>
           </Link>
           <div className="fav-page-box-add-fav-icon-container" style={{ cursor: "pointer" }}>
             <IoIosHeart
               className={`added-to-fav-product-icon ${isFavorite ? "d-block" : "d-none"}`}
-              onClick={() => removeFromFav(data.productName)}
+              onClick={() => removeFromFav(data?.productName)}
             />
             <IoIosHeartEmpty
               className={`add-to-fav-product-icon ${isFavorite ? "d-none" : "d-block"}`}
-              onClick={() => addToFav(data.productName)}
+              onClick={() => addToFav(data?.productName)}
             />
           </div>
         </div>
 
-        <div className="fav-page-box-brand-name text-uppercase">{data.brand}</div>
-        <div className="fav-page-box-price">₹ {data.price}</div>
+        <div className="fav-page-box-brand-name text-uppercase">{data?.brand}</div>
+        <div className="fav-page-box-price">₹ {data?.price}</div>
         <div className="fav-page-box-trending-text text-uppercase fw-semibold">
-          {data.trending ? "Trending" : null}
+          {data?.trending ? "Trending" : null}
         </div>
 
         <div className="gap-2 d-flex d-lg-none mt-2">
@@ -188,7 +186,7 @@ function ProductCard({
         </div>
 
         <div className="fav-page-box-same-color-text mt-3 text-capitalize d-flex gap-1">
-          <span className="d-block">{colors.length}</span>
+          <span className="d-block">{colors?.length}</span>
           <span className="d-block">colors available</span>
         </div>
       </div>

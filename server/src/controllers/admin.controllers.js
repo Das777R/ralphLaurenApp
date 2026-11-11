@@ -28,20 +28,7 @@ const logInSchema = z.object({
   password: z.string().min(1, { message: 'Password is required' }),
 });
 
-const orderSchema = z.object({
-  products: z.array(z.any()).min(1, { message: 'Order has no products' }),
-  addressName: z.string().trim().min(1),
-  firstName: z.string().trim().min(1),
-  lastName: z.string().trim().min(1),
-  email: z.email().trim(),
-  country: z.string().trim().min(1),
-  address1: z.string().trim().min(1),
-  address2: z.string().trim().optional(),
-  city: z.string().trim().min(1),
-  postcode: z.string().trim().min(1),
-  mobileNumber: z.string().trim().min(1),
-  deliveryDate: z.coerce.date(),
-});
+
 
 /* ---------- helpers ---------- */
 const COOKIE_NAME = 'refreshTokenForAdmin';
@@ -273,18 +260,7 @@ export const updateOrderStatus = async (req, res) => {
   }
 };
 
-/* ---------- public: placing an order (move to your USER router, behind user auth) ---------- */
-export const ordersOfUsers = async (req, res) => {
-  try {
-    const parsed = orderSchema.safeParse(req.body);
-    if (!parsed.success) return fail(res, 400, 'Order info is incomplete!!');
 
-    const order = await OrderList.create(parsed.data);
-    return res.status(201).json({ message: 'Order successfully placed!!', data: order, success: true });
-  } catch (err) {
-    return serverError(res, err);
-  }
-};
 
 export const getAllCustomers = async (req, res) => {
   try {

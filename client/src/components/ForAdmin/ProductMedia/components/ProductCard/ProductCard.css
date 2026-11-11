@@ -1,0 +1,285 @@
+/* ============================================
+   Admin ProductCard (theme-aware: light / dark)
+   Uses Bootstrap 5.3 variables, switches with data-bs-theme
+   ============================================ */
+
+.product-box-card {
+  /* Theme tokens (light) */
+  --pb-ink: #041e3a;                       /* brand navy: text, borders, accents */
+  --pb-ink-contrast: #fff;                 /* text on top of an ink-colored fill */
+  --pb-surface: var(--bs-body-bg);
+  --pb-border: var(--bs-border-color);
+  --pb-overlay-bg: rgba(255, 255, 255, 0.8);
+  --pb-hover-bg: var(--bs-tertiary-bg);
+  --pb-chip-border: var(--bs-border-color);
+  --pb-shadow: rgba(4, 30, 58, 0.1);
+
+  --media-h: 22rem;
+  position: relative;
+  width: 100%;
+  background: var(--pb-surface);
+  color: var(--bs-body-color);
+  border: 1px solid var(--pb-border);
+  border-radius: 0.75rem;
+  overflow: visible; /* lets the actions dropdown escape the card */
+  user-select: none;
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out,
+    background-color 0.2s ease-in-out;
+}
+
+/* Theme tokens (dark) */
+[data-bs-theme="dark"] .product-box-card {
+  --pb-ink: #e6ecf5;
+  --pb-ink-contrast: #0b1626;
+  --pb-overlay-bg: rgba(33, 37, 41, 0.8);
+  --pb-shadow: rgba(0, 0, 0, 0.5);
+}
+
+.product-box-card:hover {
+  box-shadow: 0 6px 18px var(--pb-shadow);
+}
+
+.product-box-card.selected {
+  border-color: var(--pb-ink);
+  box-shadow: 0 0 0 2px var(--pb-ink);
+}
+
+/* ---------- Image area ---------- */
+
+.product-box-card .media-frame-wrap {
+  height: var(--media-h);
+  background-color: rgb(29, 28, 28);
+  border-radius: calc(0.75rem - 1px) calc(0.75rem - 1px) 0 0;
+  overflow: hidden;
+}
+
+.product-box-card .media-frame {
+  display: block;
+  height: 100%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.product-box-card .media-frame img,
+.product-box-card .media-frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.product-box-card .media-check {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  z-index: 6;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+  line-height: 1;
+}
+
+.product-box-card .media-check .form-check-input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.55); /* visible on both light and dark images */
+}
+
+.product-box-card .media-check .form-check-input:checked {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
+/* ---------- Quick look + color swatches overlay ---------- */
+
+.product-box-card .color-quicklook-div {
+  display: flex;
+  align-items: center;
+  left: 0;
+  bottom: 0; /* sits on the bottom edge of the image, at any height */
+  background: var(--pb-overlay-bg);
+  color: var(--pb-ink);
+  z-index: 5;
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+}
+
+.product-box-card .color-quicklook-div.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.product-box-card .color-quicklook-div.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.product-box-card .product-colors-div {
+  width: 1.6em;
+  height: 1.6em;
+  border: 1px solid var(--pb-ink);
+  padding: 2px;
+  flex-shrink: 0;
+}
+
+.product-box-card .product-colors-div img {
+  object-fit: cover;
+}
+
+.product-box-card .quickLook {
+  border: 1px solid var(--pb-ink);
+  font-size: 0.8em;
+  width: 6rem;
+  padding: 5px 10px;
+  border-radius: 1em;
+  font-family: monospace;
+  color: var(--pb-ink);
+  background: transparent;
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+}
+
+.product-box-card .quickLook:hover {
+  background-color: var(--pb-ink);
+  color: var(--pb-ink-contrast);
+}
+
+/* ---------- Info section ---------- */
+
+.product-box-card .product-info-container {
+  min-width: 0;
+  border-radius: 0 0 calc(0.75rem - 1px) calc(0.75rem - 1px);
+}
+
+.product-box-card .product-box-name-container {
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.product-box-card .product-box-name-text-admin {
+  margin: 0;
+  font-weight: 500;
+  font-family: "Playfair Display", serif;
+  font-size: 16px;
+  /* color: var(--pb-ink); */
+  cursor: pointer;
+}
+
+.product-box-card .product-box-name-text-admin:hover {
+  text-decoration: underline;
+}
+
+.product-box-card .brand-name {
+  font-size: 9px;
+  font-family: "Roboto Mono", monospace;
+  color: var(--pb-ink);
+}
+
+.product-box-card .product-box-price-admin {
+  font-size: 13px;
+  margin-top: 10px;
+  color: var(--pb-ink);
+}
+
+.product-box-card .product-box-trending-text {
+  font-size: 10px;
+  margin-top: 5px;
+  font-family: "Roboto Mono", monospace;
+  color: var(--bs-emphasis-color);
+}
+
+.product-box-card .product-box-trending-text:empty {
+  display: none;
+}
+
+.product-box-card .product-box-same-color-text {
+  font-size: 11px;
+  font-family: Arial, sans-serif;
+  color: var(--pb-ink);
+}
+
+.product-box-card .size-chip {
+  font-size: 10px;
+  font-family: "Roboto Mono", monospace;
+  color: var(--pb-ink);
+  border: 1px solid var(--pb-chip-border);
+  border-radius: 0.35rem;
+  padding: 1px 6px;
+  text-transform: uppercase;
+}
+
+/* ---------- Actions dropdown ---------- */
+
+.product-box-card .icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 100%;
+  background: transparent;
+  color: var(--bs-body-color);
+  cursor: pointer;
+}
+
+.product-box-card .icon-btn::after {
+  display: none; /* hide bootstrap caret */
+}
+
+.product-box-card .icon-btn:hover,
+.product-box-card .icon-btn.show {
+  background-color: var(--pb-hover-bg);
+  color: var(--bs-body-color);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 991px) {
+  /* swatches move to the info section below lg, so hide the overlay */
+  .product-box-card .color-quicklook-div {
+    display: none;
+  }
+}
+
+@media (max-width: 1025px) {
+  .product-box-card {
+    --media-h: 20rem;
+  }
+
+  .product-box-card .product-box-name-text-admin {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 769px) {
+  .product-box-card {
+    --media-h: 17rem;
+  }
+
+  .product-box-card .product-colors-div {
+    width: 1.2em;
+    height: 1.2em;
+  }
+
+  .product-box-card .product-box-trending-text {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 426px) {
+  .product-box-card {
+    --media-h: 15rem;
+  }
+
+  .product-box-card .product-box-name-text-admin {
+    font-size: 0.85rem;
+  }
+
+  .product-box-card .product-box-trending-text {
+    font-size: 8px;
+  }
+}

@@ -7,7 +7,7 @@ function DeskBagCost() {
   const {userId} = useParams();
 
   const {bagProducts, totalPrice} = useContext(UIContext);
-  const bagSubmitPath = userId ? `/bagSubmit/${userId}` : '/bagSubmit';
+  const bagSubmitPath = userId ? `/bagSubmit/${userId}` : '/auth';
 return (
 <>
   {bagProducts.length !== 0 && (

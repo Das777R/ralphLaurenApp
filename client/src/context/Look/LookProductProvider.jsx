@@ -19,7 +19,6 @@ function LookProductProvider({ children }) {
 
   const [availableColor, setAvailableColor] = useState([]);
   const { setBagLength, bagLength } = useContext(UIContext);
-
   const [compleProductsData, setCompleteProductsData] = useState([]);
 
   const { productId, userId } = useParams();
@@ -70,7 +69,7 @@ function LookProductProvider({ children }) {
       if (!productLook.productName) return;
 
       try {
-        const res = await api.get(`/products/getproductByName`, {
+        const res = await api.get(`/product/getproductByName`, {
           params: { productName: productLook.productName },
         });
 
@@ -93,7 +92,7 @@ function LookProductProvider({ children }) {
     async function getSimilarProducts() {
       try {
         const res = await api.get(
-          `/products/${productLook.category}/${productLook.kind}`
+          `/product/${productLook.category}/${productLook.kind}`
         );
         const load = res?.data?.data || [];
         const randomTen = [...load].sort(() => 0.5 - Math.random()).slice(0, 10);
@@ -118,7 +117,7 @@ function LookProductProvider({ children }) {
             ? ["Polo Shirts", "Casual Shirts"]
             : ["Accessories", "Jackets&Coats"];
         const res = await api.get(
-          `/products/lookup/match/${productLook.category}`,
+          `/product/lookup/match/${productLook.category}`,
           { params: { match: matchValues.join(",") } }
         );
 
@@ -144,7 +143,7 @@ function LookProductProvider({ children }) {
   const getProductByName = async (name) => {
     if (!name) return;
     try {
-      const res = await api.get(`/products/getproductByName`, {
+      const res = await api.get(`/product/getproductByName`, {
         params: { productName: name },
       });
       const data = res.data?.data || [];
@@ -170,7 +169,7 @@ function LookProductProvider({ children }) {
 
   const getProductByColor = async (clr) => {
     try {
-      const res = await api.get(`/products/getProductByClr`, {
+      const res = await api.get(`/product/getProductByClr`, {
         params: {
           colorImg: clr,
           product: productLook.productName,
@@ -204,11 +203,12 @@ function LookProductProvider({ children }) {
 
       setsizeNotSelectForLookForLook(false);
       
-      const res = await api.get(`/products/${id}`);
+      const res = await api.get(`/product/${id}`);
       const productInfo = res.data.data;
 
       const newItem = {
         productId: productInfo._id,
+        category: productInfo.category,
         lookImage: productInfo.lookImage,
         productName: productInfo.productName,
         qty: 1,

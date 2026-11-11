@@ -5,12 +5,14 @@ import {UIContext} from '../../../context/UIContext';
 
 function MobBagCost() {
   const {userId} = useParams();
-
   const {bagProducts, totalPrice} = useContext(UIContext);
-  const bagSubmitPath = userId ? `/bagSubmit/${userId}` : '/bagSubmit';
+  const bagSubmitPath = userId ? `/bagSubmit/${userId}` : '/auth';
+  
 
   return (
-    <div className={`proceed-outer user-select-none d-flex flex-column justify-content-end align-items-end p-0 ${bagProducts.length === 0 ? 'd-lg-none' : 'd-block'} d-block d-lg-none`}>
+    <>
+    {bagProducts.length !== 0 && (
+      <div className={`proceed-outer user-select-none d-flex flex-column justify-content-end align-items-end p-0 ${bagProducts.length === 0 ? 'd-lg-none' : 'd-block'} d-block d-lg-none`}>
       <div className=" bg-body p-3 w-100 bg-dark">
         <div className="sub-total-outer d-flex flex-column">
         <h4 className="text-uppercase price-info">subtotal <span className="price-num">₹{Number(totalPrice)}</span></h4>
@@ -22,6 +24,9 @@ function MobBagCost() {
         </Link>
       </div>
     </div>
+  
+    )}
+  </>
   )
 }
 

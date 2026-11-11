@@ -1,91 +1,100 @@
-* {
-  box-sizing: border-box;
-}
-
-.products-collection-info-container {
+.k-collection-info-container {
   width: 100%;
   overflow: hidden;
-  margin-top: 0em;
+  margin-top: 0;
   padding-left: 3%;
   user-select: none;
 }
 
-.collect-info-link {
+.k-collect-info-link {
   font-family: monospace;
   font-size: 12px;
 }
 
-.filter-btn-pop {
+.k-filter-btn-pop {
   width: fit-content;
   border-radius: 5px;
   margin-left: 3%;
   font-size: 12px;
   gap: 4px;
   padding-inline: 8px;
-  background: rgb(169, 168, 168);
   background-color: #47474747;
   color: #041e3a;
   margin-top: 1rem;
   font-family: sans-serif;
 }
 
-.close-filter {
+.k-close-filter {
   font-size: 18px;
 }
 
-.boys-shirt-container,
-.boys-jumpers-container,
-.girls-jumpers-container,
-.boys-jackets-container,
-.girls-jackets-container,
-.girls-tshirts-container,
-.boys-tshirts-container {
+/* ---------- Category banners ---------- */
+
+.k-boys-shirt-container,
+.k-boys-jumpers-container,
+.k-girls-jumpers-container,
+.k-boys-jackets-container,
+.k-girls-jackets-container,
+.k-girls-tshirts-container,
+.k-boys-tshirts-container {
   width: 100%;
   height: 25rem;
   margin-top: 0;
   padding: 3rem;
+  background-image: var(--k-bg-desktop);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   user-select: none;
   cursor: pointer;
-
 }
 
-.boys-shirt-container {
-  background-image: url('/kids/boysShirts/MOOD_BOYS_DSK_BLANK%20(2).avif');
-}
-.boys-jumpers-container {
-  background-image: url('/kids/boysJumpers/MOOD_BOYS_DSK_BLANK%20(1).avif');
+.k-boys-shirt-container {
+  --k-bg-desktop: url("/kids/boysShirts/MOOD_BOYS_DSK_BLANK%20(2).avif");
+  --k-bg-mobile: url("/kids/boysShirts/MOOD_BOYS_MOB_BLANK%20(2).avif");
 }
 
-.girls-jumpers-container {
-  background-image: url('/kids/girlsJumpers/MOOD_GIRLS_DSK_BLANK_NEW.avif');
+.k-boys-jumpers-container {
+  --k-bg-desktop: url("/kids/boysJumpers/MOOD_BOYS_DSK_BLANK%20(1).avif");
+  --k-bg-mobile: url("/kids/boysJumpers/MOOD_BOYS_MOB_BLANK%20(1).avif");
 }
 
-.boys-jackets-container {
-  background-image: url('/kids/boysjackets/0915_sibling_boys_mb_c01_img.jpg');
-}
-.girls-jackets-container {
-  background-image: url('/kids/girlsjackets/0915_sibling_girls_mb_c01_img.jpg');
+.k-girls-jumpers-container {
+  --k-bg-desktop: url("/kids/girlsJumpers/MOOD_GIRLS_DSK_BLANK_NEW.avif");
+  --k-bg-mobile: url("/kids/girlsJumpers/MOOD_GIRLS_MOB_BLANK_NEW.avif");
 }
 
-.boys-tshirts-container {
-  background-image: url('/kids/boysPolo/MOOD_BOYS_DSK_BLANK.avif');
+.k-boys-jackets-container {
+  --k-bg-desktop: url("/kids/boysjackets/0915_sibling_boys_mb_c01_img.jpg");
+  --k-bg-mobile: url("/kids/boysjackets/0915_sibling_boys_mb_m_c01_img.jpg");
 }
 
-.girls-tshirts-container {
-  background-image: url('/kids/boysPolo/MOOD_BOYS_DSK_BLANK.avif');
+.k-girls-jackets-container {
+  --k-bg-desktop: url("/kids/girlsjackets/0915_sibling_girls_mb_c01_img.jpg");
+  --k-bg-mobile: url("/kids/girlsjackets/0915_sibling_girls_mb_m_c01_img.jpg");
 }
 
-.products-collection-info-title {
+.k-boys-tshirts-container {
+  --k-bg-desktop: url("/kids/boysPolo/MOOD_BOYS_DSK_BLANK.avif");
+  --k-bg-mobile: url("/kids/boysPolo/MOOD_BOYS_MOB_BLANK.avif");
+}
+
+/* currently reuses the boys image, replace with a girls image when you have one */
+.k-girls-tshirts-container {
+  --k-bg-desktop: url("/kids/boysPolo/MOOD_BOYS_DSK_BLANK.avif");
+  --k-bg-mobile: url("/kids/boysPolo/MOOD_BOYS_MOB_BLANK.avif");
+}
+
+/* ---------- Text ---------- */
+
+.k-collection-info-title {
   color: #fff;
   font-family: "Playfair Display", serif;
   font-size: 2.2rem;
   font-weight: 100;
 }
 
-.products-collection-info-text {
+.k-collection-info-text {
   width: 90%;
   color: #fff;
   font-family: "Roboto Mono", monospace;
@@ -93,17 +102,19 @@
   font-weight: 400;
 }
 
-.view-more-btn {
+.k-view-more-btn {
   cursor: pointer;
 }
 
-.filteBtn-collection {
+/* ---------- Filter buttons ---------- */
+
+.k-filter-btn-collection {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-.filterBtn {
+.k-filter-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,151 +123,115 @@
   transition: 0.7s ease-in-out;
 }
 
-.products-collection-product-container {
+/* ---------- Product grid ---------- */
+
+.k-collection-product-container {
   gap: 1px;
   padding-bottom: 10rem;
 }
 
+/* ---------- Responsive ---------- */
+
 @media (max-width: 1025px) {
-  .products-collection-info-text {
+  .k-collection-info-text {
     width: 90%;
   }
 
-  .filterBtn {
+  .k-filter-btn {
     padding: 0.3rem 1rem;
     font-size: 13px;
   }
 }
 
 @media (max-width: 769px) {
-  .products-collection-info-container {
-    margin-top: 0;
+  .k-collection-info-container {
     padding-left: 5%;
   }
 
-  .boys-shirt-container,
-  .boys-jumpers-container,
-  .girls-jumpers-container,
-  .boys-jackets-container,
-  .girls-jackets-container,
-  .girls-tshirts-container,
-  .boys-tshirts-container {
+  .k-boys-shirt-container,
+  .k-boys-jumpers-container,
+  .k-girls-jumpers-container,
+  .k-boys-jackets-container,
+  .k-girls-jackets-container,
+  .k-girls-tshirts-container,
+  .k-boys-tshirts-container {
     height: 20rem;
   }
 
-  .products-collection-info-title {
+  .k-collection-info-title {
     font-size: 1.3rem;
   }
 
-  .products-collection-info-text {
+  .k-collection-info-text {
     width: 100%;
     font-size: 12px;
   }
 
-  .filteBtn-collection {
+  .k-filter-btn-collection {
     margin-top: 0.5rem;
   }
 
-  .filterBtn {
+  .k-filter-btn {
     padding: 0.7rem 1.5rem;
     font-size: 8px;
   }
 
-  .collect-info-link {
-    font-family: monospace;
+  .k-collect-info-link {
     font-size: 10px;
   }
 }
 
 @media (max-width: 426px) {
-  .boys-shirt-container,
-  .boys-jumpers-container,
-  .girls-jumpers-container,
-  .boys-jackets-container,
-  .girls-jackets-container,
-  .girls-tshirts-container,
-  .boys-tshirts-container {
+  .k-boys-shirt-container,
+  .k-boys-jumpers-container,
+  .k-girls-jumpers-container,
+  .k-boys-jackets-container,
+  .k-girls-jackets-container,
+  .k-girls-tshirts-container,
+  .k-boys-tshirts-container {
     height: 35rem;
     padding-top: 15rem;
+    background-image: var(--k-bg-mobile);
   }
 
-  .boys-shirt-container{
-    background-image: url('/kids/boysShirts/MOOD_BOYS_MOB_BLANK%20(2).avif');
-  }
-
-  .boys-jumpers-container {
-    background-image: url('/kids/boysJumpers/MOOD_BOYS_MOB_BLANK%20(1).avif');
-  }
-
-  .girls-jumpers-container {
-    background-image: url('/kids/girlsJumpers/MOOD_GIRLS_MOB_BLANK_NEW.avif');
-  }
-
-  .boys-jackets-container {
-    background-image: url('/kids/boysjackets/0915_sibling_boys_mb_m_c01_img.jpg');
-  }
-
-  .girls-jackets-container {
-    background-image: url('/kids/girlsjackets/0915_sibling_girls_mb_m_c01_img.jpg');
-  }
-
-  .boys-tshirts-container {
-    background-image: url('/kids/boysPolo/MOOD_BOYS_MOB_BLANK.avif');
-  }
-
-  .girls-tshirts-container {
-     background-image: url('/kids/boysPolo/MOOD_BOYS_MOB_BLANK.avif');
-  }
-
-  .collect-info-link {
-    font-family: monospace;
+  .k-collect-info-link {
     font-size: 9px;
   }
 
-  .products-collection-info-title {
+  .k-collection-info-title {
     font-size: 1.3rem;
   }
 
-  .products-collection-info-text {
+  .k-collection-info-text {
     font-size: 10px;
   }
 
-  .filterBtn {
+  .k-filter-btn {
     padding: 0.5rem 1rem;
     font-size: 8px;
   }
 }
 
 @media (max-width: 376px) {
-  .products-collection-info-title {
+  .k-collection-info-title {
     font-size: 1.1rem;
   }
 
-  .products-collection-info-text {
+  .k-collection-info-text {
     font-size: 9px;
   }
 
-  .filteBtn-collection {
+  .k-filter-btn-collection {
     margin-top: 1rem;
-  }
-
-  .filterBtn {
-    padding: 0.5rem 1rem;
-    font-size: 8px;
   }
 }
 
 @media (max-width: 321px) {
-  .products-collection-info-title {
+  .k-collection-info-title {
     font-size: 1rem;
   }
 
-  .products-collection-info-text {
-    font-size: 8px;
-  }
-
-  .filterBtn {
-    padding: 0.5rem 1rem;
+  .k-collection-info-text {
     font-size: 8px;
   }
 }

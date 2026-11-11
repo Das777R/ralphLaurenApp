@@ -16,7 +16,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    'https://ralph-lauren-app-qu1o.vercel.app',
+    // 'https://ralph-lauren-app-hf2q.vercel.app',
    ],
   credentials: true
 }));
@@ -38,7 +38,7 @@ Navs.map((nav) => {
 
 
 
-app.use('/api/products', productsRoute);
+app.use('/api/product', productsRoute);
 app.use('/api/mediaforpage', mediaForPage);
 app.use('/api/landingPage',mediaForHomePage);
 

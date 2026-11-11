@@ -8,7 +8,10 @@ import {
   putUserProductsOnBag,
   deleteFromBag,
   updateQtyOfTheProduct,
-  deleteUserBag
+  deleteUserBag,
+  ordersOfUsers,
+  createOrderController,
+  verifyPaymentController
 } from "../controllers/authController.controller.js";
 import { verifyToken, isAdmin, isOwner } from "../middleware/auth.middleware.js";
 
@@ -17,6 +20,9 @@ const router = Router();
 router.post("/signin", signupController);
 router.post("/login", loginController);
 router.post("/token", refreshTokenController);
+router.post("/create-order", createOrderController);
+router.post("/verify-payment", verifyPaymentController);
+router.post("/placeorder", ordersOfUsers);
 
 router.get("/customers", verifyToken, isAdmin, getCustomer);
 

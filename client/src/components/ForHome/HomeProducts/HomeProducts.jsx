@@ -40,7 +40,7 @@ function HomeProducts() {
               <div className="product-box-img-container-carousel">
                 <div className="product-box-carousel">
                   <img
-                    src={encodeURI(`/${data.lookImages?.[0]}`)}
+                    src={encodeURI(`${data.lookImages?.[0]}`)}
                     alt=""
                     className={`w-100 object-fit-cover ${
                       productHovered ? "d-none" : "d-block"
@@ -64,7 +64,7 @@ function HomeProducts() {
                           <Link to={lookPath} className="no-underline">
                             {isVideo(srcLink) ? (
                               <video
-                                src={encodeURI(`/${srcLink}`)}
+                                src={encodeURI(`${srcLink}`)}
                                 className="d-block w-100"
                                 autoPlay
                                 muted
@@ -73,7 +73,7 @@ function HomeProducts() {
                               />
                             ) : (
                               <img
-                                src={encodeURI(`/${srcLink}`)}
+                                src={encodeURI(`${srcLink}`)}
                                 className="d-block w-100 object-fit-cover"
                                 alt="Product"
                               />
@@ -134,7 +134,7 @@ function HomeProducts() {
                         onClick={() => selectVariant(clrImg, data.productName)}
                       >
                         <img
-                          src={encodeURI(`/${clrImg}`)}
+                          src={encodeURI(`${clrImg}`)}
                           alt=""
                           className="w-100 h-100 rounded-circle border border-1 border-dark"
                         />
@@ -184,7 +184,7 @@ function HomeProducts() {
                       onClick={() => selectVariant(clrImg, data.productName)}
                     >
                       <img
-                        src={encodeURI(`/${clrImg}`)}
+                        src={encodeURI(`${clrImg}`)}
                         alt=""
                         className="w-100 h-100 rounded-circle border border-1 border-dark"
                       />

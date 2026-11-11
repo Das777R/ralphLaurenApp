@@ -3,6 +3,7 @@ import mongoose, { Schema } from 'mongoose'
 
 const bag = new Schema({
     productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+    category: String,
     productName:String,
     lookImage: String,
     colorName: String,

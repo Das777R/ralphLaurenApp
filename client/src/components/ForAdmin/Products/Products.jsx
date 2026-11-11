@@ -111,7 +111,7 @@ function Products() {
     setLoading(true);
     setLoadError("");
     try {
-      const res = await api.get("/products");
+      const res = await api.get("/product");
       const list = res.data?.data || [];
       setProducts(list.map(normalizeProduct));
     } catch (err) {

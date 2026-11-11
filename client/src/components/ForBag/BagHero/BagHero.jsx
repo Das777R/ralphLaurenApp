@@ -5,7 +5,7 @@ function BagHero() {
   
   const {userId} = useParams();
 
-  const bagSubmitPath = userId ? `/bagSubmit/${userId}` : '/bagSubmit';
+  const bagSubmitPath = userId ? `/bagSubmit/${userId}` : '/auth';
   const homePath = userId ? `/${userId}`: '/';
   
   return (

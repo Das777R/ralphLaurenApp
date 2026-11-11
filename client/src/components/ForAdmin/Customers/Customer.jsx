@@ -81,11 +81,7 @@ const colorFromId = (id) => {
 const getTier = (c) =>
   c.spent >= 700 ? "VIP" : c.orders <= 1 ? "New" : "Regular";
 
-/**
- * UserAccount → UI customer
- * Schema: name, email, bag[], role, createdAt
- * Optional later: phone, city, status
- */
+
 const normalizeCustomer = (u) => {
   const bag = Array.isArray(u.bag) ? u.bag : [];
   const orders = bag.reduce((n, item) => n + (Number(item.qty) || 1), 0);
@@ -134,10 +130,9 @@ function Customers() {
     setLoading(true);
     setLoadError("");
     try {
-      // Requires admin access token (verifyToken + isAdmin on backend)
       const res = await api.get("/admin/customers");
       const list = res.data?.data || [];
-      // Only show end-users in the customers list
+      console.log(list)
       const users = list.filter((u) => u.role !== "admin");
       setCustomers(users.map(normalizeCustomer));
     } catch (err) {
@@ -155,7 +150,7 @@ function Customers() {
     loadCustomers();
   }, [loadCustomers]);
 
-  /* ---------- Stats ---------- */
+ 
   const stats = useMemo(() => {
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
@@ -169,7 +164,7 @@ function Customers() {
     };
   }, [customers]);
 
-  /* ---------- Filter + sort ---------- */
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     const list = customers.filter((c) => {
@@ -192,7 +187,7 @@ function Customers() {
     return [...list].sort(sorters[sort] || sorters.newest);
   }, [customers, query, tier, status, sort]);
 
-  /* ---------- Pagination ---------- */
+ 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
   const start = (safePage - 1) * PAGE_SIZE;
@@ -203,7 +198,7 @@ function Customers() {
     setPage(1);
   };
 
-  /* ---------- Actions (local until backend supports them) ---------- */
+ 
   const toggleBlock = (id) =>
     setCustomers((prev) =>
       prev.map((c) =>
@@ -369,7 +364,6 @@ function Customers() {
               <thead>
                 <tr>
                   <th>Customer</th>
-                  <th className="d-none d-lg-table-cell">Location</th>
                   <th className="d-none d-sm-table-cell">Bag items</th>
                   <th>Bag value</th>
                   <th className="d-none d-md-table-cell">Joined</th>
@@ -410,7 +404,7 @@ function Customers() {
                           </div>
                         </div>
                       </td>
-                      <td className="d-none d-lg-table-cell">{c.city}</td>
+    
                       <td className="d-none d-sm-table-cell">{c.orders}</td>
                       <td className="fw-semibold">{inr(c.spent)}</td>
                       <td className="d-none d-md-table-cell">

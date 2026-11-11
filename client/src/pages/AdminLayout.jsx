@@ -31,7 +31,7 @@ function AdminLayout() {
     setSidebarOpen(false);
   }, []);
 
-  // Clear the admin session and redirect to authentication
+
   const clearSession = useCallback(() => {
     setAccessToken("", "admin");
     setAdmin(null);
@@ -41,7 +41,7 @@ function AdminLayout() {
     navigate("/admin/auth", { replace: true });
   }, [navigate]);
 
-  // Restore the admin session using the HttpOnly refresh-token cookie
+
   useEffect(() => {
     let alive = true;
 
@@ -74,7 +74,7 @@ function AdminLayout() {
     };
   }, [clearSession]);
 
-  // Handle expired or revoked admin sessions
+
   useEffect(() => {
     window.addEventListener(ADMIN_EXPIRED_EVENT, clearSession);
 
@@ -83,7 +83,7 @@ function AdminLayout() {
     };
   }, [clearSession]);
 
-  // Handle successful admin authentication
+
   const handleAuthenticated = useCallback(
     ({ user, accessToken }) => {
       if (user?.role !== "admin" || !accessToken || !user.id) {
@@ -109,7 +109,7 @@ function AdminLayout() {
     [navigate]
   );
 
-  // Log out the admin
+
   const handleLogout = useCallback(async () => {
     try {
       await api.post("/admin/logout");
@@ -120,7 +120,7 @@ function AdminLayout() {
     }
   }, [clearSession]);
 
-  // Keep the URL admin ID consistent with the authenticated admin
+ 
   useEffect(() => {
     if (status !== "authed" || !admin?.id) return;
 
@@ -150,12 +150,12 @@ function AdminLayout() {
     navigate,
   ]);
 
-  // Close the sidebar whenever the route changes
+
   useEffect(() => {
     setSidebarOpen(false);
   }, [location.pathname]);
 
-  // Close the sidebar when switching to desktop width
+
   useEffect(() => {
     const mediaQuery = window.matchMedia(DESKTOP_QUERY);
 
@@ -172,7 +172,7 @@ function AdminLayout() {
     };
   }, []);
 
-  // Handle Escape and prevent background scrolling while the sidebar is open
+
   useEffect(() => {
     if (!sidebarOpen) return;
 
@@ -193,7 +193,7 @@ function AdminLayout() {
     };
   }, [sidebarOpen, closeSidebar]);
 
-  // Display a loading spinner while checking the session
+ 
   if (status === "checking") {
     return (
       <div
@@ -205,12 +205,11 @@ function AdminLayout() {
     );
   }
 
-  // Display the admin login page for unauthenticated users
+ 
   if (status === "guest") {
     return <AdminAuth onAuthenticated={handleAuthenticated} />;
   }
 
-  // Render the protected admin pages
   return (
     <div className="admin-layout">
       <SideBar

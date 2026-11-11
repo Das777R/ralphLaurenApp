@@ -89,7 +89,7 @@ function ProductsCollectionInfo() {
   const m_jackets_path = userId ? `/men-section/category/jackets & coats/${userId}`:`/men-section/category/jackets & coats`;
   const m_shorts_path = userId ? `/men-section/category/shorts/${userId}` : `/men-section/category/shorts`;
   const m_accessories_path = userId ? `/men-section/category/accessories/${userId}` : `/men-section/category/accessories`;
-
+  
   return (
     <>
       {isCasualShirt && (
@@ -473,17 +473,15 @@ function ProductsCollectionInfo() {
           </div>
         </div>
       )}
-{filterBtn && (
-  <div className="text-white w-100 d-flex">
-    <div className="border-white border-1 border py-1 px-2 filter-btn-pop d-flex justify-content-center align-items-center text-capitalize">
-      <span>{filterBtn}</span>
-      <IoIosClose style={{ cursor: 'pointer' }} className='close-filter' onClick={() => handleCloseFilterPop(cleanCategory)} />
-    </div>
-  </div>
-)}
+    {filterBtn && (
+      <div className="text-white w-100 d-flex">
+        <div className="border-white border-1 border py-1 px-2 filter-btn-pop d-flex justify-content-center align-items-center text-capitalize">
+          <span>{filterBtn}</span>
+          <IoIosClose style={{ cursor: 'pointer' }} className='close-filter' onClick={() => handleCloseFilterPop(cleanCategory)} />
+        </div>
+      </div>
+    )}
       <div className="products-collection-product-container d-flex flex-wrap justify-content-center mt-5">
- 
-        
         <MenProducts />
       </div>
     </>

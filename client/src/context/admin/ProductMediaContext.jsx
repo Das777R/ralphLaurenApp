@@ -11,8 +11,8 @@ import { emptyForm, QUOTA, MAX_BATCH } from "./constants";
 import { checkFile, parseSizes, revokeItemUrls, normalizeProduct } from "./utils";
 import api from "../../api/api.js";
 
-const ProductMediaContext = createContext(null);
 
+const ProductMediaContext = createContext(null);
 const getErrMessage = (err, fallback) =>
   err?.response?.data?.message || err?.message || fallback;
 
@@ -24,7 +24,6 @@ export function ProductMediaProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
   const [actionError, setActionError] = useState("");
-
   const [query, setQuery] = useState("");
   const [kindFilter, setKindFilter] = useState("All");
   const [categoryFilter, setCategoryFilter] = useState("");
@@ -32,10 +31,8 @@ export function ProductMediaProvider({ children }) {
   const [view, setView] = useState("grid");
   const [selected, setSelected] = useState(new Set());
   const [hoveredId, setHoveredId] = useState(null);
-
   const [previewId, setPreviewId] = useState(null);
   const [confirmIds, setConfirmIds] = useState(null);
-
   const [uploadOpen, setUploadOpen] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState(emptyForm());
@@ -44,11 +41,9 @@ export function ProductMediaProvider({ children }) {
   const [slideQueue, setSlideQueue] = useState([]);
   const [uploadError, setUploadError] = useState("");
   const [dragOver, setDragOver] = useState(false);
-
   const itemsRef = useRef(items);
   itemsRef.current = items;
 
-  /* ---------- Load ---------- */
   const loadItems = useCallback(async (signal) => {
     try {
       setLoadError("");
@@ -71,7 +66,7 @@ export function ProductMediaProvider({ children }) {
     return () => controller.abort();
   }, [loadItems]);
 
-  /* ---------- Stats ---------- */
+
   const stats = useMemo(() => {
     const total = items.length;
     const trending = items.filter((i) => i.isTrending).length;
@@ -120,7 +115,7 @@ export function ProductMediaProvider({ children }) {
     };
   }, [items]);
 
-  /* ---------- Filter options for toolbar ---------- */
+ 
   const kindOptions = useMemo(() => {
     const map = new Map();
     items.forEach((i) => {
@@ -143,7 +138,7 @@ export function ProductMediaProvider({ children }) {
       .sort((a, b) => a.name.localeCompare(b.name));
   }, [items]);
 
-  /* ---------- Filtered list ---------- */
+ 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     const cat = categoryFilter.trim().toLowerCase();
@@ -180,7 +175,7 @@ export function ProductMediaProvider({ children }) {
   const previewItem = filtered.find((i) => i.id === previewId) || null;
   const validSlides = slideQueue.filter((q) => !q.error);
 
-  /* ---------- Selection ---------- */
+ 
   const toggleOne = (id) =>
     setSelected((prev) => {
       const next = new Set(prev);
@@ -199,7 +194,6 @@ export function ProductMediaProvider({ children }) {
 
   const clearSelection = () => setSelected(new Set());
 
-  /* ---------- Delete ---------- */
   const removeItems = async (ids) => {
     setActionError("");
     const results = await Promise.allSettled(
@@ -236,7 +230,7 @@ export function ProductMediaProvider({ children }) {
     setConfirmIds(null);
   };
 
-  /* ---------- Upload helpers ---------- */
+
   const revokeDrafts = () => {
     [lookFile?.url, colorFile?.url, ...slideQueue.map((q) => q.url)].forEach(
       (u) => {
@@ -306,7 +300,7 @@ export function ProductMediaProvider({ children }) {
     );
   }, [items, form.category, form.kind, form.productName, form.colorName]);
 
-  /* ---------- Upload ---------- */
+ 
   const handleUpload = async () => {
     if (uploading) return;
     if (!form.productName.trim())

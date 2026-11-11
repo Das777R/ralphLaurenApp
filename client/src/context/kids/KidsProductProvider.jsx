@@ -15,7 +15,7 @@ function KidsProductProvider({ children }) {
   const handleFilterByCat = async (type, kind) => {
     try {
       const res = await api.get(
-        `/products/filter/kids/${kind}`,
+        `/product/filter/kids/${kind}`,
         {
           params: {
             type: type

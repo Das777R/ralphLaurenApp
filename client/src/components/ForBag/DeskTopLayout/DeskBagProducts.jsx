@@ -133,7 +133,7 @@ return (
         <div className="d-flex gap-4">
           <div className="bag-product-img-con">
             <Link to={lookPath} style={{ textDecoration: 'inherit' }}>
-              <img src={`/${encodeURI(bagProd?.lookImage || '')}`} alt="" className="w-100 h-100" />
+              <img src={`${encodeURI(bagProd?.lookImage || '')}`} alt="" className="w-100 h-100" />
             </Link>
           </div>
           <div className="d-flex flex-column">

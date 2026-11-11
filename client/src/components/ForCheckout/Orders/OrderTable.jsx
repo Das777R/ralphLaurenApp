@@ -26,7 +26,7 @@ function OrderTable({ products, userId }) {
                     <div className="bag-product-img-con">
                       <Link to={lookPath} style={{ textDecoration: 'inherit' }}>
                         <img
-                          src={'/' + encodeURI(item.lookImage)}
+                          src={encodeURI(item.lookImage)}
                           alt=""
                           className="w-100 h-100"
                         />

@@ -16,9 +16,10 @@ const [filterBtn, setFilterBtn] = useState('');
 
 
   const handleFilterByCat = async (type, kind) => {
+  
     try {
       const res = await api.get(
-        `/products/filter/men/${kind}`,
+        `/product/filter/men/${kind}`,
         {
           params: {
             type: type

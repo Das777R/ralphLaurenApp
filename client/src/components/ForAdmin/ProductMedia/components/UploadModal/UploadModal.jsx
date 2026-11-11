@@ -49,7 +49,7 @@ export default function UploadModal() {
           <Col md={4}>
             <Form.Label className="small fw-semibold">Brand</Form.Label>
             <Form.Control
-              value={form.brand}
+              value="Polo Ralph Lauren"
               onChange={(e) => setField("brand", e.target.value)}
               placeholder="Polo Ralph Lauren"
             />

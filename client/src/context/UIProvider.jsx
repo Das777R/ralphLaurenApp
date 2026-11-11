@@ -5,10 +5,8 @@ export function UIProvider({children}){
 
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openRlcBar, setRlcBar] = useState(false);
-
   const [bagLength, setBagLength] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
-
   const [productsData, setProductsData] = useState([]);
  
 
@@ -17,6 +15,7 @@ export function UIProvider({children}){
     setRlcBar(false);
 
   }
+
   const handleBarToggle = () => {
     setRlcBar((prevUI) => !prevUI);
     setOpenSearchBar(false);
@@ -35,8 +34,6 @@ export function UIProvider({children}){
   const [guestFavData, setGuestFavData] = useState([]);
   const [bagProducts, setBagProducts] = useState([]);
   const [checkoutProducts ,setCheckoutProducts] = useState([]);
-
-
 
 
 

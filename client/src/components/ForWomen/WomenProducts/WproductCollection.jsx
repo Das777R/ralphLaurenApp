@@ -272,9 +272,9 @@ function WproductCollection() {
 
       {isTrousers && (
         <div className="w-collection-info-container w-trousers-container">
-          <div className="text-white text-uppercase w-collect-info-link">
+          <div className="text-black text-uppercase w-collect-info-link">
             <Link
-              className={`text-white me-2 ${handleEnterCat === 'women' ? 'text-decoration-underline' : ''}`}
+              className={`text-black me-2 ${handleEnterCat === 'women' ? 'text-decoration-underline' : ''}`}
               style={{ textDecoration: "inherit" }}
               onMouseEnter={() => setHandleEnterCat('women')}
               onMouseLeave={() => setHandleEnterCat('')}
@@ -284,7 +284,7 @@ function WproductCollection() {
             </Link>
             /
             <Link
-              className={`text-white mx-2 ${handleEnterCat === 'trousers' ? 'text-decoration-underline' : ''}`}
+              className={`text-black mx-2 ${handleEnterCat === 'trousers' ? 'text-decoration-underline' : ''}`}
               style={{ textDecoration: "inherit" }}
               onMouseEnter={() => setHandleEnterCat('trousers')}
               onMouseLeave={() => setHandleEnterCat('')}
@@ -295,10 +295,10 @@ function WproductCollection() {
             /
           </div>
 
-          <h1 className="w-collection-info-title text-capitalize">
+          <h1 className="w-collection-info-title text-black text-capitalize">
             Women's Trousers
           </h1>
-          <p className="w-collection-info-text text-white">
+          <p className="w-collection-info-text text-black">
             Tailored with precision and cut for comfort, our women's trousers offer a polished foundation for any wardrobe, from fluid wide-leg styles to sharp pleated pairs and easy straight-fit silhouettes
             <span ref={trousersTruncatRef}>...</span>
             <span className="d-none mt-2" ref={trousersTextRef}>
@@ -313,12 +313,12 @@ function WproductCollection() {
             </span>
           </p>
 
-          <div className="d-flex gap-2 text-white mt-lg-5 flex-wrap w-filter-btn-collection">
+          <div className="d-flex gap-2 text-black mt-lg-5 flex-wrap w-filter-btn-collection">
             {typeForTrousers.map((t, i) => (
               <div
                 key={t || i}
-                className={`text-center text-capitalize rounded-pill px-lg-5 py-lg-2 text-nowrap d-flex justify-content-center align-items-center w-filter-btn ${
-                  filterBtn === t ? 'bg-body text-dark' : 'bg-transparent text-white'
+                className={`text-center border border-1 border-black text-capitalize rounded-pill px-lg-5 py-lg-2 text-nowrap d-flex justify-content-center align-items-center w-filter-btn ${
+                  filterBtn === t ? 'bg-dark text-white' : 'bg-transparent text-black'
                 }`}
                 onClick={() => handleFilterByCat(t, 'trousers')}
               >
@@ -389,10 +389,10 @@ function WproductCollection() {
       )}
 
       {isJackets && (
-        <div className="w-collection-info-container w-jackets-container">
-          <div className="text-white text-uppercase w-collect-info-link">
+        <div className="w-collection-info-container w-jackets-container text-black">
+          <div className="text-uppercase w-collect-info-link">
             <Link
-              className={`text-white me-2 ${handleEnterCat === 'women' ? 'text-decoration-underline' : ''}`}
+              className={` text-black me-2 ${handleEnterCat === 'women' ? 'text-decoration-underline' : ''}`}
               style={{ textDecoration: "inherit" }}
               onMouseEnter={() => setHandleEnterCat('women')}
               onMouseLeave={() => setHandleEnterCat('')}
@@ -402,7 +402,7 @@ function WproductCollection() {
             </Link>
             /
             <Link
-              className={`text-white mx-2 ${handleEnterCat === 'jackets' ? 'text-decoration-underline' : ''}`}
+              className={`text-black mx-2 ${handleEnterCat === 'jackets' ? 'text-decoration-underline' : ''}`}
               style={{ textDecoration: "inherit" }}
               onMouseEnter={() => setHandleEnterCat('jackets')}
               onMouseLeave={() => setHandleEnterCat('')}
@@ -413,10 +413,10 @@ function WproductCollection() {
             /
           </div>
 
-          <h1 className="w-collection-info-title text-capitalize">
+          <h1 className="w-collection-info-title text-black text-capitalize">
             Women's Jackets
           </h1>
-          <p className="w-collection-info-text text-white">
+          <p className="w-collection-info-text text-black">
             Define your outerwear wardrobe with women's jackets that balance function and style, from sharp tailored blazers and supple leather moto jackets to quilted layers and classic trench coats
             <span ref={jacketsTruncatRef}>...</span>
             <span className="d-none mt-2" ref={jacketsTextRef}>
@@ -431,12 +431,12 @@ function WproductCollection() {
             </span>
           </p>
 
-          <div className="d-flex gap-2 text-white mt-lg-5 flex-wrap w-filter-btn-collection">
+          <div className="d-flex gap-2 text-black mt-lg-5 flex-wrap w-filter-btn-collection">
             {typeForJackets.map((t, i) => (
               <div
                 key={t || i}
-                className={`text-center text-capitalize rounded-pill px-lg-5 py-lg-2 text-nowrap d-flex justify-content-center align-items-center w-filter-btn ${
-                  filterBtn === t ? 'bg-body text-dark' : 'bg-transparent text-white'
+                className={`text-center border border-1 border-black text-capitalize rounded-pill px-lg-5 py-lg-2 text-nowrap d-flex justify-content-center align-items-center w-filter-btn ${
+                  filterBtn === t ? 'bg-dark text-white' : 'bg-white text-black'
                 }`}
                 onClick={() => handleFilterByCat(t, 'jackets')}
               >

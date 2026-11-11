@@ -28,7 +28,7 @@ router.post('/auth/login', authLimiter, loginController);
 router.post('/token', getTokenController);
 router.post('/logout', adminLogoutController);
 
-// ---- everything below requires a valid admin ----
+
 router.use(verifyAdmin);
 router.get('/me/:adminId', getLoggedInAdmin);
 router.get('/orders', getAllOrders);
