@@ -219,6 +219,8 @@
 
 @media (max-width: 320px){
   .bag-product-img-con-mobile {
-  width: 18rem;
+   width: 17rem;
+   margin: 0 3%;
+  
 }
 }

@@ -2,6 +2,9 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useContext } from "react";
 import api from "../../../api/api";
 import { UIContext } from "../../../context/UIContext";
+// import 'client/src/styles/BagPage.css'
+import '../../../styles/BagPage.css';
+
 
 function MobBagProducts() {
   const { userId } = useParams();
@@ -119,7 +122,7 @@ function MobBagProducts() {
           return (
             <tr key={uniqueKey}>
               <th scope="row">
-                <div className="d-flex flex-column gap-4">
+                <div className="d-flex flex-column gap-4 mx-auto">
                   <div className="bag-product-img-con-mobile">
                     <Link to={lookPath} style={{ textDecoration: "inherit" }}>
                       <img
