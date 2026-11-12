@@ -36,6 +36,7 @@ const isMobileScreen = () =>
 export default function Slide({ interval = 6000, url }) {
   const [slideData, setSlideData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(
     () => !window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -43,7 +44,9 @@ export default function Slide({ interval = 6000, url }) {
 
   useEffect(() => {
     if (!url) {
+      console.warn("Slide: no `url` prop received");
       setSlideData([]);
+      setError("Slide: no API url was provided");
       setIsLoading(false);
       return;
     }
@@ -52,6 +55,7 @@ export default function Slide({ interval = 6000, url }) {
 
     async function fetchSlides() {
       setIsLoading(true);
+      setError("");
       try {
         const res = await api.get(url);
         const data = res.data?.data;
@@ -60,9 +64,12 @@ export default function Slide({ interval = 6000, url }) {
           throw new Error("Invalid slide API response");
         }
         if (!cancelled) setSlideData(data);
-      } catch (error) {
-        console.error("Failed to fetch slides:", error);
-        if (!cancelled) setSlideData([]);
+      } catch (err) {
+        console.error("Failed to fetch slides:", url, err);
+        if (!cancelled) {
+          setSlideData([]);
+          setError(err?.message || "Failed to load slides");
+        }
       } finally {
         if (!cancelled) setIsLoading(false);
       }
@@ -110,7 +117,14 @@ export default function Slide({ interval = 6000, url }) {
     );
   }
 
-  if (!total) return null;
+  // Temporary: show why nothing rendered. Change back to `return null` when fixed.
+  if (!total) {
+    return error ? (
+      <div className="w-100 text-center text-danger py-4" role="alert">
+        {error}
+      </div>
+    ) : null;
+  }
 
   return (
     <section className="ads-section" aria-label="Featured brands">
