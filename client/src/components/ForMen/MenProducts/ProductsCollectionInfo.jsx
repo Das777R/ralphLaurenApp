@@ -481,7 +481,7 @@ function ProductsCollectionInfo() {
         </div>
       </div>
     )}
-      <div className="products-collection-product-container d-flex flex-wrap justify-content-center mt-5">
+      <div className="products-collection-product-container d-flex flex-wrap justify-content-center">
         <MenProducts />
       </div>
     </>

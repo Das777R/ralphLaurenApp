@@ -161,14 +161,14 @@
  }
 
    .ralph-logo {
-    font-size: 1.1rem;
-    font-weight: 500;
+    font-size: 1rem;
+    /* font-weight: 500;
    
 
     letter-spacing: 5px;
     word-spacing: 1px;
    
-    flex-wrap: nowrap;
+    flex-wrap: nowrap; */
     
   }
 
