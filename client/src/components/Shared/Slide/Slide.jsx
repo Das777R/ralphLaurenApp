@@ -1,81 +1,164 @@
+
 import { useEffect, useMemo, useState } from "react";
 import { Carousel } from "react-bootstrap";
 import { FiPause, FiPlay } from "react-icons/fi";
-import api from "../../../api/api.js"; // adjust path if needed
+import api from "../../../api/api.js";
 import "./Slide.css";
 
-/* ---------- Helpers: API entry -> slide ---------- */
-const API_ORIGIN = (import.meta.env.VITE_API_BASE_URL || "http://localhost:4000").replace(
-  /\/api\/?$/,
-  ""
-);
+// Your Render backend URL
+const API_ORIGIN = (
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:4000"
+).replace(/\/api\/?$/, "");
 
+// Supported video formats
 const VIDEO_EXT = /\.(mp4|webm|mov|m4v|ogv)$/i;
-const isVideoUrl = (url) => !!url && VIDEO_EXT.test(url.split(/[?#]/)[0]);
 
-const toUrl = (m) => {
-  const p = typeof m === "string" ? m : m?.url || m?.secure_url || "";
-  if (!p) return "";
-  if (/^(https?:|blob:|data:)/i.test(p)) return p;
-  return `${API_ORIGIN}${p.startsWith("/") ? p : `/${p}`}`;
+// Check whether media is a video
+const isVideoUrl = (url = "") => {
+  return VIDEO_EXT.test(url.split(/[?#]/)[0]);
 };
 
-const toSlide = (entry, i) => {
-  const list = Array.isArray(entry.media)
+// Get the actual URL from a Cloudinary URL or media object
+const toUrl = (media) => {
+  const value =
+    typeof media === "string"
+      ? media
+      : media?.url || media?.secure_url || "";
+
+  if (!value || typeof value !== "string") return "";
+
+  // Cloudinary URLs and other absolute URLs
+  if (/^(https?:|blob:|data:)/i.test(value)) {
+    return value;
+  }
+
+  // Relative URLs served by your backend
+  return `${API_ORIGIN}/${value.replace(/^\/+/, "")}`;
+};
+
+// Convert API data into a consistent slide structure
+const toSlide = (entry, index) => {
+  const mediaList = Array.isArray(entry.media)
     ? entry.media
     : entry.media
-    ? [entry.media]
-    : [];
-  const urls = list.map(toUrl).filter(Boolean);
-  const main = urls[0] || "";
+      ? [entry.media]
+      : [];
+
+  const mediaUrls = mediaList.map(toUrl).filter(Boolean);
+
+  const mediaUrl = mediaUrls[0] || "";
 
   return {
-    id: entry._id || `slide-${i}`,
-   label: entry.brand || `Slide ${i + 1}`,
+    id: entry._id || `slide-${index}`,
+    label: entry.brand || `Slide ${index + 1}`,
     title: entry.title || "",
     text: entry.description || "",
     cta: entry.cta || "Shop now",
     link: entry.link || "/",
     forMobile: Boolean(entry.forMobile),
-    mediaUrl: main,
-    isVideo: isVideoUrl(main),
-    thumb: entry.thumb,
+    mediaUrl,
+    isVideo: isVideoUrl(mediaUrl),
+    thumb: toUrl(entry.thumb),
   };
 };
 
 export default function Slide({ interval = 6000, url }) {
-  const [SlideData, setSlideData] = useState([]);
+  const [slideData, setSlideData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [index, setIndex] = useState(0);
-  const [playing, setPlaying] = useState(
-    () => !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
 
+  const [playing, setPlaying] = useState(() => {
+    if (typeof window === "undefined") return false;
+
+    return !window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+  });
+
+  // Fetch slides from backend
   useEffect(() => {
-    const fetchForSlide = async () => {
+    if (!url) {
+      setSlideData([]);
+      setIsLoading(false);
+      return;
+    }
+
+    let cancelled = false;
+
+    const fetchSlides = async () => {
+      setIsLoading(true);
+
       try {
         const res = await api.get(url);
-        setSlideData(res.data.data);
-      } catch (err) {
-        console.log(err);
+
+        // Support common API response structures
+        const data =
+          res.data?.data ??
+          res.data?.slides ??
+          [];
+
+        if (!Array.isArray(data)) {
+          throw new Error("Invalid slide API response");
+        }
+
+        if (!cancelled) {
+          setSlideData(data);
+        }
+
+      } catch (error) {
+        console.error("Failed to fetch slides:", error);
+
+        if (!cancelled) {
+          setSlideData([]);
+        }
+
       } finally {
-        setIsLoading(false);
+        if (!cancelled) {
+          setIsLoading(false);
+        }
       }
     };
 
-    fetchForSlide();
-  }, []);
+    fetchSlides();
 
+    return () => {
+      cancelled = true;
+    };
+  }, [url]);
+
+  // Convert API data and filter for desktop/mobile
   const slides = useMemo(() => {
-    const all = (SlideData || []).map(toSlide).filter((s) => s.mediaUrl);
-    const isMobile = window.matchMedia("(max-width: 767.98px)").matches;
-    const matching = all.filter((s) => s.forMobile === isMobile);
-    return matching.length ? matching : all;
-  }, [SlideData]);
+    const allSlides = slideData
+      .map(toSlide)
+      .filter((slide) => slide.mediaUrl);
 
-  console.log(slides);
-  const hasTabs = slides.some((s) => Boolean(s.thumb));
+    const isMobile =
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 767.98px)").matches;
 
+    const matchingSlides = allSlides.filter(
+      (slide) => slide.forMobile === isMobile
+    );
+
+    return matchingSlides.length ? matchingSlides : allSlides;
+  }, [slideData]);
+
+  // Reset carousel index when slides change
+  useEffect(() => {
+    setIndex(0);
+  }, [slides.length]);
+
+  const total = slides.length;
+
+  const next = () => {
+    if (total > 1) {
+      setIndex((current) => (current + 1) % total);
+    }
+  };
+
+  const hasTabs = slides.some((slide) => slide.thumb);
+
+  // Loading state
   if (isLoading) {
     return (
       <div
@@ -86,52 +169,81 @@ export default function Slide({ interval = 6000, url }) {
           className="spinner-grow text-dark"
           style={{ width: "4rem", height: "4rem" }}
           role="status"
-        />
+        >
+          <span className="visually-hidden">Loading...</span>
+        </div>
       </div>
     );
   }
 
-  if (!slides.length) return null;
-
-  const total = slides.length;
-  const next = () => setIndex((i) => (i + 1) % total);
+  // Empty state
+  if (!total) return null;
 
   return (
     <section className="ads-section" aria-label="Featured brands">
+
+      {/* Main carousel */}
       <Carousel
         className="ads-carousel"
         activeIndex={index}
-        onSelect={setIndex}
+        onSelect={(selectedIndex) => setIndex(selectedIndex)}
         controls={false}
         indicators={false}
         interval={null}
+        pause={false}
         fade
       >
-        {slides.map((s) => (
-          <Carousel.Item key={s.id}>
-            {s.isVideo ? (
+        {slides.map((slide) => (
+          <Carousel.Item key={slide.id}>
+
+            {/* Image or video */}
+            {slide.isVideo ? (
               <video
                 className="ads-media"
-                src={s.mediaUrl}
+                src={slide.mediaUrl}
                 muted
                 loop
-                autoPlay
+                autoPlay={playing}
                 playsInline
+                preload="metadata"
               />
             ) : (
-              <img className="ads-media" src={s.mediaUrl} alt={s.title || s.label} />
+              <img
+                className="ads-media"
+                src={slide.mediaUrl}
+                alt={slide.title || slide.label}
+                loading="eager"
+              />
             )}
-            <div className="ads-scrim position-absolute"/>
-           <div className="d-flex w-100 justify-content-center">
-            <div className="ads-content text-center position-absolute">
-              {s.title && <h2 className="ads-title">{s.title}</h2>}
-              {s.text && <div className="ads-text my-3">{s.text}</div>}
-              <a className="ads-cta font-monospace fw-bold" href={s.link}>
-                {s.cta}
-              </a>
-            </div>
-           </div>
 
+            {/* Overlay */}
+            <div className="ads-scrim position-absolute" />
+
+            {/* Content */}
+            <div className="d-flex w-100 justify-content-center">
+              <div className="ads-content text-center position-absolute">
+
+                {slide.title && (
+                  <h2 className="ads-title">
+                    {slide.title}
+                  </h2>
+                )}
+
+                {slide.text && (
+                  <div className="ads-text my-3">
+                    {slide.text}
+                  </div>
+                )}
+
+                <a
+                  className="ads-cta font-monospace fw-bold"
+                  href={slide.link}
+                >
+                  {slide.cta}
+                </a>
+
+              </div>
+            </div>
 
           </Carousel.Item>
         ))}
@@ -139,26 +251,39 @@ export default function Slide({ interval = 6000, url }) {
 
       {/* Brand tabs */}
       {hasTabs && (
-      <div className="ads-tabs d-none d-md-block rounded-pill" role="tablist" aria-label="Choose a brand">
-        {slides.map((s, i) => (
-          <button
-            key={s.id}
-            type="button"
-            role="tab"
-            aria-selected={i === index}
-            className={`ads-tab rounded-pill ${i === index ? "active" : ""}`}
-            onClick={() => setIndex(i)}
-          >
-            {s.thumb && <img className="ads-tab-thumb rounded-circle" src={s.thumb} alt="" />}
-            <span>{s.label}</span>
-          </button>
-        ))}
-      </div>
+        <div
+          className="ads-tabs d-none d-md-block rounded-pill"
+          role="tablist"
+          aria-label="Choose a brand"
+        >
+          {slides.map((slide, i) => (
+            <button
+              key={slide.id}
+              type="button"
+              role="tab"
+              aria-selected={i === index}
+              className={`ads-tab rounded-pill ${
+                i === index ? "active" : ""
+              }`}
+              onClick={() => setIndex(i)}
+            >
+              {slide.thumb && (
+                <img
+                  className="ads-tab-thumb rounded-circle"
+                  src={slide.thumb}
+                  alt=""
+                />
+              )}
+
+              <span>{slide.label}</span>
+            </button>
+          ))}
+        </div>
       )}
 
-
-      {/* Counter, progress bar, play / pause */}
+      {/* Counter, progress bar and controls */}
       <div className="ads-bar">
+
         <div className="ads-count">
           <span>{index + 1}</span>
           <i aria-hidden="true" />
@@ -166,25 +291,30 @@ export default function Slide({ interval = 6000, url }) {
         </div>
 
         <div className="ads-track bg-black">
-          <div
-            key={index}
-            className="ads-fill"
-            style={{
-              animationDuration: `${interval}ms`,
-              animationPlayState: playing ? "running" : "paused",
-            }}
-            onAnimationEnd={next}
-          />
+          {total > 1 && (
+            <div
+              key={`${index}-${playing}`}
+              className="ads-fill"
+              style={{
+                animationDuration: `${interval}ms`,
+                animationPlayState: playing ? "running" : "paused",
+              }}
+              onAnimationEnd={next}
+            />
+          )}
         </div>
 
         <button
           type="button"
           className="ads-toggle"
-          onClick={() => setPlaying((p) => !p)}
-          aria-label={playing ? "Pause slideshow" : "Play slideshow"}
+          onClick={() => setPlaying((previous) => !previous)}
+          aria-label={
+            playing ? "Pause slideshow" : "Play slideshow"
+          }
         >
           {playing ? <FiPause /> : <FiPlay />}
         </button>
+
       </div>
     </section>
   );
