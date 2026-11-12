@@ -1,7 +1,7 @@
 
 
 import KidsPageFooter from "../components/ForLandingPage/HomePageFooter/HomePageFooter"
-import KidsPageHeader from "../components/ForLandingPage/Header/HeaderBanner/HeaderBanner"
+// import KidsPageHeader from "../components/ForLandingPage/Header/HeaderBanner/HeaderBanner"
 import KidsCategory from "../components/ForKids/KidsCategory/KidsCategory"
 import KidsShop from "../components/ForKids/KidsShop/KidsShop"
 import KidsSlide from "../components/ForKids/KidsSlide/KidsSlide"
@@ -9,6 +9,7 @@ import KidsTrend from "../components/ForKids/KidsTrend/KidsTrend"
 import KidsExplore from "../components/ForKids/KidsExplore/KidsExplore"
 import { useState, useEffect } from "react";
 import api from "../api/api"
+import KidsPageHeader from "../components/ForLandingPage/Header/HomepageHeader/HomePageHeader"
 
 
 function KidsPage() {
