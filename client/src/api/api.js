@@ -1,27 +1,32 @@
 import axios from 'axios';
 
-// Full backend root, e.g. https://your-backend.onrender.com/api
-// (no trailing slash on VITE_API_BASE_URL)
-const API_ROOT = `${import.meta.env.VITE_API_BASE_URL}/api`;
+// const api = axios.create({
+//   baseURL: '/api',
+//   withCredentials: true,
+// });
+
+
+// import axios from 'axios';
 
 const api = axios.create({
-  baseURL: API_ROOT,
+  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,
   withCredentials: true,
 });
 
+
 const tokens = { user: '', admin: '' };
 const typeOf = (url = '') => (url.startsWith('/admin') ? 'admin' : 'user');
+
 
 export const setAccessToken = (token, type = 'user') => {
   tokens[type] = token || '';
 };
 
-// These use plain axios (no interceptors), so they need the FULL url.
-// A relative '/api/...' here would hit your Vercel domain, not the backend.
 const REFRESH_URLS = {
-  user: `${API_ROOT}/auth/token`,
-  admin: `${API_ROOT}/admin/token`,
+  user: '/api/auth/token',
+  admin: '/api/admin/token',
 };
+
 
 const inFlight = { user: null, admin: null };
 
@@ -64,6 +69,7 @@ api.interceptors.response.use(
     const url = originalRequest?.url || '';
     const type = typeOf(url);
 
+  
     const retryable = status === 401 || (status === 403 && type === 'user');
 
     if (retryable && originalRequest && !originalRequest._retry && !isAuthCall(url)) {
@@ -77,7 +83,7 @@ api.interceptors.response.use(
         return api(originalRequest);
       } catch {
         setAccessToken('', type);
-
+      
         if (type === 'admin') window.dispatchEvent(new Event(ADMIN_EXPIRED_EVENT));
         return Promise.reject(error);
       }

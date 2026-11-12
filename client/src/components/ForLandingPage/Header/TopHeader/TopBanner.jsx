@@ -89,7 +89,7 @@ function TopBanner() {
 
       <div className="header-icons d-flex gap-lg-4 gap-3 gap-md-3">
         <div className="profile-icon d-none d-lg-block">
-          <Link to={adminPath} style={{color: "inherit"}} target='_blank' onMouseEnter={() => setAdminIconIsHovered(true)} onMouseLeave={() => setUserProfileIsHovered(false)}>
+          <Link to={adminPath} style={{color: "inherit"}} onMouseEnter={() => setAdminIconIsHovered(true)} onMouseLeave={() => setUserProfileIsHovered(false)}>
           {adminIconIsHovered ? (
            <MdAdminPanelSettings className="banner-icon"/>
           ):(
