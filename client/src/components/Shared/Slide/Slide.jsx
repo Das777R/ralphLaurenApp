@@ -5,7 +5,7 @@ import api from "../../../api/api.js"; // adjust path if needed
 import "./Slide.css";
 
 /* ---------- Helpers: API entry -> slide ---------- */
-const API_ORIGIN = (import.meta.env.VITE_API_URL || "http://localhost:4000").replace(
+const API_ORIGIN = (import.meta.env.VITE_API_BASE_URL || "http://localhost:4000").replace(
   /\/api\/?$/,
   ""
 );
