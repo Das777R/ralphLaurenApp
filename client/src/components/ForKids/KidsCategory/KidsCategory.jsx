@@ -42,10 +42,10 @@ function KidsCategory() {
 
   <h1 className="text-white kids-category-title flex-nowrap text-uppercase">Kids: Shop by category</h1>
   <div className="kids-category-img-carosuel-cont d-flex">
-  {kidsCategoryData?.map((item) => (
+  {kidsCategoryData?.map((item,index) => (
   <Link 
   to={userId ? `/kids-section/category/${item?.title}/${userId}` : `/kids-section/category/${item?.title}`}
-  style={{textDecoration:"inherit"}}>
+  style={{textDecoration:"inherit"}} key={index}>
     <div className="kids-category-img-carousel">
     <img src={item?.media[0]} alt="" className="kids-category-img-carousel-img" />
     <div className="kids-category-img-info">

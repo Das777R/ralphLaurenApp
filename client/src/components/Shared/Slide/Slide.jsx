@@ -15,7 +15,7 @@ const toUrl = (media) =>
 const toSlide = (entry, index) => {
   const first = Array.isArray(entry.media) ? entry.media[0] : entry.media;
   const mediaUrl = toUrl(first);
-
+  // console.log(mediaUrl)
   return {
     id: entry._id || `slide-${index}`,
     label: entry.brand || `Slide ${index + 1}`,
@@ -59,7 +59,7 @@ export default function Slide({ interval = 6000, url }) {
       try {
         const res = await api.get(url);
         const data = res.data?.data;
-
+        console.log(data);
         if (!Array.isArray(data)) {
           throw new Error("Invalid slide API response");
         }
@@ -88,7 +88,7 @@ export default function Slide({ interval = 6000, url }) {
     const matching = all.filter((s) => s.forMobile === isMobileScreen());
     return matching.length ? matching : all;
   }, [slideData]);
-
+//  console.log(slides);
   const total = slides.length;
   const hasTabs = slides.some((s) => s.thumb);
 
@@ -122,6 +122,7 @@ export default function Slide({ interval = 6000, url }) {
     return error ? (
       <div className="w-100 text-center text-danger py-4" role="alert">
         {error}
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo perspiciatis quae repellat vitae odio quasi blanditiis facere, officiis magnam aliquid vel officia impedit, molestiae ut magni labore eos itaque sint quas veniam recusandae dolorem! Et mollitia iure quibusdam laborum cum! Dolores facilis perspiciatis enim voluptatum adipisci, asperiores assumenda accusamus porro culpa fuga vel reprehenderit aperiam expedita eos quae natus, atque unde ipsum quibusdam vero minima mollitia. Quo totam odit non culpa, sit voluptatibus officia blanditiis cupiditate autem dolorem dicta recusandae facere dignissimos amet minus earum sequi doloribus modi. Modi esse quisquam veritatis quae et vero quidem. Nesciunt animi nisi et!
       </div>
     ) : null;
   }
