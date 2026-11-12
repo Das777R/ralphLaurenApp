@@ -7,8 +7,6 @@ import "./Slide.css";
 const VIDEO_EXT = /\.(mp4|webm|mov|m4v|ogv)$/i;
 
 const isVideoUrl = (url) => VIDEO_EXT.test(url.split(/[?#]/)[0]);
-
-// Media can be a plain URL string or an object like { url } / { secure_url }
 const toUrl = (media) =>
   typeof media === "string" ? media : media?.secure_url || media?.url || "";
 
@@ -88,7 +86,7 @@ export default function Slide({ interval = 6000, url }) {
     const matching = all.filter((s) => s.forMobile === isMobileScreen());
     return matching.length ? matching : all;
   }, [slideData]);
-//  console.log(slides);
+  //  console.log(slides);
   const total = slides.length;
   const hasTabs = slides.some((s) => s.thumb);
 
@@ -122,15 +120,14 @@ export default function Slide({ interval = 6000, url }) {
     return error ? (
       <div className="w-100 text-center text-danger py-4" role="alert">
         {error}
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo perspiciatis quae repellat vitae odio quasi blanditiis facere, officiis magnam aliquid vel officia impedit, molestiae ut magni labore eos itaque sint quas veniam recusandae dolorem! Et mollitia iure quibusdam laborum cum! Dolores facilis perspiciatis enim voluptatum adipisci, asperiores assumenda accusamus porro culpa fuga vel reprehenderit aperiam expedita eos quae natus, atque unde ipsum quibusdam vero minima mollitia. Quo totam odit non culpa, sit voluptatibus officia blanditiis cupiditate autem dolorem dicta recusandae facere dignissimos amet minus earum sequi doloribus modi. Modi esse quisquam veritatis quae et vero quidem. Nesciunt animi nisi et!
       </div>
     ) : null;
   }
 
   return (
-    <section className="ads-section" aria-label="Featured brands">
+    <section className="hero-section" aria-label="Featured brands">
       <Carousel
-        className="ads-carousel"
+        className="hero-carousel"
         activeIndex={index}
         onSelect={setIndex}
         controls={false}
@@ -143,7 +140,7 @@ export default function Slide({ interval = 6000, url }) {
           <Carousel.Item key={slide.id}>
             {slide.isVideo ? (
               <video
-                className="ads-media"
+                className="hero-media"
                 src={slide.mediaUrl}
                 muted
                 loop
@@ -153,20 +150,20 @@ export default function Slide({ interval = 6000, url }) {
               />
             ) : (
               <img
-                className="ads-media"
+                className="hero-media"
                 src={slide.mediaUrl}
                 alt={slide.title || slide.label}
                 loading="eager"
               />
             )}
 
-            <div className="ads-scrim position-absolute" />
+            <div className="hero-scrim position-absolute" />
 
             <div className="d-flex w-100 justify-content-center">
-              <div className="ads-content text-center position-absolute">
-                {slide.title && <h2 className="ads-title">{slide.title}</h2>}
-                {slide.text && <div className="ads-text my-3">{slide.text}</div>}
-                <a className="ads-cta font-monospace fw-bold" href={slide.link}>
+              <div className="hero-content text-center position-absolute">
+                {slide.title && <h2 className="hero-title">{slide.title}</h2>}
+                {slide.text && <div className="hero-text my-3">{slide.text}</div>}
+                <a className="hero-cta font-monospace fw-bold" href={slide.link}>
                   {slide.cta}
                 </a>
               </div>
@@ -177,7 +174,7 @@ export default function Slide({ interval = 6000, url }) {
 
       {hasTabs && (
         <div
-          className="ads-tabs d-none d-md-block rounded-pill"
+          className="hero-tabs d-none d-md-block rounded-pill"
           role="tablist"
           aria-label="Choose a brand"
         >
@@ -187,12 +184,12 @@ export default function Slide({ interval = 6000, url }) {
               type="button"
               role="tab"
               aria-selected={i === index}
-              className={`ads-tab rounded-pill ${i === index ? "active" : ""}`}
+              className={`hero-tab rounded-pill ${i === index ? "active" : ""}`}
               onClick={() => setIndex(i)}
             >
               {slide.thumb && (
                 <img
-                  className="ads-tab-thumb rounded-circle"
+                  className="hero-tab-thumb rounded-circle"
                   src={slide.thumb}
                   alt=""
                 />
@@ -203,18 +200,18 @@ export default function Slide({ interval = 6000, url }) {
         </div>
       )}
 
-      <div className="ads-bar">
-        <div className="ads-count">
+      <div className="hero-bar">
+        <div className="hero-count">
           <span>{index + 1}</span>
           <i aria-hidden="true" />
           <span>{total}</span>
         </div>
 
-        <div className="ads-track bg-black">
+        <div className="hero-track bg-black">
           {total > 1 && (
             <div
               key={`${index}-${playing}`}
-              className="ads-fill"
+              className="hero-fill"
               style={{
                 animationDuration: `${interval}ms`,
                 animationPlayState: playing ? "running" : "paused",
@@ -226,7 +223,7 @@ export default function Slide({ interval = 6000, url }) {
 
         <button
           type="button"
-          className="ads-toggle"
+          className="hero-toggle"
           onClick={() => setPlaying((p) => !p)}
           aria-label={playing ? "Pause slideshow" : "Play slideshow"}
         >

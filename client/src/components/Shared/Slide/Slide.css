@@ -1,4 +1,4 @@
-.ads-section {
+.hero-section {
   position: relative;
   width: 100%;
   height: clamp(715px, 75vh, 780px);
@@ -10,13 +10,13 @@
 }
 
 /* Make the Bootstrap carousel fill the section */
-.ads-carousel,
-.ads-carousel .carousel-inner,
-.ads-carousel .carousel-item {
+.hero-carousel,
+.hero-carousel .carousel-inner,
+.hero-carousel .carousel-item {
   height: 100%;
 }
 
-.ads-media {
+.hero-media {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -25,16 +25,16 @@
   display: block;
 }
 
-.ads-scrim {
+.hero-scrim {
   position: absolute;
   inset: 0;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38));
 }
 
 /* Centered copy */
-.ads-content {
+.hero-content {
   position: absolute;
-  inset: 0; 
+  inset: 0;
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -45,10 +45,9 @@
   text-align: center;
   font-family: "Playfair Display", serif;
   font-weight: 100;
-  
 }
 
-.ads-kicker {
+.hero-kicker {
   font-family: "Playfair Display", serif;
   font-size: 0.95rem;
   font-weight: 100;
@@ -56,7 +55,7 @@
   text-transform: uppercase;
 }
 
-.ads-title {
+.hero-title {
   margin: 0;
   font-family: "Playfair Display", serif;
   font-size: clamp(2rem, 5.5vw, 4rem);
@@ -66,7 +65,7 @@
   text-transform: uppercase;
 }
 
-.ads-text {
+.hero-text {
   /* max-width: 32ch; */
   margin: 0 20%;
   font-family: "Playfair Display", serif;
@@ -74,10 +73,9 @@
   font-weight: 100;
   line-height: 1.5;
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
-
 }
 
-.ads-cta {
+.hero-cta {
   padding: 0.6rem 1.5rem;
   border: 1px solid #fff;
   border-radius: 999px;
@@ -91,14 +89,14 @@
   transition: background 0.2s, color 0.2s;
 }
 
-.ads-cta:hover,
-.ads-cta:focus-visible {
+.hero-cta:hover,
+.hero-cta:focus-visible {
   background: #fff;
   color: #111;
 }
 
 /* Brand tabs */
-.ads-tabs {
+.hero-tabs {
   position: absolute;
   left: 50%;
   bottom: 4.5rem;
@@ -112,7 +110,6 @@
   overflow-x: auto;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.20);
   border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: px;
   /* background: rgba(30, 30, 30, 0.55); */
   opacity: 1;
   backdrop-filter: blur(40px);
@@ -120,17 +117,16 @@
   scrollbar-width: none;
 }
 
-.ads-tabs::-webkit-scrollbar {
+.hero-tabs::-webkit-scrollbar {
   display: none;
 }
 
-.ads-tab {
+.hero-tab {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
   padding: 0.3rem 1rem 0.3rem 0.3rem;
   border: 0;
-  border-radius: px;
   background: rgba(243, 241, 241, 0.1);
   color: #fff;
   font-family: "Playfair Display", serif;
@@ -140,20 +136,19 @@
   transition: background 0.25s, color 0.25s;
 }
 
-
-.ads-tab.active {
+.hero-tab.active {
   background: #fff;
   color: #111;
   font-weight: 500;
 }
 
-.ads-tab:focus-visible,
-.ads-toggle:focus-visible {
+.hero-tab:focus-visible,
+.hero-toggle:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 2px;
 }
 
-.ads-tab-thumb {
+.hero-tab-thumb {
   width: 25px;
   height: 25px;
   object-fit: cover;
@@ -161,7 +156,7 @@
 }
 
 /* Counter, progress, play / pause */
-.ads-bar {
+.hero-bar {
   position: absolute;
   left: 0;
   right: 0;
@@ -175,7 +170,7 @@
   font-weight: 100;
 }
 
-.ads-count {
+.hero-count {
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -183,13 +178,13 @@
   font-weight: 500;
 }
 
-.ads-count i {
+.hero-count i {
   width: 1px;
   height: 12px;
   background: rgba(255, 255, 255, 0.7);
 }
 
-.ads-track {
+.hero-track {
   flex: 1;
   height: 3px;
   overflow: hidden;
@@ -197,21 +192,21 @@
   background: rgba(255, 255, 255, 0.35);
 }
 
-.ads-fill {
+.hero-fill {
   height: 100%;
   background: #fff;
   transform: scaleX(0);
   transform-origin: left;
-  animation: ads-progress linear forwards;
+  animation: hero-progress linear forwards;
 }
 
-@keyframes ads-progress {
+@keyframes hero-progress {
   to {
     transform: scaleX(1);
   }
 }
 
-.ads-toggle {
+.hero-toggle {
   display: grid;
   place-items: center;
   padding: 0.25rem;
@@ -221,36 +216,35 @@
   font-size: 1.1rem;
 }
 
-
-@media (max-width: 769px){
- .ads-tabs{
-   width: 53.7%;
-   background: #000;
- }
+@media (max-width: 769px) {
+  .hero-tabs {
+    width: 53.7%;
+    background: #000;
+  }
 }
 
 @media (max-width: 575.98px) {
-  .ads-tabs {
+  .hero-tabs {
     bottom: 4rem;
   }
 
-  .ads-tab {
+  .hero-tab {
     font-size: 0.85rem;
   }
 
-  .ads-tab-thumb {
+  .hero-tab-thumb {
     width: 20px;
     height: 20px;
   }
 
-  .ads-bar {
+  .hero-bar {
     gap: 0.75rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ads-tab,
-  .ads-cta {
+  .hero-tab,
+  .hero-cta {
     transition: none;
   }
 }
