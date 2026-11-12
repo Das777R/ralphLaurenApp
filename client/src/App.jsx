@@ -19,7 +19,7 @@ import MenProductsPage from './pages/MenProductsPage';
 import HomeProductsPage from './pages/HomeProductsPage';
 import DiscoverNavPage from './pages/DiscoverNavPage';
 import AdminLayout from './pages/AdminLayout';
-import api, { refreshSession } from './api/api';
+import { refreshSession } from './api/api';
 import Dashboard from './components/ForAdmin/Dashboard/Dashboard';
 import Products from './components/ForAdmin/Products/Products';
 import Orders from './components/ForAdmin/Orders/Orders';
