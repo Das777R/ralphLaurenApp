@@ -55,15 +55,11 @@
 
 @media (max-width: 321px){
 
-
-    .ralph-logo-user {
+  .ralph-logo-user {
     font-size: 0.9rem;
     font-weight: 500;
-   
-
     letter-spacing: 5px;
     word-spacing: 1px;
-   
     flex-wrap: nowrap;
     
   }
