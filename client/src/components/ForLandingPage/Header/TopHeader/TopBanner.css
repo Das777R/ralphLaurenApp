@@ -47,9 +47,10 @@
 @media (max-width: 321px) {
   .ralph-logo-user {
     font-size: 1rem;
-    font-weight: 500;
-    letter-spacing: 5px;
+    /* font-weight: 500; */
+    letter-spacing: 3px;
     word-spacing: 1px;
     white-space: nowrap;
+    /* background-color: #000; */
   }
 }
