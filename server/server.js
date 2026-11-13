@@ -11,7 +11,7 @@ const port = 4000;
 createProductFolder();
 createHomeMediaFolder();
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`Port is running on ${port}`);
   dbConnection();
 })

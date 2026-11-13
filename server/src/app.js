@@ -16,8 +16,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    // 'https://ralph-lauren-app-owxp.vercel.app'
-    'https://calm-licorice-cda365.netlify.app'
+    'https://ralph-lauren-app-kuub.vercel.app'
    ],
   credentials: true
 }));
