@@ -80,7 +80,7 @@ function TopBanner() {
           className="text-decoration-none text-uppercase"
           style={{ color: "inherit" }}
         >
-          {/* <div className="ralph-logo-user text-nowrap bg-black">ralph lauren</div> */}
+          <div className="ralph-logo-user text-nowrap bg-black">ralph lauren</div>
         </Link>
 
         <div className="ralph-categories text-uppercase d-lg-flex d-none gap-lg-3 gap-4 pt-3 pe-5">
