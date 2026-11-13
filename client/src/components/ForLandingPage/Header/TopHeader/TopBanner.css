@@ -36,7 +36,7 @@
 
 @media (max-width: 426px) {
   .ralph-logo-user {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
   }
 
   .banner-icon {
@@ -46,7 +46,7 @@
 
 @media (max-width: 321px) {
   .ralph-logo-user {
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 500;
     letter-spacing: 5px;
     word-spacing: 1px;
