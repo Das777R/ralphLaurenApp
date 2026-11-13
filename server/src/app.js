@@ -1,5 +1,4 @@
 import 'dotenv/config';
-
 import express from 'express';
 import cors from 'cors';
 import productsRoute from './routes/products.routes.js'
@@ -9,9 +8,10 @@ import authRoutes from './routes/authRoutes.route.js'
 import adminAuthRoutes from './routes/adminAuth.routes.js'
 import path from 'path';
 import { Navs, Parts } from './constants.js';
-import cookieParser from 'cookie-parser';
+import helmet from 'helmet'
 
 const app = express();
+app.use(helmet());
 
 app.use(cors({
   origin: [
@@ -23,7 +23,6 @@ app.use(cors({
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cookieParser());
 
 
 app.use('/products', express.static(path.join(process.cwd(), "Products",)));
