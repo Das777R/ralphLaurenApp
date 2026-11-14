@@ -56,7 +56,7 @@ const parseSizes = (sizesAvailable) => {
 export const getProducts = async (req, res) => {
   try {
     const products = await Products.find({});
-    console.log(products);
+    
     return res.status(200).json({
       success: true,
       count: products.length,
