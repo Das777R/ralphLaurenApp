@@ -7,6 +7,7 @@ import HeaderBanner from "../../ForLandingPage/Header/HeaderBanner/HeaderBanner"
 import RlcOnBarClick from "../OnBarClick/RlcOnBarClick"
 import RlcOnSearchClick from "../OnSearchClick/RlcOnSearchClick"
 import './ProductsHeader.css';
+import '../../../styles/FavPage.css'
 import { IoIosHeart } from "react-icons/io";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { BsPerson, BsPersonFill } from "react-icons/bs";
@@ -15,7 +16,6 @@ import { HiOutlineBars2 } from "react-icons/hi2";
 
 
 function ProductsHeader() {
-
     const {handleSearchToggle, handleBarToggle, bagLength, setBagLength} = useContext(UIContext);
     const [userProfileIsHovered, setUserProfileIsHovered] = useState(false);
     const [userFavIsHovered, setUserFavIsHovered] = useState(false);

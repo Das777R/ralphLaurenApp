@@ -317,6 +317,7 @@
   .fav-page-box-container {
     height: 18rem;
     width: 11.6rem;
+    background-color: green;
     margin-bottom: 12rem;
   }
 
@@ -382,6 +383,7 @@
 
   .fav-page-box-name-text {
     font-size: 0.9rem;
+    background-color: #7e1212;
   }
 
   .fav-page-box-trending-text {
@@ -393,6 +395,7 @@
   font-size: 1.5rem;
   font-weight: 100;
   margin: 0;
+  
 }
 
 .fav-description {

@@ -1,87 +1,105 @@
+/* ---------- Visibility helpers ---------- */
 .is-hidden {
   opacity: 0;
   visibility: hidden;
-  z-index: 1;
+  pointer-events: none;
 }
 
+.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ---------- Layout ---------- */
 .fav-products-container {
   position: relative;
-  z-index: -50;
   width: 100%;
   gap: 1px;
   margin-top: 4rem;
 }
 
 .fav-page-box-container {
-  height: 40rem;
-  width: 25rem;
-  user-select: none;
-  margin-bottom: 3em;
+  --media-h: 30rem; /* image height; changed per breakpoint below */
   position: relative;
-  z-index: 1;
+  width: 25rem;
+  height: auto;
+  margin-bottom: 3rem;
+  user-select: none;
 }
 
-.fav-page-box-img-container-carousel {
+/* Wrapper for image + carousel + overlay */
+.fav-page-box-media {
+  position: relative;
   width: 100%;
-  height: 100%;
+  height: var(--media-h);
+  background-color: rgb(29, 28, 28);
+  overflow: hidden;
   cursor: pointer;
 }
 
-.fav-page-box-carousel > img {
-  height: 30rem;
-  background-color: rgb(29, 28, 28);
-}
-
-.fade-element {
-  position: absolute;
-  top: 0;
-  left: 0;
+.fav-page-box-base-img {
+  display: block;
   width: 100%;
-  height: 30rem;
+  height: 100%;
   object-fit: cover;
   transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
 }
 
-.fade-element.is-visible {
-  opacity: 1;
-  visibility: visible;
-  z-index: 2;
+.fade-element {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
 }
 
-.fav-page-box-carousel-inner {
-  width: 100%;
-  height: 30em;
-}
-
+.fav-page-box-carousel-inner,
 .fav-page-box-carousel-item {
+  width: 100%;
+  height: 100%;
   overflow: hidden;
+}
+
+.fav-page-box-carousel-item a {
+  display: block;
   height: 100%;
 }
 
 .fav-page-box-carousel-item video,
 .fav-page-box-carousel-item img {
-  object-fit: cover;
   width: 100%;
-  height: 30rem;
+  height: 100%;
+  object-fit: cover;
 }
 
+/* ---------- Carousel controls ---------- */
 .fav-page-box-carousel-control-prev,
 .fav-page-box-carousel-control-next {
   width: 10%;
 }
 
-.fav-page-box-carousel-control-prev-icon,
-.fav-page-box-carousel-control-next-icon {
-  width: 20px;
-  height: 20px;
-  background-size: contain;
-  color: #000;
+.carousel .fav-page-box-carousel-control-prev-icon,
+.carousel .fav-page-box-carousel-control-next-icon {
+  width: 2rem;
+  height: 2rem;
+  background-size: 50% 50%;
+  transition: background-color 0.2s ease-in-out;
 }
 
+.carousel .fav-page-box-carousel-control-prev-icon:hover,
+.carousel .fav-page-box-carousel-control-next-icon:hover {
+  background-color: #212529;
+  border-radius: 0.5rem;
+  filter: none; /* carousel-dark inverts the arrow; show it white on the dark pill */
+}
+
+/* ---------- Quick look overlay ---------- */
 .color-quicklook-div {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 3;
   background: rgba(255, 255, 255, 0.8);
-  bottom: 10rem;
-  z-index: 5;
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
 }
 
 .product-colors-div {
@@ -90,6 +108,7 @@
   border: 1px solid #041e3a;
   padding: 2px;
   cursor: pointer;
+  background: transparent;
 }
 
 .quickLook {
@@ -100,7 +119,6 @@
   border-radius: 1em;
   transition: all ease-in-out 0.2s;
   font-family: monospace;
-  opacity: 1;
   cursor: pointer;
 }
 
@@ -109,16 +127,20 @@
   color: #fff;
 }
 
+/* ---------- Product info ---------- */
+.fav-page-box-name-link {
+  flex: 1;
+  min-width: 0;
+}
+
 .fav-page-box-name-text {
+  margin: 0;
   font-weight: 500;
   font-family: "Playfair Display", serif;
   cursor: pointer;
   user-select: none;
   color: #041e3a;
   font-size: 16px;
-  width: 90%;
-  white-space: wrap;
-  text-overflow: ellipsis;
 }
 
 .fav-page-box-name-text:hover {
@@ -126,6 +148,7 @@
 }
 
 .fav-page-box-add-fav-icon-container {
+  flex-shrink: 0;
   font-size: 18px;
   color: #000;
   cursor: pointer;
@@ -135,6 +158,9 @@
   justify-content: center;
   width: 2rem;
   height: 2rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
   border-radius: 100%;
 }
 
@@ -164,7 +190,7 @@
 
 .fav-page-box-same-color-text {
   font-size: 11px;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   color: #041e3a;
   cursor: pointer;
   user-select: none;
@@ -174,32 +200,11 @@
   text-decoration: underline;
 }
 
+/* ---------- Responsive (widest -> narrowest) ---------- */
 @media (max-width: 1025px) {
   .fav-page-box-container {
-    height: 24rem;
+    --media-h: 24rem;
     width: 20rem;
-    margin-bottom: 12rem;
-  }
-
-  .fav-page-box-img-container-carousel {
-    width: 100%;
-    height: 24rem;
-    background-color: #000;
-  }
-
-  .fav-page-box-carousel > img {
-    height: 24rem;
-  }
-
-  .fav-page-box-carousel-inner {
-    width: 100%;
-    height: 24em;
-  }
-
-  .color-quicklook-div {
-    bottom: 0rem;
-    margin-top: 6rem;
-    display: flex;
   }
 
   .fav-page-box-name-text {
@@ -207,32 +212,10 @@
   }
 }
 
-@media (max-width: 1024px) {
-  .color-quicklook-div {
-    top: 63.5%;
-  }
-}
-
 @media (max-width: 769px) {
   .fav-page-box-container {
-    height: 20rem;
+    --media-h: 20rem;
     width: 15rem;
-    margin-bottom: 12rem;
-  }
-
-  .fav-page-box-img-container-carousel {
-    width: 100%;
-    height: 20rem;
-    background-color: #000;
-  }
-
-  .fav-page-box-carousel > img {
-    height: 20rem;
-  }
-
-  .fav-page-box-carousel-inner {
-    width: 100%;
-    height: 20em;
   }
 
   .color-quicklook-div {
@@ -256,24 +239,8 @@
 
 @media (max-width: 426px) {
   .fav-page-box-container {
-    height: 18rem;
+    --media-h: 18rem;
     width: 13.2rem;
-    margin-bottom: 13rem;
-    background-color: #000;
-  }
-
-  .fav-page-box-img-container-carousel {
-    width: 100%;
-    height: 18rem;
-  }
-
-  .fav-page-box-carousel > img {
-    height: 18rem;
-  }
-
-  .fav-page-box-carousel-inner {
-    width: 100%;
-    height: 18em;
   }
 
   .fav-page-box-name-text {
@@ -292,15 +259,8 @@
 
 @media (max-width: 376px) {
   .fav-page-box-container {
-    height: 18rem;
+    --media-h: 18rem;
     width: 11.6rem;
-    margin-bottom: 12rem;
-  }
-
-  .fav-page-box-img-container-carousel,
-  .fav-page-box-carousel-item {
-    width: 100%;
-    height: 18rem;
   }
 
   .fav-page-box-name-text {
@@ -310,33 +270,12 @@
 
 @media (max-width: 321px) {
   .fav-page-box-container {
-    height: 15rem;
+    --media-h: 15rem;
     width: 8rem;
-    margin-bottom: 13em;
-
-    
-  }
-
-  
-
-  .fav-page-box-img-container-carousel,
-  .fav-page-box-carousel-item {
-    width: 100%;
-    height: 15rem;
-  }
-
-  .fav-page-box-carousel > img {
-    height: 15rem;
-  }
-
-  .fav-page-box-carousel-inner {
-    width: 100%;
-    height: 15em;
   }
 
   .fav-page-box-name-text {
     font-size: 0.9rem;
-    background-color: #7e1212;
   }
 
   .fav-page-box-trending-text {
