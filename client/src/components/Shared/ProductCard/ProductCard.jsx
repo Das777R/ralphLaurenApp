@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState} from "react";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import './ProductCard.css'
+import '../../../styles/FavPage.css'
 
 const isVideo = (url) => /\.(mp4|webm|mov|ogg)$/i.test(url);
 
@@ -27,6 +28,7 @@ function ProductCard({
       <div
         onMouseEnter={() => setProductHovered(true)}
         onMouseLeave={() => setProductHovered(false)}
+        className="position-relative"
       >
         <div className="fav-page-box-img-container-carousel">
           <div className="fav-page-box-carousel">
