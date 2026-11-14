@@ -240,7 +240,7 @@
 @media (max-width: 426px) {
   .fav-page-box-container {
     --media-h: 18rem;
-    width: 13.2rem;
+    /* width: 13.2rem; */
   }
 
   .fav-page-box-name-text {
@@ -260,7 +260,7 @@
 @media (max-width: 376px) {
   .fav-page-box-container {
     --media-h: 18rem;
-    width: 11.6rem;
+    width: 9.5rem;
   }
 
   .fav-page-box-name-text {
@@ -268,7 +268,7 @@
   }
 }
 
-@media (max-width: 321px) {
+/* @media (max-width: 321px) {
   .fav-page-box-container {
     --media-h: 15rem;
     width: 8rem;
@@ -281,4 +281,4 @@
   .fav-page-box-trending-text {
     font-size: 8px;
   }
-}
+} */

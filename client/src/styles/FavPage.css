@@ -316,8 +316,8 @@
 @media (max-width: 376px) {
   .fav-page-box-container {
     height: 18rem;
-    width: 11.6rem;
-    background-color: green;
+    width: 9.5rem;
+    background-color: white;
     margin-bottom: 12rem;
   }
 
@@ -359,7 +359,7 @@
 }
 }
 
-@media (max-width: 321px) {
+/* @media (max-width: 321px) {
   .fav-page-box-container {
     height: 15rem;
     width: 8rem;
@@ -417,4 +417,4 @@
 .fav-signin-text {
   font-size: 10px;
 }
-}
+} */
