@@ -203,7 +203,7 @@ function LookProductContent() {
       <div className={`product-look-container d-flex ${completeLookOpen ? 'd-none': ''}`}>
         <div className="product-image-look-container">
           <img
-            src={productLook?.lookImage}
+            src={productLook?.lookImage || null}
             alt=""
             className="product-lookImage position-relative"
           />
@@ -234,7 +234,7 @@ function LookProductContent() {
           <div className="w-100 look-product-carousel d-flex">
             <div className="slide-img-look-container">
               <img
-                src={productLook?.lookImage}
+                src={productLook?.lookImage || null}
                 className="slide-img-look"
                 alt=""
               />
@@ -376,7 +376,7 @@ function LookProductContent() {
 
             <div className="slide-img-look-container d-lg-none d-md-none d-block mt-5">
               <img
-                src={productLook?.lookImage}
+                src={productLook?.lookImage || null}
                 className="slide-img-look w-100 h-100"
                 alt=""
               />
@@ -476,7 +476,7 @@ function LookProductContent() {
               <div className="bag-offcanvas-item-image">
                 <Link style={{ textDecoration: "inherit" }} to="#">
                   <img
-                    src={canvasData?.lookImage}
+                    src={canvasData?.lookImage || null}
                     alt=""
                     className="w-100 h-100"
                   />
